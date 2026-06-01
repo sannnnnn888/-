@@ -1237,22 +1237,27 @@ function checkHepaiShare(){
   }
 }
 
+// ══════════════════════════════════════════════════════════════ SUPABASE ══════════════════════════════════════════════════════════════
+const SB_URL='https://ihtlypzusfsgpieeomhi.supabase.co';
+const SB_KEY='sb_publishable_6Tu-LDqldC7AJMAjC0TXVQ_5gQql6Eu';
+function sbHeaders(){return{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'}}
+
 // ══════════════════════════════════════════════════════════════ PUSH ══════════════════════════════════════════════════════════════
 function sendReport(){
   if(!userInfo||!userInfo.phone)return;
-  let scores='D:'+(sc.D>0?'+':'')+sc.D+' I:'+(sc.I>0?'+':'')+sc.I+' S:'+(sc.S>0?'+':'')+sc.S+' C:'+(sc.C>0?'+':'')+sc.C;
-  let core=(combo?combo.id:'').replace(/<[^>]*>/g,'');
-  let desp='══ DISC 测试报告 ══\n\n';
-  desp+='👤 姓名：'+userInfo.name+'\n📱 手机：'+userInfo.phone+'\n🕐 时间：'+userInfo.time+'\n\n';
-  desp+='🏷 类型：'+label+'\n'+(combo?combo.name+' · '+resultKey:'')+'\n\n';
-  desp+='📊 评分：'+scores+'\n\n📝 核心解读：\n'+core;
-  if(combo)desp+='\n\n🌿 自然状态：'+combo.life+'\n\n💼 工作状态：'+combo.work+'\n\n💕 情感关系：'+combo.rel+'\n\n🔥 压力状态：'+combo.pressure+'\n\n🌱 成长方向：'+combo.grow+'\n\n💬 '+combo.gold;
+  // Save to Supabase
+  var payload={
+    name:userInfo.name,
+    phone:userInfo.phone,
+    disc_type:label||'',
+    scores:displaySc||{},
+    result_key:resultKey||''
+  };
   try{
-    fetch('https://sctapi.ftqq.com/SCT349012TbYqbUYuOInYSi0cWfHhY2qTt.send',{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({title:'DISC报告 - '+userInfo.name+' ('+label+')',desp})
-    }).then(r=>r.json()).then(d=>console.log('[Push]',d.code===0?'OK':d.message)).catch(e=>console.log('[Push] error:',e));
-  }catch(e){console.log('[Push] skip:',e)}
+    fetch(SB_URL+'/rest/v1/unlocks',{method:'POST',headers:sbHeaders(),body:JSON.stringify(payload)})
+      .then(function(r){if(!r.ok)console.log('[DB] error:',r.status);else console.log('[DB] saved')})
+      .catch(function(e){console.log('[DB] error:',e)});
+  }catch(e){console.log('[DB] skip:',e)}
 }
 
 
