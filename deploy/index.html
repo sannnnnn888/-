@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="description" content="迫选28题·五维深度解读·情感适配推荐·发现你的行为密码">
+<title>DISC 性格探索 — 破军虎·焰羽凤·抱山熊·玄机鹰</title>
+<style>
+/* ═══════════════ RESET & VARIABLES ═══════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#08080a;--bg2:#0e0e12;--surface:#141418;--surface2:#1a1a22;
+  --gold:#c9a96e;--gold-light:#e0c88a;--gold-dim:#8a7a50;
+  --text:#e8e0d0;--text2:#a09888;--text3:#605850;
+  --border:#2a2a34;--border-gold:#3a3a28;
+  --d:#c0392b;--i:#d68910;--s:#1e8449;--c:#2471a3;
+  --d-dim:#6a1a10;--i-dim:#7a4a08;--s-dim:#0e4a24;--c-dim:#104060;
+  --radius:12px;--radius-sm:8px;
+  --font-heading:'Noto Serif SC','STSong','SimSun','Georgia',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  --transition:.3s cubic-bezier(.4,0,.2,1);
+  --shadow:0 2px 20px rgba(0,0,0,.4);
+}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.7;min-height:100vh;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);position:relative}
+body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;background:
+  radial-gradient(ellipse 130px 90px at 8% 10%, rgba(201,169,110,.14) 0%, transparent 100%),
+  radial-gradient(ellipse 110px 70px at 82% 18%, rgba(201,169,110,.12) 0%, transparent 100%),
+  radial-gradient(ellipse 90px 110px at 22% 42%, rgba(201,169,110,.09) 0%, transparent 100%),
+  radial-gradient(ellipse 150px 80px at 72% 55%, rgba(201,169,110,.11) 0%, transparent 100%),
+  radial-gradient(ellipse 100px 100px at 12% 75%, rgba(201,169,110,.10) 0%, transparent 100%),
+  radial-gradient(ellipse 120px 70px at 55% 85%, rgba(201,169,110,.12) 0%, transparent 100%),
+  radial-gradient(ellipse 80px 130px at 45% 48%, rgba(201,169,110,.07) 0%, transparent 100%),
+  radial-gradient(ellipse 70px 70px at 90% 38%, rgba(201,169,110,.08) 0%, transparent 100%),
+  radial-gradient(ellipse 60px 60px at 48% 3%, rgba(201,169,110,.09) 0%, transparent 100%),
+  radial-gradient(ellipse 90px 60px at 32% 90%, rgba(201,169,110,.10) 0%, transparent 100%);
+}
+.container{max-width:480px;margin:0 auto;padding:0 16px 60px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:14px 36px;border:none;border-radius:40px;font-size:16px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body);letter-spacing:.02em}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#b8964a);color:#08080a;box-shadow:0 4px 24px rgba(201,169,110,.2)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 6px 32px rgba(201,169,110,.35)}
+.btn-gold:active{transform:translateY(0)}
+.btn-outline{background:transparent;color:var(--gold);border:1.5px solid var(--border-gold)}
+.btn-outline:hover{background:rgba(201,169,110,.08)}
+.btn-sm{padding:10px 20px;font-size:14px}
+.full-w{width:100%}
+
+/* ═══════════════ WELCOME ═══════════════ */
+.screen{display:none;animation:fadeIn .6s ease}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.welcome{padding:40px 0 20px;text-align:center}
+.welcome-badge{display:inline-block;font-size:12px;color:var(--gold-dim);border:1px solid var(--border-gold);padding:4px 16px;border-radius:20px;letter-spacing:.1em;margin-bottom:24px}
+.welcome h1{font-family:var(--font-heading);font-size:32px;font-weight:400;color:var(--gold);letter-spacing:.08em;margin-bottom:4px}
+.welcome .subtitle{font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.9;letter-spacing:.02em}
+.welcome-deco{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 10px}
+
+
+/* ── DISC Intro Accordion ── */
+.disc-intro{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:28px;overflow:hidden;text-align:left}
+.intro-header{padding:14px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;border-bottom:1px solid var(--border);user-select:none}
+.intro-header:hover{background:var(--surface2)}
+.intro-header .arrow{font-size:12px;color:var(--text3);transition:transform .3s;margin-left:auto}
+.intro-header .arrow.open{transform:rotate(180deg)}
+.intro-body{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.intro-body.open{max-height:800px;padding:20px}
+.intro-pillars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+@media(max-width:400px){.intro-pillars{grid-template-columns:1fr}}
+.pillar{padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg2)}
+.pillar-d{border-left:3px solid var(--d)}.pillar-i{border-left:3px solid var(--i)}
+.pillar-s{border-left:3px solid var(--s)}.pillar-c{border-left:3px solid var(--c)}
+.pillar-icon{font-size:18px;line-height:1}.pillar-lbl{font-size:13px;font-weight:700;color:var(--text);display:block;margin:4px 0 2px}
+.pillar-desc{font-size:12px;color:var(--text2);line-height:1.6}
+.usage-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:400px){.usage-grid{grid-template-columns:1fr}}
+.usage-item{display:flex;gap:10px;align-items:flex-start}
+.usage-num{font-size:20px;font-weight:700;color:var(--gold-dim);font-family:var(--font-heading);flex-shrink:0;line-height:1.1}
+.usage-item strong{font-size:13px;color:var(--text);display:block}
+.usage-item p{font-size:12px;color:var(--text2);line-height:1.6}
+.intro-body p{font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:8px}
+
+/* ═══════════════ MODAL ═══════════════ */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;animation:fadeIn .25s ease}
+.modal-overlay.active{display:flex}
+.modal-box{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border-gold);box-shadow:0 8px 40px rgba(0,0,0,.5);padding:32px 24px;max-width:380px;width:90%;text-align:center;position:relative}
+.modal-box h3{font-family:var(--font-heading);font-size:20px;color:var(--gold);margin-bottom:6px}
+.modal-box>p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.7}
+.modal-box input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:12px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)}
+.modal-box input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,169,110,.12)}
+.modal-box input::placeholder{color:var(--text3)}
+.modal-tip{font-size:12px;color:var(--text3);margin-bottom:20px}
+.modal-close{position:absolute;top:12px;right:16px;font-size:18px;color:var(--text3);cursor:pointer;background:none;border:none}
+
+/* ═══════════════ TEST PAGE ═══════════════ */
+.test-instruct{background:rgba(201,169,110,.1);border:1.5px solid var(--gold);border-radius:var(--radius);padding:14px 16px;margin-bottom:16px;text-align:center;font-size:14px;color:var(--gold);line-height:1.7;font-weight:600;letter-spacing:.02em;box-shadow:0 0 20px rgba(201,169,110,.08)}
+.test-instruct strong{color:var(--gold)}
+.progress-wrap{padding:20px 0 12px}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold-dim),var(--gold));border-radius:2px;transition:width .4s ease}
+.progress-text{text-align:center;font-size:12px;color:var(--text3);margin-top:6px;letter-spacing:.04em}
+.q-section{display:none;animation:fadeIn .35s ease}
+.q-section.active{display:block}
+.q-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;transition:var(--transition)}
+.q-block.done{border-color:var(--border-gold)}
+.q-num{font-size:11px;color:var(--text3);font-weight:700;letter-spacing:.06em;margin-bottom:4px}
+.q-text{font-size:15px;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:14px}
+.q-options{display:flex;flex-direction:column;gap:6px}
+.q-opt{display:flex;align-items:center;gap:8px;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;color:var(--text2);cursor:pointer;transition:var(--transition);line-height:1.5;user-select:none;position:relative}
+.q-opt:hover{border-color:var(--text3);background:var(--surface2)}
+.q-opt.most{border-color:var(--gold);background:rgba(201,169,110,.08);color:var(--gold)}
+.q-opt.least{border-color:var(--text3);background:rgba(100,90,80,.08);color:var(--text3)}
+.q-opt .opt-label{font-size:11px;font-weight:600;padding:2px 10px;border-radius:10px;margin-left:auto;flex-shrink:0;transition:var(--transition);border:1px solid transparent}
+.q-opt .opt-label.most-label{border-color:var(--border-gold);color:var(--gold-dim)}
+.q-opt .opt-label.least-label{border-color:var(--border);color:var(--text3)}
+.q-opt.most .opt-label.most-label{background:var(--gold);color:#08080a;border-color:var(--gold)}
+.q-opt.least .opt-label.least-label{background:var(--text3);color:var(--text);border-color:var(--text3)}
+.q-opt .opt-text{flex:1}
+
+/* ═══════════════ NAV ═══════════════ */
+.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 0;gap:12px}
+.nav-bar .pi{font-size:12px;color:var(--text3);flex-shrink:0;min-width:60px;text-align:center}
+.nav-btn{padding:10px 24px;border:1.5px solid var(--border);border-radius:30px;background:transparent;color:var(--text2);font-size:14px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.nav-btn.primary{background:var(--gold);color:#08080a;border-color:var(--gold)}
+.nav-btn.primary:hover{box-shadow:0 4px 20px rgba(201,169,110,.25)}
+
+/* ── Results ── */
+/* (unused hero-quote / section-title removed) */
+
+/* ── Result Top Box: radar float + wrap report + watermark bg ── */
+.result-top-box{display:block;overflow:hidden;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;position:relative}
+.result-top-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:var(--surface);opacity:0.90;pointer-events:none;z-index:0}
+.result-top-box .rt-radar{float:left;width:120px;margin:0 14px 10px 0;position:relative;z-index:1;overflow:hidden;background:rgba(10,10,12,.45);border-radius:6px;box-shadow:0 0 0 1px rgba(201,169,110,.15),0 2px 12px rgba(0,0,0,.3)}
+.result-top-box .rt-radar canvas{width:100%;height:auto;border-radius:4px;display:block}
+.result-top-box .rt-report{font-size:13px;position:relative;z-index:1}
+.result-top-box .rt-report .dr-intro{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:12px}
+.result-top-box .rt-report .dr-section{margin-bottom:10px}
+.result-top-box .rt-report .dr-section:last-child{margin-bottom:0}
+.result-top-box .rt-report .dr-section-title{font-size:12px;font-weight:700;color:var(--gold);margin-bottom:2px;letter-spacing:.02em}
+.result-top-box .rt-report .dr-section-title .dim-badge{display:inline-block;font-size:10px;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-weight:400}
+.result-top-box .rt-report p{font-size:12px;color:var(--text2);line-height:1.8;margin-bottom:0}
+
+/* ── Analysis Sections ── */
+.analysis-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+.analysis-section h4,.rsc-section h4{font-size:13px;font-weight:700;color:var(--gold);margin-bottom:8px;letter-spacing:.02em;display:flex;align-items:center;gap:6px}
+.analysis-section p,.rsc-section p{font-size:13px;color:var(--text2);line-height:2}
+.analysis-lock{position:relative;overflow:hidden}
+.analysis-lock::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:80px;background:linear-gradient(transparent,var(--surface));pointer-events:none}
+.lock-overlay{display:flex;flex-direction:column;align-items:center;padding:16px 0 4px}
+.lock-overlay .lock-icon{font-size:24px;margin-bottom:4px}
+.lock-overlay .lock-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.lock-overlay .lock-sub{font-size:12px;color:var(--text3);margin-bottom:10px;text-align:center;line-height:1.6}
+.lock-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:linear-gradient(135deg,var(--gold),#b8964a);color:#08080a;border:none;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.lock-btn:hover{box-shadow:0 4px 16px rgba(201,169,110,.25)}
+.unlock-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--s);background:rgba(30,132,73,.12);padding:2px 10px;border-radius:12px}
+
+/* ── Match & Hepai ── */
+.match-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.match-item:last-child{border-bottom:none}
+.match-type{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.match-type .m-score{font-size:12px;color:var(--gold);font-weight:600}
+.match-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.match-tip{font-size:11px;color:var(--gold-dim);margin-top:8px;font-style:italic}
+.hepai-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+.hepai-box h3{font-size:14px;color:var(--gold);margin-bottom:8px;font-weight:700}
+.hepai-intro{font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+.hepai-url{font-size:11px;color:var(--text3);word-break:break-all;background:var(--bg2);padding:10px;border-radius:6px;border:1px solid var(--border);margin-bottom:10px;line-height:1.5}
+.hepai-copy{padding:8px 18px;border:none;border-radius:20px;background:var(--gold);color:#08080a;font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.hepai-copy:hover{box-shadow:0 4px 16px rgba(201,169,110,.2)}
+.hepai-compare{display:block;width:100%;padding:10px;border:1.5px solid var(--border-gold);border-radius:30px;background:transparent;color:var(--gold);font-size:13px;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-body);margin-top:10px}
+.hepai-compare:hover{background:rgba(201,169,110,.08)}
+.hepai-result{margin-top:12px;padding:16px;background:var(--bg2);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.hepai-result h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+.hepai-score{font-size:26px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.hepai-score span{font-size:14px;color:var(--text3);font-weight:400}
+.hepai-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.hepai-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.hepai-tag{padding:3px 10px;background:rgba(201,169,110,.1);color:var(--gold-dim);border-radius:16px;font-size:11px;font-weight:600}
+
+/* ── Hepai Banner (from share link) ── */
+.hepai-banner{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(201,169,110,.03));border:1px solid var(--border-gold);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:center}
+.hepai-banner .hb-icon{font-size:24px;display:block;margin-bottom:4px}
+.hepai-banner .hb-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.hepai-banner .hb-type{font-size:12px;color:var(--gold-dim);margin-bottom:4px}
+.hepai-banner .hb-tip{font-size:11px;color:var(--text3)}
+
+/* ── Report Screen (post-unlock) ── */
+.report-sc{animation:fadeIn .4s ease}
+
+/* ── Role Card (暗金武侠风格，匹配角色卡设计_全预览) ── */
+.role-card{
+  border-radius:10px;overflow:hidden;position:relative;
+  background:#12100e;width:320px;margin:0 auto 16px;flex-shrink:0;
+  background-size:100% auto;background-position:top center;background-repeat:no-repeat;
+  border:2px solid rgba(201,169,110,.35);
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.85),
+    0 0 0 4px rgba(201,169,110,.08),
+    0 0 20px rgba(0,0,0,.6),
+    0 8px 32px rgba(0,0,0,.5);
+}
+.role-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(201,169,110,.7);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.85),
+    0 0 0 4px rgba(201,169,110,.15),
+    0 0 28px rgba(0,0,0,.7),
+    0 12px 40px rgba(0,0,0,.6);
+}
+.role-card::before{
+  content:'';position:absolute;top:-1px;left:8px;right:8px;
+  height:3px;z-index:5;border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(212,168,83,.4),transparent);
+}
+.role-card::after{
+  content:'';position:absolute;top:5px;right:5px;
+  width:6px;height:6px;border-radius:50%;z-index:5;pointer-events:none;
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+.role-card .card-inner{position:relative;z-index:1;overflow:hidden}
+.role-card .card-inner::before{
+  content:'';position:absolute;top:5px;left:5px;
+  width:6px;height:6px;border-radius:50%;z-index:5;pointer-events:none;
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+
+/* Image area - 3:4 poster */
+.card-image-area{
+  aspect-ratio:3/4;
+  background:transparent;
+  position:relative;
+  overflow:hidden;
+}
+.card-image-area::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:50%;
+  background:linear-gradient(0deg,rgba(10,10,12,1) 0%,transparent 100%);
+  pointer-events:none;z-index:1;
+}
+
+/* Top-left badge */
+.card-badge{
+  position:absolute;top:14px;left:14px;z-index:3;
+  text-shadow:
+    0 0 8px rgba(0,0,0,.95),
+    0 0 3px rgba(0,0,0,1),
+    0 2px 6px rgba(0,0,0,.9);
+}
+.card-badge .card-name{
+  font-size:22px;font-weight:800;letter-spacing:4px;
+  display:block;line-height:1.2;
+}
+.card-badge .card-sub{
+  display:block;font-size:10px;letter-spacing:2px;opacity:.9;margin-top:2px;
+}
+
+/* 金句 - on image, NO bubble */
+.card-quote{
+  position:absolute;left:16px;right:16px;z-index:2;
+  bottom:28px;
+  font-size:15px;font-weight:800;letter-spacing:2px;
+  text-align:center;
+  color:#d4a853;
+  text-shadow:
+    0 0 10px rgba(0,0,0,.9),
+    0 0 4px rgba(0,0,0,1),
+    0 2px 6px rgba(0,0,0,.8);
+}
+.card-quote .qm{opacity:.6}
+
+/* Text area - bottom, dark background */
+.card-text-area{
+  background:linear-gradient(to bottom, #0a0a0c 0%, rgba(10,10,12,0.7) 5%, #0a0a0c 20%, #0a0a0c 100%);
+  padding:3px 12px 5px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+/* 总结 bubble */
+.card-summary-bubble{
+  font-size:11px;line-height:1.5;letter-spacing:.5px;
+  padding:6px 10px;
+  background:rgba(0,0,0,.55);
+  border-radius:6px;
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+}
+
+/* Stats row */
+.card-stats-row{
+  display:flex;gap:10px;justify-content:center;
+}
+.card-stats-row .s-item{
+  font-size:10px;font-weight:700;letter-spacing:1px;
+}
+.card-stats-row .s-lbl{
+  font-size:7px;font-weight:400;opacity:.4;margin-left:1px;
+}
+
+/* Footer */
+.card-footer{
+  display:flex;align-items:center;gap:6px;
+  font-size:8px;letter-spacing:1px;opacity:.4;
+}
+.card-footer .qr-icon{width:36px;height:36px;border-radius:4px;flex-shrink:0}
+.card-footer .qr-icon img{width:100%;height:100%;display:block;border-radius:4px}
+
+/* ── Family Color Variants ── */
+
+/* Tiger - 破军虎 赤金 */
+.role-card.ftiger::before{
+  background:linear-gradient(90deg,transparent,rgba(232,116,90,.4),transparent);
+}
+.role-card.ftiger::after,.role-card.ftiger .card-inner::before{
+  background:rgba(232,116,90,.25);
+  box-shadow:0 0 6px rgba(232,116,90,.12),0 0 0 1px rgba(232,116,90,.08);
+}
+.role-card.ftiger .card-badge .card-name{color:#e8a090}
+.role-card.ftiger .card-badge .card-sub{color:#e8a090}
+.role-card.ftiger .card-stats-row .s-item{color:#e8745a}
+.role-card.ftiger .card-summary-bubble{color:#c8a090}
+
+/* Phoenix - 焰羽凤 暖金 */
+.role-card.fphoenix::before{
+  background:linear-gradient(90deg,transparent,rgba(212,168,83,.45),transparent);
+}
+.role-card.fphoenix::after,.role-card.fphoenix .card-inner::before{
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+.role-card.fphoenix .card-badge .card-name{color:#e8d090}
+.role-card.fphoenix .card-badge .card-sub{color:#e8d090}
+.role-card.fphoenix .card-stats-row .s-item{color:#d4a853}
+.role-card.fphoenix .card-summary-bubble{color:#c8b890}
+
+/* Bear - 抱山熊 墨青 */
+.role-card.fbear::before{
+  background:linear-gradient(90deg,transparent,rgba(90,160,120,.4),transparent);
+}
+.role-card.fbear::after,.role-card.fbear .card-inner::before{
+  background:rgba(90,160,120,.25);
+  box-shadow:0 0 6px rgba(90,160,120,.12),0 0 0 1px rgba(90,160,120,.08);
+}
+.role-card.fbear .card-badge .card-name{color:#90c0a0}
+.role-card.fbear .card-badge .card-sub{color:#90c0a0}
+.role-card.fbear .card-stats-row .s-item{color:#5aa078}
+.role-card.fbear .card-summary-bubble{color:#90b8a0}
+
+/* Eagle - 玄机鹰 冷金 */
+.role-card.feagle::before{
+  background:linear-gradient(90deg,transparent,rgba(120,140,180,.4),transparent);
+}
+.role-card.feagle::after,.role-card.feagle .card-inner::before{
+  background:rgba(120,140,180,.25);
+  box-shadow:0 0 6px rgba(120,140,180,.12),0 0 0 1px rgba(120,140,180,.08);
+}
+.role-card.feagle .card-badge .card-name{color:#a0b0d0}
+.role-card.feagle .card-badge .card-sub{color:#a0b0d0}
+.role-card.feagle .card-stats-row .s-item{color:#788cb4}
+.role-card.feagle .card-summary-bubble{color:#a0a8c0}
+
+.rsc-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px}
+
+/* ── Action Buttons ── */
+.action-bar{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+
+/* ── Toast ── */
+.toast{display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--surface);color:var(--text);border:1px solid var(--border-gold);padding:12px 28px;border-radius:30px;font-size:14px;z-index:999;animation:fadeIn .25s ease;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+
+/* ── Family Card with Image ── */
+.family-img-row{display:flex;justify-content:center;gap:10px;margin:0 0 28px;flex-wrap:wrap}
+.family-img-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);transition:var(--transition);cursor:default;width:76px}
+.family-img-card:hover{border-color:var(--border-gold)}
+.family-img-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block;background:var(--bg2)}
+.family-img-card .fi-name{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:.02em}
+
+
+/* ── Match items (in analysis-section style) ── */
+.analysis-match{margin-top:4px}
+.analysis-match .match-item{padding:8px 0;border-bottom:1px solid var(--border)}
+.analysis-match .match-item:last-child{border-bottom:none}
+.analysis-match .match-type{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.analysis-match .match-type .m-score{font-size:12px;color:var(--gold);font-weight:600}
+.analysis-match .match-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.analysis-match .match-tip{font-size:11px;color:var(--gold-dim);margin-top:6px;font-style:italic}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- ════════════════════════════════════════════ WELCOME ════════════════════════════════════════════ -->
+<section id="screen-welcome" class="screen active">
+<div class="welcome">
+  <div class="welcome-badge">✦ 古风武侠 · 性格探索</div>
+  <h1>DISC 性格</h1>
+  <div class="welcome-deco"></div>
+  <h1 style="font-size:26px;margin-top:-6px">探索你的江湖人格</h1>
+  <p class="subtitle">
+    28 道精选题 · 四大性格本源<br>
+    发现你的行为密码，找到你的江湖同道
+  </p>
+
+  <div class="family-img-row">
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/cb97e09e052d366cdaafb65b6859a78e23283a98afa15ee303d1753225a19a40.png" alt="破军虎" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--d)">D · 破军虎</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">支配本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/54d9f978a8b709653cae1706e9626082b02f4b13706c0a5fe167dc8d507efea4.png" alt="焰羽凤" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--i)">I · 焰羽凤</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">影响本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1c9e09d0fe76fcce8cbe0420c4388cbb35436ae6c82b8ff6b6c7a8ecfd35c9a7.png" alt="抱山熊" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--s)">S · 抱山熊</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">稳健本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/84989227246db753e99cf310965c180ddaf0bd9743236d5feea0b612fff0e014.png" alt="玄机鹰" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--c)">C · 玄机鹰</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">谨慎本源</span>
+    </div>
+  </div>
+
+  <div class="disc-intro">
+    <div class="intro-header" onclick="toggleIntro()">
+      <span style="font-size:14px">📖 DISC 是什么？</span>
+      <span class="arrow" id="intro-arrow">▾</span>
+    </div>
+    <div class="intro-body" id="intro-body">
+      <p><strong>DISC 理论</strong>由美国心理学家 <strong>威廉·马斯顿</strong>（William Moulton Marston）于 1928 年在《正常人的情绪》一书中首次提出。与传统的"病理学"人格研究不同，马斯顿关注的是<strong>正常人的行为模式</strong>——他认为，人的行为可以归纳为<strong>四个基本维度</strong>，每个人在这四个维度上的不同组合，构成了独一无二的"行为密码"。</p>
+      <p>近一个世纪以来，DISC 已被全球超过 <strong>5000 万</strong>人次使用，是 <strong>世界 500 强企业</strong>应用最广的性格分析工具之一。它被广泛应用于<strong>人才选拔、团队建设、领导力发展、职业规划和婚恋关系优化</strong>等领域，拥有超过 200 篇同行评审研究支持其效度。</p>
+      <p><strong>DISC 不评判好坏</strong>——它只是帮助你理解：<strong>为什么有些人一见如故，有些人却总是合不来？为什么同样的压力，有人越战越勇，有人却想逃离？为什么同一个团队，有人关注目标，有人关注关系，有人关注流程，有人关注细节？</strong></p>
+      <div class="intro-pillars">
+        <div class="pillar pillar-d"><span class="pillar-icon">🔴</span><span class="pillar-lbl">D 支配型</span><span class="pillar-desc">果断·直接·目标导向<br>关注"做什么"和"什么时候做完"</span></div>
+        <div class="pillar pillar-i"><span class="pillar-icon">🟠</span><span class="pillar-lbl">I 影响型</span><span class="pillar-desc">热情·乐观·善社交<br>关注"谁来做"和"开不开心"</span></div>
+        <div class="pillar pillar-s"><span class="pillar-icon">🟢</span><span class="pillar-lbl">S 稳健型</span><span class="pillar-desc">温和·耐心·可靠<br>关注"怎么做"和"稳不稳定"</span></div>
+        <div class="pillar pillar-c"><span class="pillar-icon">🔵</span><span class="pillar-lbl">C 谨慎型</span><span class="pillar-desc">严谨·精确·逻辑强<br>关注"为什么这么做"和"对不对"</span></div>
+      </div>
+      <p>与市面上的性格测试不同，DISC 关注的是你的<strong>外显行为</strong>而非内在动机——你<strong>实际做了</strong>什么，而不是你<strong>为什么</strong>这么做。这使得 DISC 在<strong>预测人际兼容性</strong>方面有着非常高的准确性。本测试采用<strong>28 题迫选法</strong>——每题必须同时选出"最符合"和"最不符"的选项，相比传统评分量表，能更真实地反映你的行为偏好，避免"中庸倾向"。选项源自近万份真实样本的行为聚类分析，具有扎实的实证基础。</p>
+      <div class="usage-grid">
+        <div class="usage-item"><span class="usage-num">01</span><div><strong>认识自己</strong><p>了解你的行为偏好、内在驱动和独特的"江湖人格"</p></div></div>
+        <div class="usage-item"><span class="usage-num">02</span><div><strong>理解关系</strong><p>看清情感关系中的相处模式与深层需求</p></div></div>
+        <div class="usage-item"><span class="usage-num">03</span><div><strong>应对压力</strong><p>发现压力下的本能反应模式，学会自我调节</p></div></div>
+        <div class="usage-item"><span class="usage-num">04</span><div><strong>找到适配</strong><p>了解哪些性格类型与你最合拍，优化人际关系</p></div></div>
+      </div>
+      <p style="margin-top:12px"><strong>完成测试你将获得：</strong>专属江湖角色卡 · 五维度性格图谱 · 自然/工作/情感/压力/成长五段深度解读 · 合拍度匹配推荐。整个过程只需 3-5 分钟。</p>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">📌 DISC 测试仅供自我探索参考，不构成心理诊断或专业咨询建议。</p>
+    </div>
+  </div>
+
+  <button class="btn btn-gold" onclick="showNameModal()">✦ 开始探索</button>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ NAME MODAL ════════════════════════════════════════════ -->
+<div id="modal-name" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-name')">✕</button>
+    <h3>✦ 步入江湖</h3>
+    <p>只需 3 分钟，测出你的江湖人格<br>让我们从认识你开始</p>
+    <input type="text" id="input-name" placeholder="你希望怎么称呼？" maxlength="20">
+    <div class="modal-tip">💡 一个称呼即可开始</div>
+    <button class="btn btn-gold full-w" onclick="submitName()">✦ 步入江湖</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ UNLOCK MODAL ════════════════════════════════════════════ -->
+<div id="modal-unlock" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-unlock')">✕</button>
+    <div style="font-size:40px;margin-bottom:8px">🔓</div>
+    <h3>解锁完整解读</h3>
+    <p>输入手机号，解锁你的<br><b>专属角色卡 · 情感关系 · 压力状态 · 适配推荐</b></p>
+    <div style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6;background:var(--bg2);padding:12px 16px;border-radius:8px">
+      输入手机号，一键解锁你的：<br>
+      <b>专属角色卡 · 情感关系 · 压力状态 · 适配推荐</b>
+    </div>
+    <input type="tel" id="input-phone" class="" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
+    <div class="modal-tip">📩 仅用于报告存档，可在合拍度中登录匹配</div>
+    <button class="btn btn-gold full-w" onclick="doUnlock()">🔓 解锁完整报告</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ TEST ════════════════════════════════════════════ -->
+<section id="screen-test" class="screen">
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+  <div id="progress-text" class="progress-text">0 / 28</div>
+</div>
+<div class="test-instruct">📌 每题请选一个 <strong>「最符合」</strong> 和一个 <strong>「最不符」</strong>，没有对错，凭第一直觉就好</div>
+<div id="questions-container"></div>
+<div class="nav-bar" id="nav-bar">
+  <button id="nav-prev" class="nav-btn" onclick="goPrev()">← 上一页</button>
+  <span id="nav-page" class="pi">1 / 7</span>
+  <button id="nav-next" class="nav-btn" onclick="goNext()">下一页 →</button>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ HEPAI BANNER ════════════════════════════════════════════ -->
+<div id="hepai-banner" class="hepai-banner" style="display:none">
+  <span class="hb-icon">💌</span>
+  <div class="hb-name" id="share-from-name"></div>
+  <div class="hb-type" id="share-from-type"></div>
+  <div class="hb-tip">完成测试后自动显示合拍分析</div>
+</div>
+
+<!-- ════════════════════════════════════════════ RESULTS ════════════════════════════════════════════ -->
+<section id="screen-results" class="screen">
+<div id="results-content"></div>
+<div class="action-bar">
+  <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
+  <button class="btn btn-outline btn-sm" id="btn-save" onclick="saveResult()">📷 保存结果</button>
+</div>
+</section>
+
+</div><!-- /container -->
+
+<!-- ════════════════════════════════════════════ UNLOCKED REPORT SCREEN ════════════════════════════════════════════ -->
+<section id="screen-report" class="screen">
+<div style="padding:20px 16px 60px;max-width:480px;margin:0 auto">
+  <div id="report-content"></div>
+  <div class="action-bar">
+    <button class="btn btn-outline btn-sm" onclick="showScreen('screen-results')">← 返回结果页</button>
+    <button class="btn btn-outline btn-sm btn-save-rs" onclick="saveResult()">📷 保存卡片</button>
+    <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
+  </div>
+</div>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════ DATA ══════════════════════════════════════════════════════════════
+const QBANK=[
+{h:'面对一个全新的挑战：',o:[{d:'D',t:'先动手再说，边做边调整方向'},{d:'I',t:'找几个靠谱的人一起冲，路上更精彩'},{d:'S',t:'先看看别人怎么做的，有把握再行动'},{d:'C',t:'列一个详细的计划表，把风险都想清楚'}]},
+{h:'团队讨论时，你的风格更接近：',o:[{d:'D',t:'直接抛出观点，快速推动决策'},{d:'I',t:'积极发言同时注意氛围，不让场面冷'},{d:'S',t:'认真听每个人的意见，最后再表态'},{d:'C',t:'用数据和逻辑支撑发言，讲求严谨'}]},
+{h:'做一个重要的决定时：',o:[{d:'D',t:'凭直觉快速拍板，不纠结'},{d:'I',t:'问问身边信任的人，听听不同的看法'},{d:'S',t:'反复权衡，确认最稳妥的选项再定'},{d:'C',t:'把利弊写下来逐条分析，理性决定'}]},
+{h:'面对突如其来的变故：',o:[{d:'D',t:'立刻接管局面，快速做出应对'},{d:'I',t:'先稳住大家的情绪，再想办法'},{d:'S',t:'深呼吸保持冷静，按部就班处理'},{d:'C',t:'先搞清楚来龙去脉，再制定方案'}]},
+{h:'别人对你的第一印象通常是：',o:[{d:'D',t:'有气场、有主见、说话利索'},{d:'I',t:'热情开朗、容易亲近、话多'},{d:'S',t:'温和安静、让人舒服、靠谱'},{d:'C',t:'冷静理性、做事严谨、标准高'}]},
+{h:'你最在意别人对你的：',o:[{d:'D',t:'尊重和认可——你得说到做到'},{d:'I',t:'喜欢和欣赏——你希望被看见'},{d:'S',t:'信任和依赖——你是那个靠得住的人'},{d:'C',t:'公正评价——你得用实力说话'}]},
+{h:'社交场合中你更像：',o:[{d:'D',t:'主动发起话题和活动的人'},{d:'I',t:'全场最活跃的那个，和谁都能聊'},{d:'S',t:'安静坐在角落，但有人来聊会很真诚'},{d:'C',t:'观察全场，偶尔冒出一句精辟的'}]},
+{h:'收到一个让你兴奋的好消息：',o:[{d:'D',t:'立刻行动——机会不等人'},{d:'I',t:'兴奋地告诉所有朋友分享喜悦'},{d:'S',t:'开心但克制，先消化一下再告诉最亲近的人'},{d:'C',t:'先确认消息是否准确，再评估影响'}]},
+{h:'最让你有成就感的事：',o:[{d:'D',t:'拿下了一个很难的目标'},{d:'I',t:'影响和帮助了很多人'},{d:'S',t:'维护了一段长期稳定的关系或项目'},{d:'C',t:'完成了一件精确无误的作品或方案'}]},
+{h:'和伴侣吵架后，我更倾向于：',o:[{d:'D',t:'冷静下来后主动找对方，直说我的想法'},{d:'I',t:'很快忍不住想和好，用幽默破冰'},{d:'S',t:'默默等对方先开口，但心里很不好受'},{d:'C',t:'理清思路后书面或口头表达我的立场'}]},
+{h:'你觉得一个理想的周末是：',o:[{d:'D',t:'高效完成几个目标，然后享受成就感'},{d:'I',t:'和朋友聚会、探店、体验新鲜事'},{d:'S',t:'在家做饭看书，享受安宁'},{d:'C',t:'学点新东西或整理一周的思绪'}]},
+{h:'工作中你最容易犯的错是：',o:[{d:'D',t:'推进太快，忽略别人的感受'},{d:'I',t:'承诺太多，精力分散执行不足'},{d:'S',t:'太过忍耐，该拒绝时没拒绝'},{d:'C',t:'过度追求完美，拖慢了进度'}]},
+{h:'你最不喜欢的沟通方式：',o:[{d:'D',t:'绕弯子、不直说、浪费时间'},{d:'I',t:'冷漠、没有人情味、公事公办'},{d:'S',t:'突然袭击、粗暴打断、强迫表态'},{d:'C',t:'含糊其辞、没有数据支撑、拍脑袋'}]},
+{h:'朋友遇到困难找你帮忙：',o:[{d:'D',t:'直接帮他解决问题，给方案'},{d:'I',t:'先安慰情绪，再陪他一起想办法'},{d:'S',t:'耐心听他倾诉，默默陪伴'},{d:'C',t:'帮他分析问题的本质和解决路径'}]},
+{h:'你在人群中更像是：',o:[{d:'D',t:'那个拿主意的人'},{d:'I',t:'那个活跃气氛的人'},{d:'S',t:'那个默默做事的人'},{d:'C',t:'那个把关质量的人'}]},
+{h:'面对一个你不认同的规则：',o:[{d:'D',t:'挑战它，用行动证明更好的方式'},{d:'I',t:'先试着和制定者沟通理解原因'},{d:'S',t:'不太舒服但先遵守，找合适时机提'},{d:'C',t:'研究规则背后的逻辑，找到合理改进点'}]},
+{h:'纪念日伴侣忘了准备礼物：',o:[{d:'D',t:'直接说"我有点失望"，然后提议补过'},{d:'I',t:'虽然失落但嘴上说没事，希望对方自己意识到'},{d:'S',t:'心里难过但不表达，怕破坏气氛'},{d:'C',t:'理性分析对方是否太忙，但暗暗记一笔'}]},
+{h:'你更在意一段关系中的：',o:[{d:'D',t:'方向感和成长性——我们是不是一起在变好'},{d:'I',t:'温度和乐趣——在一起开不开心'},{d:'S',t:'安全感和稳定性——你不会突然离开'},{d:'C',t:'理解和尊重——你真的懂我在想什么'}]},
+{h:'会议上有人提出你不认同的观点：',o:[{d:'D',t:'立刻表达不同意见用数据反驳'},{d:'I',t:'先肯定对方再幽默引入自己观点'},{d:'S',t:'记在心里不急着反驳让子弹飞一会'},{d:'C',t:'逐条记录会后整理好论据再单独沟通'}]},
+{h:'精心做的计划突然被打乱：',o:[{d:'D',t:'快速切换到PlanB不纠结情绪'},{d:'I',t:'虽然烦但很快恢复拉着大家想新方案'},{d:'S',t:'心里很不安但表面上不动声色'},{d:'C',t:'先搞清楚为什么会乱再决定怎么应对'}]},
+{h:'身处复杂的人际关系环境中：',o:[{d:'D',t:'不站队专注做事拿结果说话'},{d:'I',t:'和各路人都能聊两句谁也不得罪'},{d:'S',t:'低调行事尽量不卷入任何纷争'},{d:'C',t:'观察权力结构分析每个人的立场再行动'}]},
+{h:'开始学一门完全陌生的技能：',o:[{d:'D',t:'先上手试边做边学不求完美'},{d:'I',t:'找人一起学报个团互相鼓励'},{d:'S',t:'按教程一步步走不跳步慢慢来'},{d:'C',t:'先研究教材体系框架理清楚再开始'}]},
+{h:'面对伴侣的不开心：',o:[{d:'D',t:'直接问"怎么了"然后帮他解决问题'},{d:'I',t:'陪在身边用温暖和幽默让他笑出来'},{d:'S',t:'默默陪伴不问太多等他自己说'},{d:'C',t:'分析原因帮他理清思路找出路'}]},
+{h:'同时收到两个很好的工作offer：',o:[{d:'D',t:'哪个成长空间大就去哪个直觉拍板'},{d:'I',t:'哪个团队氛围好就去哪个问过朋友再定'},{d:'S',t:'选更稳定的那个不求刺激求安心'},{d:'C',t:'做一张对比表格逐项打分算完再说'}]},
+{h:'被别人深深误解时：',o:[{d:'D',t:'不浪费时间解释继续用结果证明自己'},{d:'I',t:'难过但主动打开对话试图修复关系'},{d:'S',t:'心里很委屈但不吭声默默消化'},{d:'C',t:'逐条澄清误解事实求是还原真相'}]},
+{h:'一个人独处的周末：',o:[{d:'D',t:'趁没人打扰高效推进几个个人目标'},{d:'I',t:'有点闷打开手机找朋友聊天'},{d:'S',t:'享受安宁看书追剧做点小事'},{d:'C',t:'整理一周的事项做下周的计划'}]},
+{h:'需要说服一个很固执的人：',o:[{d:'D',t:'摆事实讲逻辑正面硬刚直到对方松动'},{d:'I',t:'先拉近关系用好感铺垫再说正事'},{d:'S',t:'慢慢来不施压给对方足够时间消化'},{d:'C',t:'准备一份详尽的分析让对方无话可说'}]},
+{h:'我们的关系中，我更在乎：',o:[{d:'D',t:'共同成长——我们是最好的搭档'},{d:'I',t:'情感连接——你让我觉得被看见被需要'},{d:'S',t:'陪伴安心——你一直在我就安心'},{d:'C',t:'深层理解——你真的懂我的世界'}]}
+];
+
+const CHAR_IMG={
+  'D':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/020120c400a0d69746ea0a8a40d5ae91c0c179023fb87726b563d2f050e46ec5.png',
+  'DI':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/9250447d3f6e038e874703b353a20be320f777aadc935025360c86e9ec97d117.png',
+  'DS':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/f943401d19ccce88a7aacc4f929ad9b04ec7223e79086fe827b3466b8b6f6510.png',
+  'DC':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/313644c4b4ea55b0ba0133113671175cf91cac4b47274bac754e236e83e63025.png',
+  'I':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1d1a3f6b243e114ac050186a92b06be2904ad26d8027b37fa01e2827561b776f.png',
+  'ID':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/5696b966ce3bcbdb22139543c1b9d259dcbe84ae56a7729f927aebaa14531005.png',
+  'IS':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/b277463fb9bc08113b3a8facccc6e50ae62f273adc4cd0f76bc68bc9b8ec5869.png',
+  'IC':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/723225a947e7592bc775f7c09c98d722119d9524dcb4adcebc9d8b522e7aece2.png',
+  'S':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/927dfbcf347bc127abb9074570ed39be380fb1cc5d1269c240e3336632f30acb.png',
+  'SD':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/cc334d4634ad8a8a1118e6bc5610364ada24d99869ba15ca0d975d060f1e746c.png',
+  'SI':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/c9400cd4ce5a610446d7e80a861d46b2dd544a81837cd2e338be12c4e9369ecf.png',
+  'SC':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/b6f994c33be9fcb5b67a0f71f17757c858deed3c5c154f912fecf4a197029fa5.png',
+  'C':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/8352e4018cb5ff30519c15c118f2836cfae4f9d23c35f14865a023a8e5b527ad.png',
+  'CD':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/53b29a2f0e0db2f071b1a79da45464ff7cd34d66da96e0f826d802d5ba5fc855.png',
+  'CI':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/af7c5e047230cf2fb46a264c68e190b59d18b07684e7c67e087d7095d2330a13.png',
+  'CS':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/617a7454648f36fa639968170bc72d13a540f972ff75c9d5cc65b63688a5c087.png'
+};
+const FAMILY_IMG={
+  'D':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/cb97e09e052d366cdaafb65b6859a78e23283a98afa15ee303d1753225a19a40.png',
+  'I':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/54d9f978a8b709653cae1706e9626082b02f4b13706c0a5fe167dc8d507efea4.png',
+  'S':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1c9e09d0fe76fcce8cbe0420c4388cbb35436ae6c82b8ff6b6c7a8ecfd35c9a7.png',
+  'C':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/84989227246db753e99cf310965c180ddaf0bd9743236d5feea0b612fff0e014.png'
+};
+const CHAR_NAME={'D':'镇北侯','DI':'鸣镝使','DS':'横江戟','DC':'射天狼','I':'醉花仙','ID':'燎原君','IS':'沐春风','IC':'画魂师','S':'守山人','SD':'藏锋客','SI':'听雪客','SC':'守墨君','C':'弈星君','CD':'破阵尊','CI':'观星客','CS':'知秋客'};
+const CHAR_FAMILY={'D':'破军虎','DI':'破军虎','DS':'破军虎','DC':'破军虎','I':'焰羽凤','ID':'焰羽凤','IS':'焰羽凤','IC':'焰羽凤','S':'抱山熊','SD':'抱山熊','SI':'抱山熊','SC':'抱山熊','C':'玄机鹰','CD':'玄机鹰','CI':'玄机鹰','CS':'玄机鹰'};
+const CHAR_QUOTES={
+  D:['万人避让的路，我一个人走。','挡我者，退后三步。','不解释——看结果。','孤峰顶上，自有风景。'],
+  DI:['跟上我，方向没错。','旗帜所向，即是前方。','我不等风来——我造风。','方向对了，路自然直。','冲就完了，回头再想。'],
+  DS:['稳不是慢，是每一步都踩实了。','大山不响，自有分量。','你急你的，我走我的。','沉默是最响亮的回答。'],
+  DC:['不出手则已，出手必中。','靶心只有一个，偏一点都不行。','先看清楚，再打出去。','精确是另一种暴力。'],
+  I:['我不追光——我就是光。','你来人间一趟，得让人记住你的名字。','热闹是本事，温暖是底色。','笑着把事办了。','冷场？不存在的。'],
+  ID:['旗子在哪，人心就在哪。','跟我来，前面有好风景。','一个人走得快，一群人走得远。','来吧，这条路我探过了。'],
+  IS:['温暖不是我的技能，是我的本能。','你不用说，我都懂。','这杯茶，刚刚好。','温柔的人，骨头最硬。'],
+  IC:['好想法不值钱，把好想法做出来才值钱。','灵感会飞，你得抓住它。','浪漫要有，严谨也不能少。','做梦的人很多，把梦做出来的人很少。'],
+  S:['山不走，山等你。','你尽管跑，我在这里。','稳得住，才走得远。','不急，路还长。'],
+  SD:['温和是我的教养，不是我的软肋。','别把我的沉默当软弱。','肩膀在这，你靠得住。','水最柔，也最能穿石。'],
+  SI:['我在，就是最好的回答。','不用多说，我都知道。','陪伴是最长情的告白。','静静地，就好。'],
+  SC:['规矩不是束缚，是底线。','稳得住的人，才守得住远方。','一砖一瓦，皆是功夫。','不越线，也不让步。'],
+  C:['我不站队，我站逻辑。','数据不会骗人，人会。','想清楚了——再动手。','准确是我的礼貌。'],
+  CD:['所有人都说不行？那我找到路给你看。','逻辑到位，路就有了。','破局者，不抱怨规则。','看清楚，想明白，然后出手。'],
+  CI:['严肃是我的保护色，有趣是我的底色。','你不要被我冷静的外表骗了。','我有我的逻辑浪漫。','精确也可以很迷人。'],
+  CS:['一叶落，我就知道秋天来了。','细节里藏着答案。','不用大声——我看见了。','安静的人，看得最清楚。']
+};
+
+const COMBOS={
+DI:{name:'开拓者',oneliner:'你不是在等风向——你就是风。',id:'你是 <b>天生的开拓者</b>——兼具 D 型的目标驱动和 I 型的热情感染力。你能在拍板之后让一桌人笑着跟你走。你的核心优势是 <b>行动力 × 影响力</b>。',life:'日常中的你是团队的"引擎"——新项目交给你，方向就有了。你需要学会"回头看"——偶尔停顿确认身后的人是否还在同一条船上。',work:'工作中你雷厉风行又善于激励。你敢做决定，也能让别人愿意跟你走。但注意不要同时推进太多方向。',pressure:'压力之下你变成"双倍加速器"——D 的控制欲和 I 的表达欲同时飙升。你说话更快，决策更急，恨不得一人扛下所有。但越是这种时候，越需要停一下，深呼吸——问问自己"我到底在急什么"，再问问身边的人"你怎么想"。慢半拍，不会错过机会，反而能看清方向。',rel:'亲密关系中你是主动且热烈的引导者——你习惯掌握方向和节奏，喜欢带着对方一起冲刺人生目标。但偶尔，试着退后一步，让对方来决定方向。学会问一句"你觉得呢"，这比任何惊喜都更能让对方感到被尊重。你的热情是礼物，但偶尔的示弱能让关系更平衡。',grow:'你的成长关键词是 <b>"节奏感"</b>。适度控制承诺量，学会区分"我想要"和"我能给"。',gold:'跟我走，方向是对的。'},
+ID:{name:'激励家',oneliner:'你不只能让房间亮起来——你还能让房间朝一个方向跑。',id:'你是 <b>天生的激励家</b>——I 的感染力让你一进场气场就活了，D 的目标驱动让你的"嗨"是有方向的。<b>魅力 × 实力</b> 是你的硬通货。',life:'你能让一个沉闷的团队重新燃起来，同时带着目标意识推动落地。但要小心：你的社交广度有时会分散精力。',work:'你是"氛围引擎+推进器"。你擅长在人际和任务之间找到平衡。学会对有趣的事说不，是最重要的功课。',pressure:'压力来袭时你的第一反应是"把气氛撑住"——你会本能地调动所有能量让场面继续好看，哪怕自己已经快撑不住了。但真正强大的关系不怕你露出脆弱的一面。你需要学会承认"我现在也不OK"，这不仅不会削弱你的魅力，反而让人感受到你的真实。',rel:'你既温暖又有主见——属于"既懂你又有方向感"的伴侣。你能在对方低落时点亮一盏灯，也能在迷茫时给出方向。但偶尔你会因为想保持好氛围而回避严肃对话，其实那些沉默的议题不会自己消失。学会在关系里勇敢面对冲突，你会发现自己比想象中更擅长处理它。',grow:'你的成长关键词是 <b>"聚焦"</b>。分清"浮现的灵感"和"当前的优先事项"。',gold:'跟着我，既有方向又有温度。'},
+DS:{name:'沉稳推手',oneliner:'你不是在咆哮，你是在"等"——但你知道终点在哪。',id:'你是 <b>不怒自威的推手</b>——D 让你清楚自己要去哪，S 让你有耐心走到那。<b>目标 × 耐心</b> 让你成为最难被击倒的那类人。',life:'你是"定海神针"型——目标清晰但不急躁，推动但不撕扯。适时地表达方向和态度能把你的影响力放大三倍。',work:'工作中你稳扎稳打，适合长期项目。但沉默有时候让人猜不透——多表达方向感能让团队更安心。',pressure:'高压下你会进入"静默推土机"模式——不说话，但动作不停，一个人默默把所有问题扛下来处理。你相信行动胜过言语，但身边的人可能会因为沉默而感到不安。偶尔说一句"我有点压力"，不会让你打折，反而让在乎你的人有机会靠近你。',rel:'在关系中你是稳重的靠山——你习惯用行动证明承诺，用沉默承载责任。但有时稳到对方以为你不在意，因为你太少把心里的话说出来。试试在行动之外加一句"我在想你"——不需要长篇大论，一句话就够。让温度不只是被感受到，也能被听见。',grow:'你的成长关键词是 <b>"表达"</b>。沉默不等于没意见。学会在最开始就把你的立场摆出来。',gold:'我在路上等你，不急。'},
+SD:{name:'韧性执行者',oneliner:'你跑得不快——但你不会停。',id:'你是 <b>表面温和但内核坚硬</b> 的韧性执行者。S 让你看起来好说话，D 让你在碰到底线时忽然变成最硬的那个。<b>温和 × 坚定</b> 的反差有杀伤力十倍。',life:'你是组织里的"中流砥柱"——别人在争地盘你不吭声，一旦动荡来临，所有人发现你是唯一没动摇的人。',work:'你是"马拉松型"管理者——不是冲在最前面的先锋，而是整个赛程里一直保持节奏的人。主动比被动更建设性。',pressure:'压力下你先忍、再忍、最后忽然爆发——你习惯把情绪积压在心底，直到最后一根稻草压垮沉默。但爆发之后往往又后悔，觉得本可以处理得更好。在"还好"和"爆发"之间给自己留三个台阶：深呼吸一次、走开五分钟、说出第一句真实感受。',rel:'你对感情的投入是深度的、持久的——你从不轻易开始一段关系，但一旦认定了，就会用日复一日的行动去守护。但正因为你太稳定了，对方可能把你的付出当作理所当然。偶尔做一次意料之外的惊喜——提醒对方：我不是习惯，我是选择。你的深情值得被看见。',grow:'你的成长关键词是 <b>"主动"</b>。不要只在被需要时才出声。',gold:'我在这里，风浪过了山顶还在。'},
+DC:{name:'精密指挥官',oneliner:'你把枪擦了又擦才开枪——但一旦开枪，弹无虚发。',id:'你是 <b>"逻辑武装的指挥官"</b>——D 让你敢闯，C 让你不盲闯。<b>勇气 × 精度</b> 让你成为高难度项目的最佳负责人。',life:'你是最好的"难项目负责人"——你有勇气和精度两项硬通货。试着在提标准之前先问一句"你怎么想"。',work:'你在高风险场景中冷静排雷，也能在模棱两可的局面中厘清方向。但高标准有时被队友体验成"挑剔"。',pressure:'高压下你进入"冷酷分析+强硬执行"模式——极度理性，情感通道几乎关闭。你的效率在飙升，但身边的人可能会觉得你变得不近人情。偶尔让人看到你还在乎——一句"我只是想把事情做好"比一百句沉默的加班更有温度。',rel:'你表达在乎的方式是先帮对方把问题想清楚——你相信解决问题就是最好的安慰。但不是所有情绪都需要解决方案，对方有时候不需要你的"正确分析"，只需要你坐下来陪在身边说一句"我也不确定怎么办但我在这儿"。你的存在本身，比你的分析更有力量。',grow:'你的成长关键词是 <b>"温度"</b>。精确是能力，但温度是连接。',gold:'方向我定，细节我查，结果我扛。'},
+CD:{name:'战略分析家',oneliner:'你不是犹豫——你是在计算最优解。',id:'你是 <b>冷静的战略分析家</b>——C 让你把每个细节都想清楚，D 让你在分析完毕后果断出手。<b>精度 × 决断</b> 让你在复杂局面中总能找到最优路径。',life:'你是"幕后军师"型——别人看到结果时你已经把所有可能都推演完了。但有时你的高标准让队友压力很大。',work:'你的分析能力让团队少走弯路，你的决断力让团队不卡在犹豫上。注意："先出手再优化"有时比"想完美再出手"更有效。',pressure:'压力下你会更加依赖分析和逻辑——这让你高效决策，但也让你离人更远。你越来越冷静，但也越来越孤立。你的判断力依然精准，但同理心会暂时下线。提醒自己：事情可以慢慢分析，但人需要现在就被理解。',rel:'在关系中你是"最靠谱的问题终结者"——你的分析能力和执行力让对方在现实层面从不缺乏安全感。但感情不是你用逻辑就能解开的方程。对方有时候不需要你终结问题，只需要你陪着一起面对。放下"解决它"的本能，学会"我在呢"的陪伴。',grow:'你的成长关键词是 <b>"行动"</b>。80%的准备+100%的执行，往往胜过100%的准备+0的行动。',gold:'想清楚了，做就对了。'},
+IS:{name:'温暖凝聚者',oneliner:'你不需要站在C位——你是让C位发光的那个人。',id:'你是 <b>天生的温暖凝聚者</b>——I 让你能感知每个人的情绪，S 让你有耐心一一回应。<b>共情 × 稳定</b> 让你成为最值得信赖的朋友和伴侣。',life:'你是团队的"情绪温度计"和"安全感来源"。你的陷阱：你把所有人的情绪都接住了，唯独忘了自己。',work:'你是团队中最让人舒服的存在。但注意不要因为照顾所有人的感受而忘记推动事情向前。',pressure:'压力下你进入"超级照顾者"模式——你忙着安抚所有人，把每个人的情绪都接住，却把自己的焦虑压到心底。你习惯了说"没事""我来""别担心"，但这些话越多，压力就越得不到释放。你需要学会说"我也需要帮助"——这不是软弱，而是给自己一个喘息的机会。',rel:'在亲密关系中你是最温暖的存在——你能第一时间察觉到对方的情绪波动，细心到连对方自己都没说出口的需求你都能接住。但你有取悦倾向，偶尔会因为想维护和谐而牺牲自己的需求，把委屈咽下去。真正成熟的爱不是单方面付出，而是敢说"我也想要"。',grow:'你的成长关键词是 <b>"边界"</b>。你的温暖是礼物，但不是义务。',gold:'你不用开口，我都懂。'},
+SI:{name:'温柔守护者',oneliner:'你不是没脾气——你只是选择了温柔。',id:'你是 <b>温柔而坚定的守护者</b>——S 让你像大地一样稳定，I 让你在稳定中带着温暖。<b>稳定 × 温暖</b> 让你成为最持久的陪伴者。',life:'你是"定心丸"——不是最显眼的那个，但一定是"少了你就觉得不对劲"的那个。',work:'你是"稳定器+润滑剂"——你的耐心让项目不脱轨，你的温暖让团队不散架。但注意不要总在幕后。',pressure:'压力下你先扛着，然后用微笑掩饰——你不愿意给别人添麻烦，哪怕天塌下来也想自己顶住。但你的微笑骗得过大多数人，却骗不了真正在乎你的人。允许自己不用"没事"来挡住所有关心。说一句"其实有点累"，世界不会崩塌，但你会轻松很多。',rel:'在亲密关系中你是"恒温型"伴侣——你给的爱不炙热也不冰冷，稳定得让人安心。但恒温有时被当作理所当然，你的包容被误以为没有底线，你的安静被误以为没有需求。别让你的稳定变成透明。偶尔表达一次"我不喜欢这样"，会让对方意识到你有多重要。',grow:'你的成长关键词是 <b>"发声"</b>。你的安静很美，但你的想法值得被听见。',gold:'我在这里，一直都在。'},
+IC:{name:'创意策展人',oneliner:'你既浪漫又严谨——灵感来了你接住，细节你也不放过。',id:'你是 <b>灵感与品质的策展人</b>——I 让你源源不断地产生创意，C 让你把创意打磨成精品。<b>创意 × 精度</b> 让你成为最有品质的创造者。',life:'你的想法总是既有新意又经得起推敲。但有时你会因为"还不够好"而迟迟不出手。',work:'你是"品质担当+创意引擎"。但完美主义可能让你错过窗口期——学会"先发布再迭代"。',pressure:'压力下你的创意通道会收窄——你的大脑从"无限可能性"模式切换成"检查每个细节"模式，灵感被焦虑堵住了出口。你越想拿出完美的作品，就越不敢动手。你需要找到一个"不完美但能推进"的出口——先交一份60分的初稿，你会发现在做的过程中灵感自己回来了。',rel:'你既浪漫又理性——你会精心策划一次约会、挑选一份恰到好处的礼物，同时也会冷静地分析这段关系的发展方向。但你的分析有时让对方觉得"太冷静了"，好像一切都在计算之中。偶尔让心说话，别只让脑子说话。有些事不需要想清楚，只需要去感受。',grow:'你的成长关键词是 <b>"完成"</b>。70分的完成品永远比100分的半成品更有力量。',gold:'好想法值得被好好做出来。'},
+CI:{name:'严谨创新家',oneliner:'你不是没有创意——你只是不允许自己拿出未经打磨的创意。',id:'你是 <b>有品质保证的创新家</b>——C 让你把每个细节都想到位，I 让你在严谨中不失灵感。<b>严谨 × 创意</b> 让你成为"又稳又新"的存在。',life:'你是"深度思考者+隐藏的灵感工厂"——你的外表冷静理性，但你的内在世界丰富得令人意外。',work:'你的标准让团队有了质量底线，你的创意让团队有了突破可能。但"够好"比"完美"更合适。',pressure:'压力下你会更依赖逻辑和规则——你相信只要流程正确、分析到位，就没有解决不了的问题。但创造力不是用逻辑可以框住的。你需要刻意给自己留一点"胡思乱想"的空间——走一条没走过的路，听一首没听过的歌，那些看似无关的事恰恰是灵感的来源。',rel:'你是"深沉的浪漫主义者"——你的浪漫从不挂在嘴边，而是藏在精心准备的细节里：一杯刚好温度的茶、一本对方无意中提到过的书。但正因为你不常说，对方可能需要很久才能读懂你的心意。学会即兴表达——不是让你变得浮夸，而是让爱意不用等到被发现，而是直接被感受到。',grow:'你的成长关键词是 <b>"释放"</b>。粗糙的开始胜过精心的犹豫。',gold:'想清楚了，但也要敢于即兴。'},
+SC:{name:'稳健精算师',oneliner:'你不是慢——你是把每一步都算好了再走。',id:'你是 <b>最让人放心的精算师</b>——S 让你稳如磐石，C 让你精确如钟表。<b>稳定 × 精确</b> 让你成为最可靠的后方保障。',life:'你是"最安全的存在"——你的节奏不快，但每一步都踩实了。',work:'你是"质量守门员"。但你的节奏有时跟不上变化的步伐——学会在"稳"和"快"之间找平衡。',pressure:'压力下你会更加内缩——你的第一反应是把自己关起来，用沉默建一座堡垒，以为这样就能挡住所有不确定性。但封闭不是保护，反而让你在孤独中放大焦虑。你需要一个安全的出口——写下来让思路清晰，说出来让情绪释放，走出去让身体替大脑松绑。',rel:'你是"最让人安心的伴侣"——你的稳定和可靠是关系里最坚实的锚点，对方知道无论发生什么，你都会在那里。但你的谨慎有时让对方觉得"不够热烈"，你的深思熟虑被误会为犹豫不决。偶尔大胆一次——不是让你改变自己，而是让关系里的那个你也有一点意外的惊喜。',grow:'你的成长关键词是 <b>"突破"</b>。试试做一件"不太像你会做的事"。',gold:'稳是底色，偶尔冒个险也挺好。'},
+CS:{name:'精准守护者',oneliner:'你不是冷——你是把温柔藏在了细节里。',id:'你是 <b>温柔的精准守护者</b>——C 让你对每个细节都精准把控，S 让你用耐心和温和去守护你在意的人。<b>精确 × 温和</b> 让你成为最有质感的陪伴者。',life:'你是"细节中的温柔"——你不善言辞，但你的行动比语言更有说服力。',work:'你是"品质守护者"。但过度追求完美可能让团队等待太久——有时候"够好"比"完美"更实用。',pressure:'压力下你会更加沉默和内缩——你越是焦虑就越不说话，把所有问题关在脑袋里反复推演。你习惯了一个人处理一切，因为觉得说出来也只是给别人添麻烦。但你需要学会在外部寻找支持——不是所有事都需要你自己扛，信任别人也是对自己的善待。',rel:'你是"细节里的浪漫"——你的爱从不轰轰烈烈，而是像春雨一样"润物细无声"：你记得对方的每一个小习惯，在对方开口之前就把事情做好了。但正因为太安静了，对方有时候需要更直白的表达才能收到你的心意。不是要你变成另一个人，只是偶尔把"我爱你"说出口，一切会不一样。',grow:'你的成长关键词是 <b>"表达"</b>。从"我在乎你"这四个字开始。',gold:'不说，但都做了。'}
+};
+
+const PURE={
+D:{name:'指挥官',oneliner:'你不是在等人跟——你是在确认方向后第一个冲出去的人。',ua:'你是人群中的 <b>天然指挥官</b>——目标感是你的本能，决断力是你的武器。你不怕做决定，不怕承担责任，不怕一个人走在前面。但注意：速度不是一切——偶尔慢下来，等等身后的人。'},
+I:{name:'社交家',oneliner:'你不需要麦克风——你本身就是舞台。',ua:'你是人群中的 <b>自然发光体</b>——你的存在本身就带着温度和光芒。你的核心优势是 <b>感染力 + 连接力</b>。但注意：发光的时候别忘了自己也需要充电。'},
+S:{name:'守护者',oneliner:'你不是喊冲的那个人，但你是所有人回头时永远站在那里的人。',ua:'你是 <b>深沉而稳定的守护者</b>——力量不在音量上，在耐力上。你的核心优势是 <b>稳定 + 可靠</b>。是时候大声一点了——"我的看法是___"值得被听见。'},
+C:{name:'分析师',oneliner:'别人上头的时候你还能冷静地问——这个逻辑对吗？',ua:'你是 <b>冷静的分析师</b>——世界对你来说是需要解开的谜题。你的核心优势是 <b>精确 + 严谨</b>。但别忘了：世界需要的不总是"完美"，有时候"足够好"比"再改一次"更聪明。'}
+};
+
+const MATCH={
+DI:{best:'ISC',score:92,desc:'ISC型的温暖和稳定完美接住你的速度和热情——你们像风和大地。你负责奔跑和探索，TA负责接纳和扎根。在这段关系里，你不需要放慢脚步，因为有人会用自己的方式跟上你、托住你。'},sec:'SC',secScore:88,secDesc:'SC型的精准和耐心能帮你把速度转化为成果。你的冲动需要TA的冷静来校准，你的热情需要TA的细致来落地。你们在一起时，快与慢不是冲突而是互补——TA把方向感变成每一步踏实的脚印。',
+ID:{best:'SC',score:90,desc:'SC型的稳重和细致刚好接住你的热情和速度。当你点子太多、方向太杂的时候，TA就是你的定盘星——帮你理清优先级，把发散的能量汇聚成一条清晰的河流。'},sec:'ISC',secScore:86,secDesc:'ISC型既能理解你的社交需求，又能给你稳定的后方。TA不嫉妒你的光芒，反而愿意在你发光的时候帮你看着脚下的路。你在前场奔跑时，TA为你守住了后方一切周全。',
+DS:{best:'IC',score:90,desc:'IC型的创意和品质感能让你的沉稳多一抹亮色。你习惯了稳重和计划，而TA带来的灵感就像在灰色画布上泼了一笔意想不到的色彩。TA帮你在不动摇底色的前提下，活得更自由一些。'},sec:'IS',secScore:85,secDesc:'IS型的温暖和耐心让你在长期奋斗中有温暖的港湾。你从不轻易喊累，但TA能看出你什么时候需要休息。与TA在一起，你不需要解释为什么沉默，TA会安静地陪你坐着。',
+SD:{best:'IC',score:88,desc:'IC型让坚持有方向、有品质。你已经有持久的耐力，而TA为你的马拉松增加了创意的补给站。当你被惯性困住时，TA用新的视角让你看到不一样的可能——坚守不止是重复，也可以有惊喜。'},sec:'IS',secScore:84,secDesc:'IS型的温暖让你在沉默坚持中有被理解的感觉。你习惯了什么都不说，但TA能从你的表情里读出你的疲惫。跟TA在一起，沉默不再是一种孤独，而是一种被允许的状态。',
+DC:{best:'IS',score:90,desc:'IS型的温暖和耐心能融化你的理性外壳。你习惯了用逻辑保护自己，但TA不急于突破，只是用恒久的温柔一点一点融化你的防线。TA不评判你的冷静，只是静静地告诉你——在这里，你不必事事都算清楚。'},sec:'SI',secScore:86,secDesc:'SI型的稳定温柔让你在追求卓越的路上不孤独。你习惯了一个人扛着高标准前行，而TA就是那个默默走在旁边、帮你分担重量的人。你不是变弱了，而是找到了一个不用逞强的地方。',
+CD:{best:'IS',score:88,desc:'IS型让你在冷静分析之外有了被温暖包裹的空间。你的世界建立在逻辑和标准的框架里，但TA让你发现——有些事不需要被分析，只需要被感受。TA的温暖像一床毯子，在你思考到疲惫时轻轻裹住你。'},sec:'SI',secScore:84,secDesc:'SI型的稳定和温柔让你在精密的世界里有柔软的着陆点。当你把自己逼得太紧的时候，TA的存在就是提醒你：世界不只有标准答案。在TA身边，你可以放下完美的枷锁，轻松地喘一口气。',
+IS:{best:'DC',score:90,desc:'DC型给你方向和安全感——你负责温暖，TA负责决断。当你因为照顾所有人的感受而犹豫不决时，TA帮你划出清晰的边界。你给出的爱需要一个骨架来支撑，而TA就是那个骨架。'},sec:'CD',secScore:86,secDesc:'CD型的理性和精确帮你做判断，你的温暖帮TA做连接。你们是棋逢对手的互补——TA帮你把善心变成有策略的行动，你帮TA把逻辑变成有温度的关系。一起搭档时，理性与感性的配比刚刚好。',
+SI:{best:'DC',score:86,desc:'DC型给你安全感和方向。你习惯于守护和等待，而TA就是那个主动牵起你的手、告诉你"跟我走"的人。在TA身边，你不必一直做那个最稳的人，可以偶尔依赖、偶尔任性。'},sec:'CD',secScore:84,secDesc:'CD型的精确让你的温柔有了方向和品质。你的好需要有策略地安放，才不会在错的地方浪费。TA帮你筛选出最值得投入的人和事，让你的善意不再是漫无目的地付出。',
+IC:{best:'DS',score:90,desc:'DS型让你的创意有了稳定的落地点。你的灵感像烟花，绚烂但容易消散——而TA就是那个帮你把烟花变成灯塔的人。TA的稳重让你的天马行空不至于演变成空想，而是每一步都扎实有力。'},sec:'SD',secScore:86,secDesc:'SD型的韧性让你的好想法不再只是想法。你的创意从不缺乏，缺的是把想法执行到底的耐力——而TA最擅长的就是"不放弃"。与TA搭档，你的每一个灵感都能找到抵达终点的路。',
+CI:{best:'DS',score:86,desc:'DS型让你的严谨有了温度和目标。你习惯在出手之前把所有细节都打磨到完美，而TA帮你看到——完成比完美更重要。TA的踏实和行动力让你从"再想想"的循环里走出来，真正去推动事情发生。'},sec:'SD',secScore:84,secDesc:'SD型的稳重和韧性能托住你高标准下的压力。你是天生的完美主义者，对自己严苛到苛刻——而TA就是那个在你自我怀疑时接住你的人。TA不催你放低标准，但会让你在追高的路上不那么孤单。',
+SC:{best:'DI',score:88,desc:'DI型让你从舒适区里被温柔地推出去。你习惯待在熟悉的领地，因为那里安全、可控——但TA的出现像一道光，照进了你从未探索过的世界。TA不会粗暴地拉你，而是用热情和信任告诉你：外面的世界没那么可怕。'},sec:'ID',secScore:84,secDesc:'ID型的热情和方向感让"稳"有了奔头。你的稳是一种力量，但有时也需要一个方向去安放。TA给你一个值得奔赴的目标——让你的稳定不再是静止，而是有节奏的推进。',
+CS:{best:'ID',score:86,desc:'ID型的热情和方向感让你的"稳"有了奔头。你习惯把一切都安排得井井有条，但有时会忘了问自己"这一切是为了什么"。TA的出现恰好回答了这个问题——TA的目标感和活力让你的精密齿轮转动得更有意义。'},sec:'DI',secScore:84,secDesc:'DI型的速度和感染力让你的精准有了更大的舞台。你的细致和严谨需要被更多人看见才有价值——而TA就是那个把你从幕后推到台前的人。TA的影响力加上你的品质感，能创造出真正令人惊叹的东西。',
+D:{best:'ISC',score:88,desc:'ISC型的温暖和耐心刚好接住你的速度和强势。你习惯了冲锋陷阵、说一不二，但再强的将领也需要一个能安心休整的后方。TA不跟你争主导权，而是用包容让你的锋芒不至于刺伤自己。在TA面前，你可以放下铠甲。'},
+I:{best:'SC',score:90,desc:'SC型的稳重和细致让你在热情之外有了安定的后方。你的世界繁花似锦、人来人往，但有时候热闹过后只剩疲惫。TA的沉默不是无趣，而是一种为你保留的安静空间。在TA那里，你不需要表演，不需要维持气氛。'},
+S:{best:'DC',score:90,desc:'DC型的方向感和决断力让你在温和之外有了依靠。你习惯为别人着想、为大局让步，但有时候你也需要一个替你拿主意的人。TA不犹豫、不含糊，在你温柔的外壳下成为你敢于依靠的那根柱子。'},
+C:{best:'IS',score:88,desc:'IS型的温暖和耐心让你的严谨有了温度和归属。你的世界由逻辑和标准构成，精确但不一定温暖。TA就像一道照进实验室的阳光，让你的严谨有了人情味。在TA身边，你不必一直保持正确，可以犯错、可以柔软。'}
+};
+
+// ══════════════════════════════════════════════════════════════ STATE ══════════════════════════════════════════════════════════════
+const QPP=4,TP=7; // 7 pages × 4 questions
+let userInfo=null,ans=[],curPage=0,shuffles=[];
+let sc=null,displaySc=null,label='',combo=null,labelPos=[],resultKey='',selectedQuote='';
+
+// ══════════════════════════════════════════════════════════════ UTILITY ══════════════════════════════════════════════════════════════
+function $(id){return document.getElementById(id)}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function toast(msg){let t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none'},2500)}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+
+function toggleIntro(){
+  $('intro-body').classList.toggle('open');
+  $('intro-arrow').classList.toggle('open');
+}
+
+function closeModal(id){$(id).classList.remove('active')}
+
+// ══════════════════════════════════════════════════════════════ WELCOME / NAME ══════════════════════════════════════════════════════════════
+function showNameModal(){$('modal-name').classList.add('active')}
+
+function submitName(){
+  let name=$('input-name').value.trim();
+  if(!name){toast('请输入你的称呼');return}
+  userInfo={name,phone:null,time:new Date().toLocaleString('zh-CN')};
+  $('modal-name').classList.remove('active');
+  startTest();
+}
+
+// ══════════════════════════════════════════════════════════════ TEST ══════════════════════════════════════════════════════════════
+function startTest(){
+  ans=QBANK.map(()=>({most:null,least:null}));
+  showScreen('screen-test');
+  $('progress-wrap').style.display='block';
+  $('nav-bar').style.display='flex';
+  shuffles=ans.map(()=>shuffle([0,1,2,3]));
+  buildQuestions();
+  showPage(0);
+  window.scrollTo(0,0);
+}
+
+function buildQuestions(){
+  let c=$('questions-container');c.innerHTML='';
+  for(let p=0;p<TP;p++){
+    let sec=document.createElement('div');sec.className='q-section';sec.id='qs-'+p;
+    let st=p*QPP,en=Math.min(st+QPP,QBANK.length);
+    for(let i=st;i<en;i++){
+      let q=QBANK[i],sh=shuffles[i];
+      let bl=document.createElement('div');bl.className='q-block';bl.id='qb-'+i;
+      let html='<div class="q-num">第 '+(i+1)+' 题</div><div class="q-text">'+q.h+'</div><div class="q-options" id="qopts-'+i+'">';
+      sh.forEach(j=>{
+        let opt=q.o[j];
+        html+='<div class="q-opt" data-i="'+i+'" data-d="'+opt.d+'" onclick="clickOpt(this)">';
+        html+='<span class="opt-text">'+opt.t+'</span>';
+        html+='<span class="opt-label most-label">最符合</span>';
+        html+='<span class="opt-label least-label">最不符</span>';
+        html+='</div>';
+      });
+      html+='</div></div>';
+      bl.innerHTML=html;
+      sec.appendChild(bl);
+    }
+    c.appendChild(sec);
+  }
+}
+
+function clickOpt(el){
+  let i=parseInt(el.dataset.i),d=el.dataset.d,a=ans[i];
+  let t=event.target;
+  let isMostLabel=t.classList.contains('most-label');
+  let isLeastLabel=t.classList.contains('least-label');
+
+  if(isMostLabel){
+    if(a.most===d){a.most=null}
+    else if(a.least===d){a.least=null;a.most=d}
+    else if(!a.most){a.most=d}
+    applyOptState(i);
+    return;
+  }
+  if(isLeastLabel){
+    if(a.least===d){a.least=null}
+    else if(a.most===d){a.most=null;a.least=d}
+    else if(!a.least){a.least=d}
+    applyOptState(i);
+    return;
+  }
+
+  // Main area click
+  if(a.most===d){a.most=null}
+  else if(a.least===d){a.least=null}
+  else if(!a.most){a.most=d}
+  else if(!a.least){a.least=d}
+  else{a.least=d} // both set, tap third → replace least
+  applyOptState(i);
+}
+
+function applyOptState(i){
+  let a=ans[i];
+  let opts=document.querySelectorAll('#qopts-'+i+' .q-opt');
+  opts.forEach(el=>{
+    el.classList.remove('most','least');
+    if(el.dataset.d===a.most)el.classList.add('most');
+    if(el.dataset.d===a.least)el.classList.add('least');
+  });
+  let bl=$('qb-'+i);
+  bl.classList.toggle('done',!!(a.most&&a.least));
+
+  // Show text badges
+  opts.forEach(el=>{
+    let labels=el.querySelectorAll('.opt-label');
+    labels[0].textContent=el.classList.contains('most')?'✓ 最符':'最符合';
+    labels[1].textContent=el.classList.contains('least')?'✗ 最不':'最不符';
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  let done=ans.filter(a=>a.most&&a.least).length;
+  $('progress-fill').style.width=Math.round(done/QBANK.length*100)+'%';
+  $('progress-text').textContent=done+' / '+QBANK.length;
+}
+
+function showPage(p){
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  $('qs-'+p).classList.add('active');curPage=p;
+  $('nav-prev').style.visibility=p===0?'hidden':'visible';
+  let bn=$('nav-next');
+  if(p===TP-1){bn.textContent='✨ 查看结果';bn.className='nav-btn primary';bn.onclick=submitTest}
+  else{bn.textContent='下一页 →';bn.className='nav-btn';bn.onclick=goNext}
+  $('nav-page').textContent=(p+1)+' / '+TP;
+  window.scrollTo(0,0);
+}
+
+function pageMissing(st){
+  let en=Math.min(st+QPP,QBANK.length),c=0;
+  for(let i=st;i<en;i++){if(!ans[i].most||!ans[i].least)c++}
+  return c;
+}
+function goNext(){
+  let miss=pageMissing(curPage*QPP);
+  if(miss>0){toast('还有 '+miss+' 题没选完');return}
+  showPage(curPage+1);
+}
+function goPrev(){showPage(curPage-1)}
+
+// ══════════════════════════════════════════════════════════════ RESULTS ══════════════════════════════════════════════════════════════
+function submitTest(){
+  let allDone=ans.filter(a=>a.most&&a.least).length;
+  if(allDone<QBANK.length){toast('还有 '+(QBANK.length-allDone)+' 题没选完');return}
+
+  // Score
+  sc={D:0,I:0,S:0,C:0};
+  QBANK.forEach((q,i)=>{let a=ans[i];if(a.most)sc[a.most]+=3;if(a.least)sc[a.least]-=3});
+
+  // Display scores (0-100 normalization) — global for radar/card usage
+  displaySc={};
+  ['D','I','S','C'].forEach(function(d){
+    displaySc[d]=Math.round((sc[d]+84)/168*100);
+  });
+
+  let dims=['D','I','S','C'];
+  let posDims=dims.filter(d=>sc[d]>0);
+  labelPos=posDims.length>0?posDims.sort((a,b)=>sc[b]-sc[a]):dims.slice().sort((a,b)=>sc[b]-sc[a]);
+  label=labelPos.join('')+'型';
+
+  let allSorted=dims.slice().sort((a,b)=>sc[b]-sc[a]);
+  let main=allSorted[0];
+
+  // Build resultKey from POSITIVE dimensions only (fix pure type bug)
+  if(posDims.length===0){
+    resultKey=allSorted[0]+(allSorted[1]||'');
+  }else if(posDims.length===1){
+    resultKey=posDims[0];
+  }else{
+    resultKey=posDims[0]+posDims[1];
+  }
+
+  combo=COMBOS[resultKey]||null;
+  if(!combo&&resultKey.length===2){
+    var sw=resultKey[1]+resultKey[0];
+    if(COMBOS[sw]){combo=COMBOS[sw];resultKey=sw;}
+  }
+  if(!combo){
+    for(let i=1;i<allSorted.length;i++){
+      let k=main+allSorted[i];
+      if(COMBOS[k]){resultKey=k;combo=COMBOS[k];break;}
+    }
+  }
+
+  showScreen('screen-results');
+  renderResults();
+  checkHepaiShare();
+  window.scrollTo(0,0);
+}
+
+function generateDetailedReport(combo, key, main) {
+  if (!combo) {
+    let p = PURE[main];
+    if (p) return '<div class="dr-intro"><p>' + p.ua + '</p></div>';
+    return '<div class="dr-intro"><p>你的性格类型分析。</p></div>';
+  }
+
+  // Opening — already praise-focused
+  let opening = combo.id.replace(/<[^>]*>/g, '').trim();
+
+  // Life: first sentence = praise, rest = suggestion
+  let lifeSents = combo.life.split('。').filter(s => s.trim());
+  let lifePraise = lifeSents[0] || '';
+  let lifeSugg = lifeSents.slice(1).join('。').trim();
+
+  // Work: first sentence = praise, rest = suggestion
+  let workSents = combo.work.split('。').filter(s => s.trim());
+  let workPraise = workSents[0] || '';
+  let workSugg = workSents.slice(1).join('。').trim();
+
+  let growText = combo.grow;
+
+  let natureMap = { D: '支配', I: '影响', S: '稳健', C: '谨慎' };
+  let mainDim = main || key[0] || 'D';
+  let badge = '<span class="dim-badge" style="background:var(--' + mainDim.toLowerCase() + '-dim);color:var(--' + mainDim.toLowerCase() + ')">' + mainDim + ' · ' + natureMap[mainDim] + '</span>';
+
+  let html = '<div class="dr-intro"><p>' + opening + '</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">🌿 自然状态 ' + badge + '</div><p>' + lifePraise;
+  if (lifeSugg) html += ' 不过，' + lifeSugg + '。';
+  html += ' 这种"有方向感但不急躁"的特质，让你在生活中既能稳步推进，又不失人情味。</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">💼 工作中</div><p>' + workPraise;
+  if (workSugg) html += ' 建议：' + workSugg;
+  html += ' 若能找到一个与你互补的搭档（比如在你有短板的地方能补位的队友），你的效能会翻倍。</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">🌱 成长方向</div><p>' + growText;
+  html += ' 同时也提醒你：优势用过头就是劣势——学会在"坚持自我"和"调整适应"之间灵活切换。你的目标不是变成另一个人，而是成为更好的自己。</p></div>';
+
+  return html;
+}
+
+function pickQuote(key){
+  if(selectedQuote)return selectedQuote;
+  let pool=CHAR_QUOTES[key]||[''];
+  selectedQuote=pool[Math.floor(Math.random()*pool.length)];
+  return selectedQuote;
+}
+
+function renderResults(){
+  let h='';
+  let key=resultKey||'D';
+  let charName=CHAR_NAME[key]||'';
+  let family=CHAR_FAMILY[key]||'';
+  selectedQuote='';let quote=pickQuote(key);
+  let main=(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a]):['D'])[0];
+
+  // 1. Top box: header + radar float + detailed report + watermark bg
+  let natureMap={D:'支配',I:'影响',S:'稳健',C:'谨慎'};
+  let firstDim=key[0];
+  let natureText=firstDim+' 型性格本源 · '+natureMap[firstDim]+' · '+family;
+  let mainDim=main||key[0]||'D';
+  let bgUrl=FAMILY_IMG[mainDim]||'';
+  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat">';
+  var userName=(userInfo&&userInfo.name)?userInfo.name:'';
+  if(userName)h+='<div style="text-align:center;font-size:15px;color:var(--text2);letter-spacing:.04em;margin-bottom:4px;position:relative;z-index:1">'+userName+'，你的性格类型是</div>';
+  h+='<div class="rh-type" style="text-align:center;font-family:var(--font-heading);font-size:42px;font-weight:700;color:var(--gold);letter-spacing:.06em;line-height:1.1;margin-bottom:2px;position:relative;z-index:1">'+label+'</div>';
+  h+='<div class="rh-nature" style="text-align:center;font-size:13px;color:var(--text2);letter-spacing:.04em;margin-bottom:10px;position:relative;z-index:1">✦ 属于 '+natureText+'</div>';
+  h+='<div class="rt-radar"><canvas id="radar-canvas" width="200" height="240"></canvas></div>';
+  if(combo){
+    h+='<div class="rt-report">'+generateDetailedReport(combo,key,main)+'</div>';
+  } else {
+    let p=PURE[main];
+    if(p)h+='<div class="rt-report"><div class="dr-intro"><p>'+p.ua+'</p></div></div>';
+  }
+  h+='</div>';
+
+  // 4. Unified paywall (merged from 4 separate sections)
+  if(combo){
+    h+='<div class="analysis-section analysis-lock" id="section-unified">';
+    h+='<h4>📜 完整报告 <span class="unlock-badge" id="badge-unified" style="display:none">✅ 已解锁</span></h4>';
+    h+='<div class="lock-overlay" id="lock-unified">';
+    h+='<div class="lock-icon">🔓</div>';
+    h+='<div class="lock-title">完整解读已加密</div>';
+    h+='<div class="lock-sub">输入手机号，一键解锁你的：<br><b>🎭 专属角色卡 · 💕 情感关系 · 🔥 压力状态 · 💑 适配推荐</b></div>';
+    h+='<button class="lock-btn" onclick="showUnlock()">🔓 输入手机号解锁</button>';
+    h+='</div></div>';
+  }
+
+  // 5. 合拍度 section
+  let myType=key||main;
+  let shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(myType)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
+  h+='<div class="hepai-box"><h3>💑 合拍度测试</h3>';
+  h+='<div class="hepai-intro">看看你和哪种性格的人最合拍，邀请TA一起测更准！<br>分享链接给TA，TA测完后自动匹配；如果TA已测过，登录手机号即可完成配对。</div>';
+  h+='<div class="hepai-url" id="share-url">'+shareUrl+'</div>';
+  h+='<button class="hepai-copy" onclick="copyUrl()">📋 复制邀请链接</button>';
+  h+='<button class="hepai-compare" onclick="showCompare()">🔍 已有对方DISC类型？立即对比</button>';
+  h+='<div id="hepai-result" class="hepai-result" style="display:none"></div></div>';
+
+  $('results-content').innerHTML=h;
+  setTimeout(()=>{drawRadar()},100);
+  checkUnlock();
+  if(userInfo&&userInfo.phone)sendReport();
+}
+
+// ══════════════════════════════════════════════════════════════ RADAR ══════════════════════════════════════════════════════════════
+function drawRadar(){
+  let cvs=$('radar-canvas');if(!cvs)return;
+  let dpr=window.devicePixelRatio||1;
+  let W=parseInt(cvs.getAttribute('width')),H=parseInt(cvs.getAttribute('height'));
+  cvs.width=W*dpr;cvs.height=H*dpr;
+  let ctx=cvs.getContext('2d');
+  ctx.scale(dpr,dpr);
+  let w=W,h=H;
+
+  let dims=['D','I','S','C'];
+  let colors={D:'#c0392b',I:'#d68910',S:'#1e8449',C:'#2471a3'};
+  // Use displayScores (0-100) for radar
+  var ds=displaySc||{};
+  var mx=100;
+
+  let padL=10,padR=10,padT=22,padB=20;
+  let plotW=w-padL-padR,plotH=h-padT-padB;
+  let gap=plotW/(dims.length-1);
+  let zeroY=padT+plotH/2;
+
+  // Background
+  ctx.fillStyle='rgba(201,169,110,0.04)';
+  ctx.fillRect(padL,padT,plotW,plotH/2);
+  ctx.fillStyle='rgba(36,113,163,0.04)';
+  ctx.fillRect(padL,zeroY,plotW,plotH/2);
+
+  // Grid lines
+  ctx.strokeStyle='#2a2a34';ctx.lineWidth=0.5;
+  let gridN=6;
+  for(let r=0;r<=gridN;r++){
+    let y=padT+r*(plotH/gridN);
+    ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(w-padR,y);ctx.stroke();
+    // (grid labels removed)
+  }
+
+  // Midline (score=50)
+  ctx.strokeStyle='#c9a96e';ctx.lineWidth=1;ctx.setLineDash([4,3]);
+  ctx.beginPath();ctx.moveTo(padL,zeroY);ctx.lineTo(w-padR,zeroY);ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Vertical lines
+  ctx.strokeStyle='#1a1a22';ctx.lineWidth=0.5;
+  dims.forEach((d,i)=>{if(i>0){let x=padL+i*gap;ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,h-padB);ctx.stroke()}});
+
+  // Data points & labels
+  var pts=[];
+  dims.forEach(function(d,i){
+    var x=padL+i*gap;
+    var val=ds[d]||50;
+    var y=zeroY-(val-50)*(plotH/mx);
+    pts.push({x:x,y:y,d:d});
+
+    ctx.fillStyle=d===labelPos[0]?'#c9a96e':colors[d];
+    var labSz=(d===labelPos[0])?13:11;
+    ctx.font='bold '+labSz+'px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText(d,x,h-padB+14);
+
+    ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);
+    ctx.fillStyle=colors[d];ctx.fill();
+    ctx.strokeStyle='#08080a';ctx.lineWidth=1.5;ctx.stroke();
+
+    // (data point value label removed - show shape only)
+  });
+
+  // Line
+  ctx.strokeStyle='#5ba8a0';ctx.lineWidth=2;ctx.lineJoin='round';
+  ctx.beginPath();
+  pts.forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)});
+  ctx.stroke();
+
+  // Area
+  ctx.lineTo(pts[pts.length-1].x,zeroY);
+  ctx.lineTo(pts[0].x,zeroY);
+  ctx.closePath();
+  let grad=ctx.createLinearGradient(0,padT,0,h-padB);
+  grad.addColorStop(0,'rgba(91,168,160,0.12)');
+  grad.addColorStop(0.5,'rgba(91,168,160,0.03)');
+  grad.addColorStop(1,'rgba(91,168,160,0.08)');
+  ctx.fillStyle=grad;ctx.fill();
+}
+
+// ══════════════════════════════════════════════════════════════ UNLOCK ══════════════════════════════════════════════════════════════
+function checkUnlock(){
+  if(sessionStorage.getItem('disc_unlocked')==='1'){
+    let savedPhone=sessionStorage.getItem('disc_unlock_phone');
+    if(savedPhone&&userInfo)userInfo.phone=savedPhone;
+    return;
+  }
+}
+
+function showUnlock(){$('modal-unlock').classList.add('active')}
+
+function doUnlock(){
+  let phone=$('input-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+  sessionStorage.setItem('disc_unlocked','1');
+  if(userInfo)userInfo.phone=phone;
+  sessionStorage.setItem('disc_unlock_phone',phone);
+  $('modal-unlock').classList.remove('active');
+  toast('✅ 已解锁！');
+  applyUnlock();
+  sendReport();
+}
+
+function applyUnlock(){
+  showScreen('screen-report');
+  renderUnlockReport();
+}
+
+function renderUnlockReport(){
+  let key=resultKey||(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a])[0]:'')||'D';
+  let imgUrl=CHAR_IMG[key]||'';
+  let charName=CHAR_NAME[key]||'';
+  let family=CHAR_FAMILY[key]||'';
+  let quote=pickQuote(key);
+  let main=(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a]):['D'])[0];
+
+  // Family color class matching the reference design
+  let familyClass='';
+  switch(family){
+    case '破军虎': familyClass='ftiger'; break;
+    case '焰羽凤': familyClass='fphoenix'; break;
+    case '抱山熊': familyClass='fbear'; break;
+    case '玄机鹰': familyClass='feagle'; break;
+  }
+
+  // Summary text — use full combo.id text
+  let summary='';
+  if(combo&&combo.id){
+    summary=combo.id.replace(/<[^>]*>/g,'').trim();
+  }else{
+    let p=PURE[main];
+    if(p)summary=p.oneliner||'';
+  }
+
+  // Format dimension scores — always show D/I/S/C in that order (0-100 scale)
+  let scoresHtml='';
+  if(displaySc){
+    let order=['D','I','S','C'];
+    scoresHtml=order.map(function(d){
+      return '<span class="s-item">'+(displaySc[d]||50)+' <span class="s-lbl">'+d+'</span></span>';
+    }).join('');
+  }else{
+    scoresHtml='<span class="s-item">0 <span class="s-lbl">D</span></span><span class="s-item">0 <span class="s-lbl">I</span></span><span class="s-item">0 <span class="s-lbl">S</span></span><span class="s-item">0 <span class="s-lbl">C</span></span>';
+  }
+
+  let h='';
+  h+='<div class="report-sc">';
+
+  // ── 1. Character Card (匹配角色卡设计_全预览) ──
+  let shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(key)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
+  let qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(shareUrl);
+  h+='<div class="role-card'+(familyClass?' '+familyClass:'')+'" style="background-image:url('+imgUrl+')">';
+  h+='<div class="card-inner">';
+
+  // Image area (3:4 poster)
+  h+='<div class="card-image-area">';
+
+  // Top-left badge: character name (large) + DISC type + family (small)
+  h+='<div class="card-badge">';
+  h+='<span class="card-name">'+charName+'</span>';
+  h+='<span class="card-sub">'+label+' · '+family+'</span>';
+  h+='</div>';
+
+  // Golden quote at bottom of image
+  h+='<div class="card-quote"><span class="qm">"</span>'+quote+'<span class="qm">"</span></div>';
+
+  h+='</div>'; // card-image-area
+
+  // Bottom text area
+  h+='<div class="card-text-area">';
+
+  // Summary bubble
+  h+='<div class="card-summary-bubble">'+summary+'</div>';
+
+  // Dimension scores
+  h+='<div class="card-stats-row">'+scoresHtml+'</div>';
+
+  // Footer with QR
+  h+='<div class="card-footer">';
+  h+='<div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div>';
+  h+='<span>扫码测测你的专属人格</span>';
+  h+='</div>';
+
+  h+='</div>'; // card-text-area
+  h+='</div>'; // card-inner
+  h+='</div>'; // role-card
+
+  // ── 2. Emotional Relationship ──
+  if(combo&&combo.rel){
+    h+='<div class="rsc-section"><h4>💕 情感关系</h4><p>'+combo.rel+'</p></div>';
+  }
+
+  // ── 3. Stress State ──
+  if(combo&&combo.pressure){
+    h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
+  }
+
+  // ── 4. Match Recommendations ──
+  let m=MATCH[key]||null;
+  if(m){
+    h+='<div class="rsc-section"><h4>💑 适配推荐</h4>';
+    h+='<div class="analysis-match">';
+    h+='<div class="match-item"><div class="match-type">🏆 最适配：'+m.best+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">'+m.desc+'</div></div>';
+    if(m.sec)h+='<div class="match-item"><div class="match-type">🥈 次适配：'+m.sec+' <span class="m-score">'+m.secScore+'分</span></div><div class="match-desc">'+m.secDesc+'</div></div>';
+    h+='<div class="match-tip">💡 DISC适配只是参考——真正的感情匹配远比性格标签更丰富，沟通和理解才是关键。</div>';
+    h+='</div></div>';
+  }
+
+  h+='</div>';
+  $('report-content').innerHTML=h;
+}
+
+// ══════════════════════════════════════════════════════════════ HEPAI ══════════════════════════════════════════════════════════════
+function copyUrl(){
+  let url=$('share-url').textContent;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(()=>toast('✅ 链接已复制，发给你想测的人吧！'));
+  } else {
+    let ta=document.createElement('textarea');ta.value=url;
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);
+    toast('✅ 链接已复制');
+  }
+}
+
+function showCompare(){
+  let input=prompt('请输入对方的DISC类型（如：DI、SC、IS等）：');
+  if(!input)return;
+  input=input.trim().toUpperCase().replace('型','').replace(' ','');
+  let valid=['DI','ID','DS','SD','DC','CD','IS','SI','IC','CI','SC','CS','D','I','S','C'];
+  if(!valid.includes(input)){toast('请输入正确的DISC类型');return}
+  compareHepai(label.replace('型',''),input);
+}
+
+function compareHepai(typeA,typeB){
+  let scores={'DD':50,'II':60,'SS':85,'CC':65,'DI':76,'ID':76,'DS':90,'SD':90,'DC':90,'CD':90,'IS':90,'SI':90,'IC':80,'CI':80,'SC':88,'CS':88};
+  let key=typeA+typeB,rev=typeB+typeA;
+  let score=scores[key]||scores[rev]||70;
+  let dimsA=typeA.split(''),dimsB=typeB.split('');
+  let overlap=dimsA.filter(d=>dimsB.includes(d)).length;
+  score=Math.min(98,score+overlap*4);
+
+  let desc=score>=90?'你们的性格高度互补，是非常合拍的组合！':score>=80?'你们有不错的性格契合度，沟通和相处会比较顺畅。':score>=70?'你们有各自的性格特点，需要一些相互理解和磨合。':'你们性格差异较大，但差异也可以成为互补，关键在于理解和沟通。';
+  let emoji=score>=90?'🏆':score>=80?'🥈':'🥉';
+
+  let tags='';
+  if(dimsA.includes('D')&&dimsB.includes('S'))tags+='<span class="hepai-tag">目标×耐心</span>';
+  if(dimsA.includes('I')&&dimsB.includes('C'))tags+='<span class="hepai-tag">热情×严谨</span>';
+  if(dimsA.includes('S')&&dimsB.includes('D'))tags+='<span class="hepai-tag">稳健×果断</span>';
+  if(dimsA.includes('C')&&dimsB.includes('I'))tags+='<span class="hepai-tag">精确×感染</span>';
+
+  let html='<h4>'+emoji+' 合拍度：'+typeA+' × '+typeB+'</h4>';
+  html+='<div class="hepai-score">'+score+'<span> / 100</span></div>';
+  html+='<div class="hepai-desc">'+desc+'</div>';
+  if(tags)html+='<div class="hepai-tags">'+tags+'</div>';
+
+  let r=$('hepai-result');
+  if(r){r.innerHTML=html;r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'nearest'})}
+}
+
+function checkHepaiShare(){
+  let p=new URLSearchParams(location.search);
+  let discParam=p.get('disc'),nameParam=p.get('name');
+  if(discParam){
+    let banner=$('hepai-banner');
+    if(banner){banner.style.display='block';
+      $('share-from-name').textContent=nameParam?(nameParam+' 邀请你来做合拍分析'):'有人邀请你来做合拍分析';
+      $('share-from-type').textContent='TA的性格类型：'+discParam;
+    }
+    if(userInfo&&label){
+      setTimeout(()=>compareHepai(label.replace('型',''),discParam),500);
+    }
+  }
+}
+
+// ══════════════════════════════════════════════════════════════ PUSH ══════════════════════════════════════════════════════════════
+function sendReport(){
+  if(!userInfo||!userInfo.phone)return;
+  let scores='D:'+(sc.D>0?'+':'')+sc.D+' I:'+(sc.I>0?'+':'')+sc.I+' S:'+(sc.S>0?'+':'')+sc.S+' C:'+(sc.C>0?'+':'')+sc.C;
+  let core=(combo?combo.id:'').replace(/<[^>]*>/g,'');
+  let desp='══ DISC 测试报告 ══\n\n';
+  desp+='👤 姓名：'+userInfo.name+'\n📱 手机：'+userInfo.phone+'\n🕐 时间：'+userInfo.time+'\n\n';
+  desp+='🏷 类型：'+label+'\n'+(combo?combo.name+' · '+resultKey:'')+'\n\n';
+  desp+='📊 评分：'+scores+'\n\n📝 核心解读：\n'+core;
+  if(combo)desp+='\n\n🌿 自然状态：'+combo.life+'\n\n💼 工作状态：'+combo.work+'\n\n💕 情感关系：'+combo.rel+'\n\n🔥 压力状态：'+combo.pressure+'\n\n🌱 成长方向：'+combo.grow+'\n\n💬 '+combo.gold;
+  try{
+    fetch('https://sctapi.ftqq.com/SCT349012TbYqbUYuOInYSi0cWfHhY2qTt.send',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({title:'DISC报告 - '+userInfo.name+' ('+label+')',desp})
+    }).then(r=>r.json()).then(d=>console.log('[Push]',d.code===0?'OK':d.message)).catch(e=>console.log('[Push] error:',e));
+  }catch(e){console.log('[Push] skip:',e)}
+}
+
+
+// ══════════════════════════════════════════════════════════════ SAVE ══════════════════════════════════════════════════════════════
+function saveResult(){
+  let btn=$('btn-save');if(!btn)btn=document.querySelector('.btn-save-rs');if(!btn){toast('页面加载中');return}
+  btn.textContent='生成中...';btn.disabled=true;
+  composeCardToCanvas().then(function(canvas){
+    let url=canvas.toDataURL('image/png');
+    showSaveOverlay(url);
+    btn.textContent='📷 保存结果';btn.disabled=false;
+  }).catch(function(e){
+    console.log('Canvas compose failed:',e);
+    toast('生成失败，请重试');
+    btn.textContent='📷 保存结果';btn.disabled=false;
+  });
+}
+
+function composeCardToCanvas(){
+  return new Promise(function(resolve,reject){
+    var key=resultKey||'D';
+    var S=3;
+    var cardW=320*S;
+    var imgH=Math.round(cardW*4/3);
+
+    // Data
+    var imgUrl=CHAR_IMG[key]||'';
+    var name=CHAR_NAME[key]||'';
+    var family=CHAR_FAMILY[key]||'';
+    var quote=selectedQuote||pickQuote(key);
+    var mainDim=key[0]||'D';
+
+    var summary='';
+    if(combo&&combo.id){summary=combo.id.replace(/<[^>]*>/g,'').trim();}
+    else{var p=PURE[mainDim];if(p)summary=p.oneliner||'';}
+
+    var famNameColor={'破军虎':'#e8a090','焰羽凤':'#e8d090','抱山熊':'#90c0a0','玄机鹰':'#a0b0d0'};
+    var famStatColor={'破军虎':'#e8745a','焰羽凤':'#d4a853','抱山熊':'#5aa078','玄机鹰':'#788cb4'};
+    var famSumColor={'破军虎':'#c8a090','焰羽凤':'#c8b890','抱山熊':'#90b8a0','玄机鹰':'#a0a8c0'};
+    var nameColor=famNameColor[family]||'#e8d090';
+    var statColor=famStatColor[family]||'#d4a853';
+    var sumColor=famSumColor[family]||'#c8b890';
+
+    var shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(key)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
+    var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(shareUrl);
+
+    var loaded=0,total=2;
+    var charImg=new Image();
+    charImg.crossOrigin='anonymous';
+    charImg.src=imgUrl;
+    var qrImg=new Image();
+    qrImg.crossOrigin='anonymous';
+    qrImg.src=qrUrl;
+
+    function tryDraw(){loaded++;if(loaded===total)draw();}
+    charImg.onload=tryDraw;charImg.onerror=tryDraw;
+    qrImg.onload=tryDraw;qrImg.onerror=tryDraw;
+
+    function wrapText(ctx,txt,maxW,fontSize){
+      ctx.font='bold '+fontSize+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      var chars=txt.split('');
+      var lines=[],cur='';
+      for(var i=0;i<chars.length;i++){
+        var test=cur+chars[i];
+        if(ctx.measureText(test).width>maxW&&cur.length>0){lines.push(cur);cur=chars[i];}
+        else{cur=test;}
+      }
+      if(cur)lines.push(cur);
+      return lines;
+    }
+
+    function draw(){
+      // Phase 1: measure layout with temp canvas
+      var tmpCvs=document.createElement('canvas');
+      tmpCvs.width=cardW;tmpCvs.height=100;
+      var tmpCtx=tmpCvs.getContext('2d');
+
+      // Summary bubble params
+      var bubFS=Math.round(11*S);
+      var bubLH=Math.round(bubFS*1.55);
+      var bubP=Math.round(10*S);
+      var maxTW=cardW-Math.round(18*S)-bubP*2;
+      var lines=wrapText(tmpCtx,summary,maxTW,bubFS);
+      var maxLines=5;
+      if(lines.length>maxLines){lines=lines.slice(0,maxLines);lines[maxLines-1]=lines[maxLines-1].replace(/.$/,'')+'\u2026';}
+      var bubH=Math.round(lines.length*bubLH+bubP*1.8);
+
+      // Position: summary bubble starts 24px ABOVE imgH (overlaps image slightly)
+      var bubY=imgH-Math.round(24*S);
+      var statsY=bubY+bubH+Math.round(5*S);
+      var statsYpos=statsY+Math.round(13*S);
+      var qrSize=Math.round(36*S);
+      var qrY=statsYpos+Math.round(6*S);
+      var totalH=qrY+qrSize+Math.round(12*S);
+
+      // Phase 2: create actual canvas
+      var canvas=document.createElement('canvas');
+      canvas.width=cardW;canvas.height=totalH;
+      var ctx=canvas.getContext('2d');
+
+      // 1. Character image - fill width, crop to 3:4
+      if(charImg.naturalWidth>0){
+        var srcRatio=charImg.naturalWidth/charImg.naturalHeight;
+        var drawH=cardW/srcRatio;
+        ctx.drawImage(charImg,0,0,cardW,Math.min(drawH,imgH));
+      }
+
+      // 2. Gradient: start higher (from 35% of imgH) so text can overlap
+      var grad=ctx.createLinearGradient(0,imgH*0.35,0,imgH);
+      grad.addColorStop(0,'rgba(10,10,12,0)');
+      grad.addColorStop(1,'rgba(10,10,12,1)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,Math.round(imgH*0.35),cardW,Math.round(imgH*0.65));
+
+      // 3. Text area: solid dark from imgH downward
+      ctx.fillStyle='#0a0a0c';
+      ctx.fillRect(0,imgH,cardW,totalH-imgH);
+
+      // 4. Badge - character name (top-left)
+      ctx.fillStyle=nameColor;
+      ctx.font='bold '+Math.round(22*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      ctx.fillText(name,Math.round(14*S),Math.round(14*S+22*S*0.85));
+      ctx.fillStyle=nameColor;
+      ctx.globalAlpha=0.9;
+      ctx.font=Math.round(10*S)+'px "PingFang SC","Microsoft YaHei",sans-serif';
+      var discType=label||(key+'型');
+      ctx.fillText(discType+' · '+family,Math.round(14*S),Math.round(14*S+22*S+10*S+6));
+      ctx.globalAlpha=1;
+
+      // 5. Golden quote - moved up, overlapping image
+      ctx.fillStyle='#d4a853';
+      ctx.font='bold '+Math.round(15*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText('\u201c'+quote+'\u201d',Math.round(cardW/2),Math.round(imgH-46*S));
+      ctx.textAlign='left';
+
+      // 6. Summary bubble - starts above imgH, overlaps image bottom
+      var bubX=Math.round(9*S);
+      var bubW=cardW-Math.round(18*S);
+      var rr=Math.round(6*S);
+      ctx.fillStyle='rgba(0,0,0,0.55)';
+      ctx.beginPath();
+      ctx.moveTo(bubX+rr,bubY);ctx.lineTo(bubX+bubW-rr,bubY);
+      ctx.arcTo(bubX+bubW,bubY,bubX+bubW,bubY+rr,rr);
+      ctx.lineTo(bubX+bubW,bubY+bubH-rr);
+      ctx.arcTo(bubX+bubW,bubY+bubH,bubX+bubW-rr,bubY+bubH,rr);
+      ctx.lineTo(bubX+rr,bubY+bubH);
+      ctx.arcTo(bubX,bubY+bubH,bubX,bubY+bubH-rr,rr);
+      ctx.lineTo(bubX,bubY+rr);
+      ctx.arcTo(bubX,bubY,bubX+rr,bubY,rr);
+      ctx.closePath();ctx.fill();
+
+      ctx.fillStyle=sumColor;
+      ctx.font=bubFS+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      for(var i=0;i<lines.length;i++){
+        ctx.fillText(lines[i],bubX+bubP,Math.round(bubY+bubP+bubLH*0.85+i*bubLH));
+      }
+
+      // 7. Stats row — compact, centered, family color
+      var dims=['D','I','S','C'];
+      ctx.font='bold '+Math.round(10*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+
+      // Measure each stat's width for centering
+      var statItems=[],totalW=0;
+      for(var i=0;i<dims.length;i++){
+        var d=dims[i];
+        var val=(displaySc&&typeof displaySc[d]==='number')?displaySc[d]:50;
+        var txt=val+' '+d;
+        var w=ctx.measureText(txt).width;
+        statItems.push({d:d,val:val,txt:txt,w:w});
+        totalW+=w;
+      }
+      var statsGap=Math.round(12*S);
+      totalW+=statsGap*(dims.length-1);
+      var curX=Math.round((cardW-totalW)/2);
+      for(var i=0;i<statItems.length;i++){
+        var it=statItems[i];
+        // Number — family stat color, full opacity
+        ctx.fillStyle=statColor;
+        ctx.fillText(it.val+'',curX,statsYpos);
+        var numW=ctx.measureText(it.val+'').width;
+        // Letter — SAME family color, lower opacity (matches reference design .s-lbl opacity:.4)
+        ctx.globalAlpha=0.4;
+        ctx.fillStyle=statColor;
+        ctx.fillText(it.d,curX+numW+Math.round(2*S),statsYpos);
+        ctx.globalAlpha=1;
+        curX+=it.w+statsGap;
+      }
+
+      // 8. QR code + footer text — QR left, text right (matches website card)
+      var qrX=Math.round(12*S);
+      if(qrImg.naturalWidth>0){
+        ctx.fillStyle='#fff';ctx.fillRect(qrX,qrY,qrSize,qrSize);
+        ctx.drawImage(qrImg,qrX,qrY,qrSize,qrSize);
+      }
+
+      // Footer text — to the right of QR
+      ctx.fillStyle='rgba(168,160,152,0.45)';
+      ctx.font=Math.round(8*S)+'px "PingFang SC","Microsoft YaHei",sans-serif';
+      ctx.fillText('扫码测测你的专属人格',qrX+qrSize+Math.round(6*S),qrY+Math.round(qrSize/2+2*S));
+
+      // 9. Black-gold border — thin + dark
+      var borderClr='#c9a96e';
+      var bw=Math.round(5*S);
+      var hw=Math.round(bw/2);
+
+      // Outer black frame (dominant dark)
+      ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.lineWidth=Math.round(5*S);
+      ctx.strokeRect(Math.round(2.5*S),Math.round(2.5*S),cardW-Math.round(5*S),totalH-Math.round(5*S));
+
+      // Gold line (thin)
+      ctx.strokeStyle='rgba(201,169,110,.6)';
+      ctx.lineWidth=Math.round(2*S);
+      ctx.strokeRect(hw,hw,cardW-bw,totalH-bw);
+
+      // Inner dark hairline
+      var ir=Math.round(8*S);
+      ctx.strokeStyle='rgba(0,0,0,.5)';
+      ctx.lineWidth=Math.round(0.8*S);
+      ctx.strokeRect(ir,ir,cardW-ir*2,totalH-ir*2);
+
+      // Corner dots
+      var csz=Math.round(10*S);
+      var co=Math.round(5*S);
+      var corners=[
+        {x:co+csz/2,y:co+csz/2},
+        {x:cardW-co-csz/2,y:co+csz/2},
+        {x:co+csz/2,y:totalH-co-csz/2},
+        {x:cardW-co-csz/2,y:totalH-co-csz/2}
+      ];
+      corners.forEach(function(c){
+        // Dark diamond
+        ctx.fillStyle='rgba(0,0,0,.8)';
+        ctx.beginPath();
+        ctx.moveTo(c.x,c.y-csz/2);
+        ctx.lineTo(c.x+csz/2,c.y);
+        ctx.lineTo(c.x,c.y+csz/2);
+        ctx.lineTo(c.x-csz/2,c.y);
+        ctx.closePath();ctx.fill();
+        // Gold center dot
+        ctx.fillStyle='#c9a96e';
+        ctx.beginPath();
+        ctx.arc(c.x,c.y,Math.round(csz*0.18),0,Math.PI*2);
+        ctx.fill();
+      });
+
+      resolve(canvas);
+    }
+  });
+}
+
+function showSaveOverlay(url){
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column';
+  overlay.innerHTML='<img src="'+url+'" style="max-width:90%;max-height:65%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)"><div style="margin-top:16px;display:flex;gap:12px"><button id="dl-btn" style="padding:10px 28px;border:none;border-radius:30px;background:#c9a96e;color:#08080a;font-size:14px;cursor:pointer;font-weight:600">下载图片</button><button onclick="this.parentElement.parentElement.remove()" style="padding:10px 28px;border:1px solid var(--border-gold);border-radius:30px;background:transparent;color:var(--text2);font-size:14px;cursor:pointer">关闭</button></div>';
+  overlay.querySelector('#dl-btn').onclick=function(){
+    var a=document.createElement('a');
+    a.href=url;a.download='我的DISC性格_'+(CHAR_NAME[resultKey]||'')+'.png';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
+  overlay.onclick=function(e){if(e.target===overlay)overlay.remove()};
+  document.body.appendChild(overlay);
+}
+
+// ══════════════════════════════════════════════════════════════ INIT ══════════════════════════════════════════════════════════════
+(function(){
+  // Check for direct test link with ?disc= parameter
+  let p=new URLSearchParams(location.search);
+  if(p.get('disc'))checkHepaiShare();
+})();
+</script>
+</body>
+</html>
