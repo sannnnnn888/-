@@ -409,6 +409,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
     28 道精选题 · 四大性格本源<br>
     发现你的行为密码，找到你的江湖同道
   </p>
+  <div style="text-align:right;margin-bottom:8px"><span style="font-size:12px;color:var(--text3);cursor:pointer" onclick="showLoginModal()">已完成报告？→ 登录</span></div>
 
   <div class="family-img-row">
     <div class="family-img-card">
@@ -461,13 +462,6 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
   </div>
 
   <button class="btn btn-gold" onclick="showNameModal()">✦ 开始探索</button>
-  <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border)">
-    <p style="font-size:13px;color:var(--text3);margin-bottom:12px">已有账号？输入手机号登录</p>
-    <div style="display:flex;gap:8px;justify-content:center">
-      <input type="tel" id="login-phone" placeholder="请输入手机号（11位）" maxlength="11" style="padding:10px 16px;border:1.5px solid var(--border);border-radius:40px;font-size:14px;font-family:var(--font-body);outline:none;transition:var(--transition);background:var(--bg2);color:var(--text);width:200px;box-sizing:border-box">
-      <button class="btn btn-outline btn-sm" onclick="loginUser()" style="white-space:nowrap">🔑 登录</button>
-    </div>
-  </div>
 </div>
 </section>
 
@@ -480,6 +474,17 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
     <input type="text" id="input-name" placeholder="你希望怎么称呼？" maxlength="20">
     <div class="modal-tip">💡 一个称呼即可开始</div>
     <button class="btn btn-gold full-w" onclick="submitName()">✦ 步入江湖</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ LOGIN MODAL ════════════════════════════════════════════ -->
+<div id="modal-login" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-login')">✕</button>
+    <h3>🔑 登录个人报告</h3>
+    <p>输入测试时使用的手机号<br>回看你的性格报告和匹配记录</p>
+    <input type="tel" id="login-phone" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
+    <button class="btn btn-gold full-w" onclick="loginUser()">🔑 登录查看报告</button>
   </div>
 </div>
 
@@ -835,6 +840,7 @@ function goNext(){
 function goPrev(){showPage(curPage-1)}
 
 // ══════════════════════════════════════════════════════════════ LOGIN ══════════════════════════════════════════════════════════════
+function showLoginModal(){$('modal-login').classList.add('active')}
 function loginUser(){
   var phone=$('login-phone').value.trim();
   if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
@@ -842,6 +848,7 @@ function loginUser(){
     .then(function(r){return r.json()})
     .then(function(data){
       if(!data||data.length===0){toast('未找到该手机号的记录，请先完成测试');return}
+      $('modal-login').classList.remove('active');
       var userData=data[0];
       userInfo={name:userData.name,phone:userData.phone,time:userData.created_at};
       displaySc=userData.scores||{};
