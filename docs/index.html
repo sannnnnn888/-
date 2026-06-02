@@ -1036,8 +1036,13 @@ function renderResults(){
 }
 
 // ══════════════════════════════════════════════════════════════ RADAR ══════════════════════════════════════════════════════════════
-function drawRadar(){
-  let cvs=$('radar-canvas');if(!cvs)return;
+function drawRadarPersonal(){if(displaySc)drawRadarCore('radar-canvas-personal')}
+function drawRadar(cvsId){
+  cvsId=cvsId||'radar-canvas';
+  drawRadarCore(cvsId);
+}
+function drawRadarCore(cvsId){
+  let cvs=$(cvsId);if(!cvs)return;
   let dpr=window.devicePixelRatio||1;
   let W=parseInt(cvs.getAttribute('width')),H=parseInt(cvs.getAttribute('height'));
   cvs.width=W*dpr;cvs.height=H*dpr;
@@ -1460,6 +1465,19 @@ function renderPersonalPage(userData){
   h+='<div class="card-footer"><div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div><span>扫码测测你的专属人格</span></div>';
   h+='</div></div></div>';
 
+  // Radar + detailed report (same as results page)
+  var mainDim2=key[0]||'D';
+  var bgUrl=FAMILY_IMG[mainDim2]||'';
+  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat;margin-top:16px">';
+  h+='<div class="rt-radar"><canvas id="radar-canvas-personal" width="200" height="240"></canvas></div>';
+  if(combo){
+    h+='<div class="rt-report">'+generateDetailedReport(combo,key,mainDim2)+'</div>';
+  } else {
+    var p2=PURE[mainDim2];
+    if(p2)h+='<div class="rt-report"><div class="dr-intro"><p>'+p2.ua+'</p></div></div>';
+  }
+  h+='</div>';
+
   // Match history
   h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
   h+='<div id="match-list" style="text-align:center;padding:16px;color:var(--text3)">加载中...</div></div>';
@@ -1472,6 +1490,8 @@ function renderPersonalPage(userData){
   }
 
   $('personal-content').innerHTML=h;
+  // Draw radar on personal page
+  setTimeout(function(){drawRadarPersonal()},150);
 
   // Load matches async
   var phone=userData.phone;
