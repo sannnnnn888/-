@@ -488,6 +488,14 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
   </div>
 </div>
 
+<!-- ════════════════════════════════════════════ MATCH DETAIL MODAL ════════════════════════════════════════════ -->
+<div id="modal-match-detail" class="modal-overlay">
+  <div class="modal-box" style="max-width:440px;text-align:left">
+    <button class="modal-close" onclick="closeModal('modal-match-detail')">✕</button>
+    <div id="match-detail-content"></div>
+  </div>
+</div>
+
 <!-- ════════════════════════════════════════════ UNLOCK MODAL ════════════════════════════════════════════ -->
 <div id="modal-unlock" class="modal-overlay">
   <div class="modal-box">
@@ -1512,11 +1520,84 @@ function renderPersonalPage(userData){
       } else {
         matches.forEach(function(m){
           var scoreEmoji=m.score>=90?'🏆':m.score>=80?'🥈':'🥉';
-          mh+='<div class="match-item" style="text-align:left"><div class="match-type">'+scoreEmoji+' '+m.match_name+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">对方类型：'+m.match_type+' | '+m.description+'</div><div style="font-size:10px;color:var(--text3)">'+new Date(m.created_at).toLocaleDateString('zh-CN')+'</div></div>';
+          mh+='<div class="match-item" style="text-align:left;cursor:pointer" onclick=\'showMatchDetail('+JSON.stringify(m).replace(/'/g,"&#39;")+')\'><div class="match-type">'+scoreEmoji+' '+m.match_name+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">对方类型：'+m.match_type+' | '+m.description+'</div><div style="font-size:10px;color:var(--text3)">'+new Date(m.created_at).toLocaleDateString('zh-CN')+' · 点击查看详情 →</div></div>';
         });
       }
       $('match-list').innerHTML=mh;
     }).catch(function(e){$('match-list').innerHTML='<p style="color:var(--text3)">加载失败</p>';});
+}
+
+// ══════════════════════════════════════════════════════════════ MATCH DETAIL ══════════════════════════════════════════════════════════════
+function showMatchDetail(m){
+  var typeA=m.user_type||'';
+  var typeB=m.match_type||'';
+  var report=generateMatchReport(typeA,typeB,m.match_name||'',m.score||0);
+
+  var h='<h3 style="font-family:var(--font-heading);color:var(--gold);margin-bottom:4px">💑 合拍度详情</h3>';
+  h+='<p style="font-size:13px;color:var(--text2);margin-bottom:16px">'+m.match_name+'（'+typeB+'型）</p>';
+  h+='<div class="hepai-score">'+m.score+'<span> / 100</span></div>';
+  h+='<div class="hepai-tags" style="margin:12px 0">';
+  h+='<span class="hepai-tag">'+typeA+'型 × '+typeB+'型</span>';
+  var dimsA=typeA.split(''),dimsB=typeB.split('');
+  dimsA.forEach(function(d){
+    if(dimsB.indexOf(d)>=0)h+='<span class="hepai-tag" style="background:rgba(30,132,73,.15);color:var(--s)">'+d+'维度共鸣</span>';
+  });
+  h+='</div>';
+  h+='<div class="hepai-desc">'+report+'</div>';
+  h+='<p style="font-size:11px;color:var(--text3);margin-top:12px">📅 匹配时间：'+new Date(m.created_at).toLocaleDateString('zh-CN')+'</p>';
+
+  $('match-detail-content').innerHTML=h;
+  $('modal-match-detail').classList.add('active');
+}
+
+function generateMatchReport(typeA,typeB,nameB,score){
+  var dimsA=typeA.split('');
+  var dimsB=typeB.split('');
+  var both=dimsA.filter(function(d){return dimsB.indexOf(d)>=0});
+  var onlyA=dimsA.filter(function(d){return dimsB.indexOf(d)<0});
+  var onlyB=dimsB.filter(function(d){return dimsA.indexOf(d)<0});
+
+  var dimNames={D:'支配型',I:'影响型',S:'稳健型',C:'谨慎型'};
+  var dimTraits={D:'果断、直接、有领导力',I:'热情、乐观、善社交',S:'温和、耐心、可靠',C:'严谨、精确、逻辑强'};
+  var dimNeed={D:'需要学会倾听和放慢节奏',I:'需要学会聚焦和深度思考',S:'需要学会表达和主动出击',C:'需要学会灵活和拥抱不完美'};
+  var dimGive={D:'带来方向感、决策力和行动力',I:'带来温暖、能量和感染力',S:'带来稳定、耐心和安全感',C:'带来精确、严谨和品质感'};
+
+  var r='';
+
+  // Opening based on score
+  if(score>=90){
+    r+='✨ '+nameB+'是你极其合拍的灵魂搭档。你们的性格特质高度互补，在一起几乎不需要磨合就能找到默契的节奏。';
+  }else if(score>=80){
+    r+='🥈 '+nameB+'是你非常不错的搭档人选。你们的性格大部分契合，虽然有些小差异，但这些差异恰好能让彼此看到不同的世界。';
+  }else if(score>=70){
+    r+='🤝 '+nameB+'和你有着不同的性格底色。你们需要花一些时间去理解彼此的行为模式，但只要愿意沟通，差异会变成互补。';
+  }else{
+    r+='🔍 '+nameB+'的性格与你差异较大，但这并不意味着不适合——差异往往带来新的视角。理解和尊重彼此的不同，关系才能走得更远。';
+  }
+
+  // Shared dimensions
+  if(both.length>0){
+    r+='\n\n你们共同拥有<b>'+both.map(function(d){return dimNames[d]}).join('、')+'</b>的特质，这让你们在'+both.map(function(d){return dimTraits[d]}).join('、')+'等方面有着天然的默契。当遇到需要'+both[0]+'维度能力应对的情况时，你们能迅速达成一致、配合无间。';
+  }
+
+  // Complementary dimensions
+  if(onlyA.length>0&&onlyB.length>0){
+    r+='\n\n'+nameB+'为你<b>'+onlyB.map(function(d){return dimGive[d]}).join('，')+'</b>，这正是你性格中所需要的。而你的'+onlyA.map(function(d){return dimGive[d]}).join('，')+'，也恰好填补了对方的短板。这种互补让你们在一起时，1+1远大于2。';
+  }else if(onlyA.length===0&&onlyB.length===0){
+    r+='\n\n你们的性格维度几乎完全一致，这会带来极高的默契度——你们看待问题的方式相似，做决定的节奏相近，相处起来非常舒服。唯一的提醒是：太过相似有时会缺少新鲜感的刺激，偶尔尝试对方的"非舒适区"，能让关系更有层次。';
+  }
+
+  // Growth advice
+  if(onlyA.length>0){
+    r+='\n\n对你而言，和'+nameB+'相处时，可以试着欣赏对方的'+onlyB.map(function(d){return dimTraits[d]}).join('、')+'——这些是你的性格中原本不太突出的部分。';
+  }
+  if(onlyB.length>0){
+    r+='\n\n对'+nameB+'而言，TA需要理解你的'+onlyA.map(function(d){return dimTraits[d]}).join('、')+'并非刻意为之，而是你天生的行为模式。当TA适应你的节奏后，你们会更和谐。';
+  }
+
+  r+='\n\n💡 每对性格组合都有独特的相处之道。沟通不是改变对方，而是理解"为什么TA会这样想"。珍惜彼此的不同，这些差异才是关系中最有趣的部分。';
+
+  return r;
 }
 
 // ══════════════════════════════════════════════════════════════ SAVE ══════════════════════════════════════════════════════════════
