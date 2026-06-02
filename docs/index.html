@@ -551,7 +551,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
 <div style="padding:20px 16px 60px;max-width:480px;margin:0 auto">
   <div id="report-content"></div>
   <div class="action-bar">
-    <button class="btn btn-outline btn-sm" onclick="showScreen('screen-results')">← 返回结果页</button>
+    <button class="btn btn-outline btn-sm" onclick="backToResults()">← 返回结果页</button>
     <button class="btn btn-outline btn-sm btn-save-rs" onclick="saveResult()">📷 保存卡片</button>
     <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
   </div>
@@ -690,6 +690,15 @@ function $(id){return document.getElementById(id)}
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function toast(msg){let t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none'},2500)}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+function backToResults(){
+  showScreen('screen-results');
+  if(sessionStorage.getItem('disc_unlocked')==='1'){
+    setTimeout(function(){
+      var le=$('lock-unified');if(le)le.style.display='none';
+      var be=$('badge-unified');if(be)be.style.display='inline-flex';
+    },50);
+  }
+}
 
 function toggleIntro(){
   $('intro-body').classList.toggle('open');
@@ -836,8 +845,12 @@ function loginUser(){
       var userData=data[0];
       userInfo={name:userData.name,phone:userData.phone,time:userData.created_at};
       displaySc=userData.scores||{};
-      resultKey=userData.result_key||'D';
-      label=displaySc?Object.keys(displaySc).sort(function(a,b){return displaySc[b]-displaySc[a]}).join('')+'型':'D型';
+      // Derive type from scores
+      var dims=['D','I','S','C'];
+      var sorted=dims.slice().sort(function(a,b){return (displaySc[b]||50)-(displaySc[a]||50)});
+      var pos=sorted.filter(function(d){return (displaySc[d]||50)>50});
+      resultKey=pos.length>0?(pos.length>=2?pos[0]+pos[1]:pos[0]):sorted[0];
+      label=sorted.join('')+'型';
       var key=resultKey;
       var fam=CHAR_FAMILY[key]||'';
       var main=(resultKey||'D')[0];
@@ -1382,8 +1395,7 @@ function sendReport(){
     name:userInfo.name,
     phone:userInfo.phone,
     disc_type:label||'',
-    scores:displaySc||{},
-    result_key:resultKey||''
+    scores:displaySc||{}
   };
   try{
     // Check if phone already exists → update; otherwise insert
