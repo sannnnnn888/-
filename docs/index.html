@@ -1494,6 +1494,13 @@ function renderPersonalPage(userData){
   h+='</div>';
 
   // Match history
+  // Pair with existing user
+  h+='<div class="rsc-section"><h4>🔍 配对已测好友</h4>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">输入对方测试时使用的手机号，即时查看合拍度</p>';
+  h+='<div style="display:flex;gap:8px"><input type="tel" id="pair-phone" placeholder="对方手机号（11位）" maxlength="11" style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:var(--font-body);outline:none;transition:var(--transition);background:var(--bg2);color:var(--text);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="pairUser()" style="white-space:nowrap">查看合拍度</button></div>';
+  h+='<div id="pair-result" style="margin-top:10px"></div></div>';
+
+  // Match history
   h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
   h+='<div id="match-list" style="text-align:center;padding:16px;color:var(--text3)">加载中...</div></div>';
 
@@ -1509,25 +1516,78 @@ function renderPersonalPage(userData){
   setTimeout(function(){drawRadarPersonal()},150);
 
   // Load matches async
-  var phone=userData.phone;
+  loadMatches(userData.phone);
+}
+
+// ══════════════════════════════════════════════════════════════ MATCH DETAIL ══════════════════════════════════════════════════════════════
+function pairUser(){
+  var phone=$('pair-phone').value.trim();
+  var myPhone=userInfo?userInfo.phone:'';
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+  if(phone===myPhone){toast('这是你自己的手机号哦');return}
+  // Check if already matched
+  fetch(SB_URL+'/rest/v1/matches?select=*&user_phone=eq.'+encodeURIComponent(myPhone)+'&match_phone=eq.'+encodeURIComponent(phone),{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(existing){
+    if(existing&&existing.length>0){
+      var m=existing[0];
+      showMatchDetail(m);
+      return;
+    }
+    // Look up the friend
+    fetch(SB_URL+'/rest/v1/unlocks?select=*&phone=eq.'+encodeURIComponent(phone),{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(!data||data.length===0){
+        $('pair-result').innerHTML='<p style="color:var(--text3);font-size:13px">该手机号尚未注册，发送邀请链接给TA吧</p>';
+        return;
+      }
+      var friend=data[0];
+      var typeB=friend.result_key||(friend.disc_type?friend.disc_type.replace('型',''):'');
+      if(!typeB&&friend.scores){
+        var dims=['D','I','S','C'];
+        var sorted=dims.slice().sort(function(a,b){return (friend.scores[b]||50)-(friend.scores[a]||50)});
+        var pos=sorted.filter(function(d){return (friend.scores[d]||50)>50});
+        typeB=pos.length>0?(pos.length>=2?pos[0]+pos[1]:pos[0]):sorted[0];
+      }
+      var myType=resultKey||'';
+      var score=calcMatchScore(myType,typeB);
+      var desc=getMatchDesc(score);
+      // Save bidirectional matches
+      var m1={user_phone:myPhone,match_phone:phone,match_name:friend.name||'',user_type:myType,match_type:typeB,score:score,description:desc};
+      var m2={user_phone:phone,match_phone:myPhone,match_name:userInfo?userInfo.name:'',user_type:typeB,match_type:myType,score:score,description:desc};
+      Promise.all([
+        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m1)}),
+        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m2)})
+      ]).then(function(){
+        var emoji=score>=90?'🏆':score>=80?'🥈':'🥉';
+        $('pair-result').innerHTML='<div class="match-item" style="cursor:pointer" onclick=\'showMatchDetail('+JSON.stringify(m1).replace(/'/g,"&#39;")+')\'><div class="match-type">'+emoji+' '+friend.name+' <span class="m-score">'+score+'分</span></div><div class="match-desc">'+desc+'</div><div style="font-size:11px;color:var(--gold-dim);margin-top:4px">点击查看详情 →</div></div>';
+        // Refresh match list
+        loadMatches(myPhone);
+      }).catch(function(e){toast('配对失败，请重试')});
+    }).catch(function(){toast('查询失败，请重试')});
+  });
+}
+
+// Extract match loading for reuse
+function loadMatches(phone){
   var matchQuery='user_phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc';
   fetch(SB_URL+'/rest/v1/matches?select=*&'+matchQuery,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
     .then(function(r){return r.json()})
     .then(function(matches){
       var mh='';
       if(!matches||matches.length===0){
-        mh='<p style="color:var(--text3);padding:16px">暂无匹配记录<br><span style="font-size:12px">分享你的测试链接给朋友，双方完成测试后自动生成</span></p>';
+        mh='<p style="color:var(--text3);padding:16px">暂无匹配记录<br><span style="font-size:12px">分享你的测试链接给朋友，或在上方输入朋友手机号配对</span></p>';
       } else {
         matches.forEach(function(m){
           var scoreEmoji=m.score>=90?'🏆':m.score>=80?'🥈':'🥉';
           mh+='<div class="match-item" style="text-align:left;cursor:pointer" onclick=\'showMatchDetail('+JSON.stringify(m).replace(/'/g,"&#39;")+')\'><div class="match-type">'+scoreEmoji+' '+m.match_name+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">对方类型：'+m.match_type+' | '+m.description+'</div><div style="font-size:10px;color:var(--text3)">'+new Date(m.created_at).toLocaleDateString('zh-CN')+' · 点击查看详情 →</div></div>';
         });
       }
-      $('match-list').innerHTML=mh;
-    }).catch(function(e){$('match-list').innerHTML='<p style="color:var(--text3)">加载失败</p>';});
+      var el=$('match-list');if(el)el.innerHTML=mh;
+    }).catch(function(){var el=$('match-list');if(el)el.innerHTML='<p style="color:var(--text3)">加载失败</p>';});
 }
 
-// ══════════════════════════════════════════════════════════════ MATCH DETAIL ══════════════════════════════════════════════════════════════
 function showMatchDetail(m){
   var typeA=m.user_type||'';
   var typeB=m.match_type||'';
