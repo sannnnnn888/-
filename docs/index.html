@@ -1494,11 +1494,10 @@ function renderPersonalPage(userData){
   h+='</div>';
 
   // Match history
-  // Pair with existing user
-  h+='<div class="rsc-section"><h4>🔍 配对已测好友</h4>';
-  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">输入对方测试时使用的手机号，即时查看合拍度</p>';
-  h+='<div style="display:flex;gap:8px"><input type="tel" id="pair-phone" placeholder="对方手机号（11位）" maxlength="11" style="flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-family:var(--font-body);outline:none;transition:var(--transition);background:var(--bg2);color:var(--text);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="pairUser()" style="white-space:nowrap">查看合拍度</button></div>';
-  h+='<div id="pair-result" style="margin-top:10px"></div></div>';
+  // Share link
+  h+='<div class="rsc-section"><h4>🔗 邀请好友配对</h4>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">分享此链接给好友，对方完成测试后自动生成合拍度报告</p>';
+  h+='<div style="display:flex;gap:8px"><input type="text" id="personal-share-url" readonly style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:var(--font-body);background:var(--bg2);color:var(--text2);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="copyPersonalShare()" style="white-space:nowrap">📋 复制链接</button></div></div>';
 
   // Match history
   h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
@@ -1515,61 +1514,27 @@ function renderPersonalPage(userData){
   // Draw radar on personal page
   setTimeout(function(){drawRadarPersonal()},150);
 
-  // Load matches async
+  // Load matches async + populate share URL
   loadMatches(userData.phone);
+  // Look up share_id for this user
+  fetch(SB_URL+'/rest/v1/unlocks?select=share_id&phone=eq.'+encodeURIComponent(userData.phone)+'&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(d){
+    if(d&&d.length>0&&d[0].share_id){
+      var shareUrl=location.origin+location.pathname+'?share='+d[0].share_id;
+      var el=$('personal-share-url');if(el)el.value=shareUrl;
+    }
+  }).catch(function(){});
+}
+
+function copyPersonalShare(){
+  var el=$('personal-share-url');
+  if(!el||!el.value){toast('链接未生成');return}
+  if(navigator.clipboard){navigator.clipboard.writeText(el.value).then(function(){toast('✅ 链接已复制')})}
+  else{el.select();document.execCommand('copy');toast('✅ 链接已复制')}
 }
 
 // ══════════════════════════════════════════════════════════════ MATCH DETAIL ══════════════════════════════════════════════════════════════
-function pairUser(){
-  var phone=$('pair-phone').value.trim();
-  var myPhone=userInfo?userInfo.phone:'';
-  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
-  if(phone===myPhone){toast('这是你自己的手机号哦');return}
-  // Check if already matched
-  fetch(SB_URL+'/rest/v1/matches?select=*&user_phone=eq.'+encodeURIComponent(myPhone)+'&match_phone=eq.'+encodeURIComponent(phone),{
-    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-  }).then(function(r){return r.json()}).then(function(existing){
-    if(existing&&existing.length>0){
-      var m=existing[0];
-      showMatchDetail(m);
-      return;
-    }
-    // Look up the friend
-    fetch(SB_URL+'/rest/v1/unlocks?select=*&phone=eq.'+encodeURIComponent(phone),{
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-    }).then(function(r){return r.json()}).then(function(data){
-      if(!data||data.length===0){
-        $('pair-result').innerHTML='<p style="color:var(--text3);font-size:13px">该手机号尚未注册，发送邀请链接给TA吧</p>';
-        return;
-      }
-      var friend=data[0];
-      var typeB=friend.result_key||(friend.disc_type?friend.disc_type.replace('型',''):'');
-      if(!typeB&&friend.scores){
-        var dims=['D','I','S','C'];
-        var sorted=dims.slice().sort(function(a,b){return (friend.scores[b]||50)-(friend.scores[a]||50)});
-        var pos=sorted.filter(function(d){return (friend.scores[d]||50)>50});
-        typeB=pos.length>0?(pos.length>=2?pos[0]+pos[1]:pos[0]):sorted[0];
-      }
-      var myType=resultKey||'';
-      var score=calcMatchScore(myType,typeB);
-      var desc=getMatchDesc(score);
-      // Save bidirectional matches
-      var m1={user_phone:myPhone,match_phone:phone,match_name:friend.name||'',user_type:myType,match_type:typeB,score:score,description:desc};
-      var m2={user_phone:phone,match_phone:myPhone,match_name:userInfo?userInfo.name:'',user_type:typeB,match_type:myType,score:score,description:desc};
-      Promise.all([
-        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m1)}),
-        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m2)})
-      ]).then(function(){
-        var emoji=score>=90?'🏆':score>=80?'🥈':'🥉';
-        $('pair-result').innerHTML='<div class="match-item" style="cursor:pointer" onclick=\'showMatchDetail('+JSON.stringify(m1).replace(/'/g,"&#39;")+')\'><div class="match-type">'+emoji+' '+friend.name+' <span class="m-score">'+score+'分</span></div><div class="match-desc">'+desc+'</div><div style="font-size:11px;color:var(--gold-dim);margin-top:4px">点击查看详情 →</div></div>';
-        // Refresh match list
-        loadMatches(myPhone);
-      }).catch(function(e){toast('配对失败，请重试')});
-    }).catch(function(){toast('查询失败，请重试')});
-  });
-}
-
-// Extract match loading for reuse
 function loadMatches(phone){
   var matchQuery='user_phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc';
   fetch(SB_URL+'/rest/v1/matches?select=*&'+matchQuery,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
@@ -1941,6 +1906,42 @@ function showSaveOverlay(url){
         }
       }
     }).catch(function(){});
+  }
+  // If already-tested user opens a share link → auto-match
+  if(shareParam&&sessionStorage.getItem('disc_unlocked')==='1'){
+    var savedPhone=sessionStorage.getItem('disc_unlock_phone');
+    if(savedPhone){
+      setTimeout(function(){
+        fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+          headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+        }).then(function(r){return r.json()}).then(function(invData){
+          if(!invData||invData.length===0)return;
+          var inviter=invData[0];
+          if(inviter.phone===savedPhone)return;
+          fetch(SB_URL+'/rest/v1/matches?select=id&user_phone=eq.'+encodeURIComponent(savedPhone)+'&match_phone=eq.'+encodeURIComponent(inviter.phone),{
+            headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+          }).then(function(r){return r.json()}).then(function(exist){
+            if(exist&&exist.length>0)return;
+            fetch(SB_URL+'/rest/v1/unlocks?select=*&phone=eq.'+encodeURIComponent(savedPhone),{
+              headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+            }).then(function(r){return r.json()}).then(function(myData){
+              if(!myData||myData.length===0)return;
+              var me=myData[0];
+              var myType=me.disc_type?me.disc_type.replace('型',''):'';
+              var invType=inviter.disc_type?inviter.disc_type.replace('型',''):(inviter.result_key||'');
+              var score=calcMatchScore(myType,invType);
+              var desc=getMatchDesc(score);
+              var m1={user_phone:savedPhone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:myType,match_type:invType,score:score,description:desc};
+              var m2={user_phone:inviter.phone,match_phone:savedPhone,match_name:me.name||'',user_type:invType,match_type:myType,score:score,description:desc};
+              fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m1)}).catch(function(){});
+              fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(m2)}).catch(function(){});
+              var banner=$('hepai-banner');
+              if(banner){banner.style.display='block';$('share-from-name').textContent='🎉 合拍度匹配完成！';$('share-from-type').textContent='与 '+inviter.name+' 合拍度：'+score+'分'}
+            }).catch(function(){});
+          }).catch(function(){});
+        }).catch(function(){});
+      },500);
+    }
   }
   if(p.get('disc'))checkHepaiShare();
 })();
