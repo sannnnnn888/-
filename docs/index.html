@@ -1110,6 +1110,11 @@ function checkUnlock(){
   if(sessionStorage.getItem('disc_unlocked')==='1'){
     let savedPhone=sessionStorage.getItem('disc_unlock_phone');
     if(savedPhone&&userInfo)userInfo.phone=savedPhone;
+    // Hide lock overlay if returning to results page
+    setTimeout(function(){
+      var lockEl=$('lock-unified');if(lockEl)lockEl.style.display='none';
+      var badgeEl=$('badge-unified');if(badgeEl)badgeEl.style.display='inline-flex';
+    },100);
     return;
   }
 }
@@ -1117,45 +1122,59 @@ function checkUnlock(){
 function showUnlock(){$('modal-unlock').classList.add('active')}
 
 function doUnlock(){
-  let phone=$('input-phone').value.trim();
-  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
-  sessionStorage.setItem('disc_unlocked','1');
-  if(userInfo)userInfo.phone=phone;
-  sessionStorage.setItem('disc_unlock_phone',phone);
-  $('modal-unlock').classList.remove('active');
-  toast('✅ 已解锁！');
+let phone=$('input-phone').value.trim();
+if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
 
-  // Generate share_id and update Supabase
+sessionStorage.setItem('disc_unlocked','1');
+if(userInfo)userInfo.phone=phone;
+sessionStorage.setItem('disc_unlock_phone',phone);
+$('modal-unlock').classList.remove('active');
+
+// Check if phone already registered
+fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id&phone=eq.'+encodeURIComponent(phone)+'&limit=1',{
+  headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+}).then(function(r){return r.json()}).then(function(data){
+var isNew=!data||data.length===0;
+var existingShareId=(data&&data.length>0)?data[0].share_id:null;
+
+  // Save/update report FIRST
+  sendReport();
+
+  // Generate share_id for new users (after sendReport creates the record)
+  if(!existingShareId){
   var shareId=generateShareId();
-  fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone),{
-    method:'PATCH',
-    headers:sbHeaders(),
-    body:JSON.stringify({share_id:shareId})
-  }).catch(function(e){console.log('share_id update error:',e)});
+setTimeout(function(){
+    fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone),{
+    method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:shareId})
+}).catch(function(e){console.log('share_id patch error:',e)});
+},800);
+}
 
-  // Check if came from share link → auto-match
-  var urlParams=new URLSearchParams(location.search);
-  var shareParam=urlParams.get('share');
-  if(shareParam){
+if(!isNew){toast('✅ 欢迎回来！报告已更新');}
+else{toast('✅ 已解锁！');}
+
+// Check if came from share link → auto-match
+var urlParams=new URLSearchParams(location.search);
+var shareParam=urlParams.get('share');
+if(shareParam){
     fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
       headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-    }).then(function(r){return r.json()}).then(function(data){
-      if(data&&data.length>0){
-        var inviter=data[0];
-        var score=calcMatchScore(resultKey,inviter.result_key||inviter.disc_type||'');
-        var desc=getMatchDesc(score);
-        // Create match records (bidirectional)
-        var match1={user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.result_key||inviter.disc_type,match_type:resultKey,score:score,description:desc};
-        var match2={user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.result_key||inviter.disc_type,score:score,description:desc};
-        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match1)}).catch(function(){});
-        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match2)}).catch(function(){});
-        toast('✅ 已解锁！合拍度匹配已生成');
-      }
-    }).catch(function(){});
-  }
+    }).then(function(r){return r.json()}).then(function(invData){
+      if(invData&&invData.length>0){
+          var inviter=invData[0];
+          if(inviter.phone===phone){return;}
+          var score=calcMatchScore(resultKey,inviter.result_key||inviter.disc_type||'');
+          var desc=getMatchDesc(score);
+          var match1={user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.result_key||inviter.disc_type,match_type:resultKey,score:score,description:desc};
+          var match2={user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.result_key||inviter.disc_type,score:score,description:desc};
+          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match1)}).catch(function(){});
+          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match2)}).catch(function(){});
+        }
+      }).catch(function(){});
+    }
+  }).catch(function(){});
 
   applyUnlock();
-  sendReport();
 }
 
 function generateShareId(){
@@ -1359,7 +1378,6 @@ function sbHeaders(){return{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Co
 // ══════════════════════════════════════════════════════════════ PUSH ══════════════════════════════════════════════════════════════
 function sendReport(){
   if(!userInfo||!userInfo.phone)return;
-  // Save to Supabase
   var payload={
     name:userInfo.name,
     phone:userInfo.phone,
@@ -1368,9 +1386,21 @@ function sendReport(){
     result_key:resultKey||''
   };
   try{
-    fetch(SB_URL+'/rest/v1/unlocks',{method:'POST',headers:sbHeaders(),body:JSON.stringify(payload)})
-      .then(function(r){if(!r.ok)console.log('[DB] error:',r.status);else console.log('[DB] saved')})
-      .catch(function(e){console.log('[DB] error:',e)});
+    // Check if phone already exists → update; otherwise insert
+    fetch(SB_URL+'/rest/v1/unlocks?select=id&phone=eq.'+encodeURIComponent(userInfo.phone)+'&limit=1',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.length>0){
+        // Update existing
+        return fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(userInfo.phone),{
+          method:'PATCH',headers:sbHeaders(),body:JSON.stringify(payload)
+        });
+      } else {
+        // Insert new
+        return fetch(SB_URL+'/rest/v1/unlocks',{method:'POST',headers:sbHeaders(),body:JSON.stringify(payload)});
+      }
+    }).then(function(r){if(r&&!r.ok)console.log('[DB] error:',r.status);else console.log('[DB] saved')})
+    .catch(function(e){console.log('[DB] error:',e)});
   }catch(e){console.log('[DB] skip:',e)}
 }
 
