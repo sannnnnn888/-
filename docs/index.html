@@ -461,6 +461,13 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
   </div>
 
   <button class="btn btn-gold" onclick="showNameModal()">✦ 开始探索</button>
+  <div style="margin-top:24px;padding-top:24px;border-top:1px solid var(--border)">
+    <p style="font-size:13px;color:var(--text3);margin-bottom:12px">已有账号？输入手机号登录</p>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <input type="tel" id="login-phone" placeholder="请输入手机号（11位）" maxlength="11" style="padding:10px 16px;border:1.5px solid var(--border);border-radius:40px;font-size:14px;font-family:var(--font-body);outline:none;transition:var(--transition);background:var(--bg2);color:var(--text);width:200px;box-sizing:border-box">
+      <button class="btn btn-outline btn-sm" onclick="loginUser()" style="white-space:nowrap">🔑 登录</button>
+    </div>
+  </div>
 </div>
 </section>
 
@@ -487,6 +494,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
       输入手机号，一键解锁你的：<br>
       <b>专属角色卡 · 情感关系 · 压力状态 · 适配推荐</b>
     </div>
+    <div style="text-align:center;font-size:12px;color:var(--gold-dim);margin-bottom:14px;line-height:1.5">💡 手机号码将用于事后登录回看报告及合拍度匹配记录</div>
     <input type="tel" id="input-phone" class="" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
     <div class="modal-tip">📩 仅用于报告存档，可在合拍度中登录匹配</div>
     <button class="btn btn-gold full-w" onclick="doUnlock()">🔓 解锁完整报告</button>
@@ -522,6 +530,17 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;point
 <div class="action-bar">
   <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
   <button class="btn btn-outline btn-sm" id="btn-save" onclick="saveResult()">📷 保存结果</button>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ PERSONAL ════════════════════════════════════════════ -->
+<section id="screen-personal" class="screen">
+<div style="padding:20px 16px 60px;max-width:480px;margin:0 auto">
+  <div id="personal-content"></div>
+  <div class="action-bar">
+    <button class="btn btn-outline btn-sm" onclick="showScreen('screen-welcome')">← 返回首页</button>
+    <button class="btn btn-outline btn-sm btn-save-rs" onclick="saveResult()">📷 保存卡片</button>
+  </div>
 </div>
 </section>
 
@@ -664,6 +683,7 @@ C:{best:'IS',score:88,desc:'IS型的温暖和耐心让你的严谨有了温度�
 const QPP=4,TP=7; // 7 pages × 4 questions
 let userInfo=null,ans=[],curPage=0,shuffles=[];
 let sc=null,displaySc=null,label='',combo=null,labelPos=[],resultKey='',selectedQuote='';
+let shareInviter=null,shareInviterType='';
 
 // ══════════════════════════════════════════════════════════════ UTILITY ══════════════════════════════════════════════════════════════
 function $(id){return document.getElementById(id)}
@@ -805,6 +825,35 @@ function goNext(){
 }
 function goPrev(){showPage(curPage-1)}
 
+// ══════════════════════════════════════════════════════════════ LOGIN ══════════════════════════════════════════════════════════════
+function loginUser(){
+  var phone=$('login-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+  fetch(SB_URL+'/rest/v1/unlocks?select=*&phone=eq.'+encodeURIComponent(phone),{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
+    .then(function(r){return r.json()})
+    .then(function(data){
+      if(!data||data.length===0){toast('未找到该手机号的记录，请先完成测试');return}
+      var userData=data[0];
+      userInfo={name:userData.name,phone:userData.phone,time:userData.created_at};
+      displaySc=userData.scores||{};
+      resultKey=userData.result_key||'D';
+      label=displaySc?Object.keys(displaySc).sort(function(a,b){return displaySc[b]-displaySc[a]}).join('')+'型':'D型';
+      var key=resultKey;
+      var fam=CHAR_FAMILY[key]||'';
+      var main=(resultKey||'D')[0];
+      combo=COMBOS[resultKey]||null;
+      if(!combo){
+        var allSorted=Object.keys(displaySc||{}).sort(function(a,b){return (displaySc[b]||50)-(displaySc[a]||50)});
+        for(var i=1;i<allSorted.length;i++){var k=key[0]+allSorted[i];if(COMBOS[k]){combo=COMBOS[k];break;}}
+      }
+      selectedQuote='';
+      sessionStorage.setItem('disc_unlocked','1');
+      sessionStorage.setItem('disc_unlock_phone',phone);
+      renderPersonalPage(userData);
+      showScreen('screen-personal');
+    }).catch(function(e){toast('登录失败，请重试');console.log(e)});
+}
+
 // ══════════════════════════════════════════════════════════════ RESULTS ══════════════════════════════════════════════════════════════
 function submitTest(){
   let allDone=ans.filter(a=>a.most&&a.least).length;
@@ -945,8 +994,21 @@ function renderResults(){
   }
 
   // 5. 合拍度 section
-  let myType=key||main;
-  let shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(myType)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
+  var myType=key||main;
+  var shareUrl='';
+  // Try to get share_id from Supabase for this user
+  if(userInfo&&userInfo.phone){
+    fetch(SB_URL+'/rest/v1/unlocks?select=share_id&phone=eq.'+encodeURIComponent(userInfo.phone)+'&limit=1',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.length>0&&data[0].share_id){
+        var surl=location.origin+location.pathname+'?share='+data[0].share_id;
+        var el=document.getElementById('share-url');
+        if(el)el.textContent=surl;
+      }
+    }).catch(function(){});
+  }
+  shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(myType)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
   h+='<div class="hepai-box"><h3>💑 合拍度测试</h3>';
   h+='<div class="hepai-intro">看看你和哪种性格的人最合拍，邀请TA一起测更准！<br>分享链接给TA，TA测完后自动匹配；如果TA已测过，登录手机号即可完成配对。</div>';
   h+='<div class="hepai-url" id="share-url">'+shareUrl+'</div>';
@@ -1062,8 +1124,61 @@ function doUnlock(){
   sessionStorage.setItem('disc_unlock_phone',phone);
   $('modal-unlock').classList.remove('active');
   toast('✅ 已解锁！');
+
+  // Generate share_id and update Supabase
+  var shareId=generateShareId();
+  fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone),{
+    method:'PATCH',
+    headers:sbHeaders(),
+    body:JSON.stringify({share_id:shareId})
+  }).catch(function(e){console.log('share_id update error:',e)});
+
+  // Check if came from share link → auto-match
+  var urlParams=new URLSearchParams(location.search);
+  var shareParam=urlParams.get('share');
+  if(shareParam){
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.length>0){
+        var inviter=data[0];
+        var score=calcMatchScore(resultKey,inviter.result_key||inviter.disc_type||'');
+        var desc=getMatchDesc(score);
+        // Create match records (bidirectional)
+        var match1={user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.result_key||inviter.disc_type,match_type:resultKey,score:score,description:desc};
+        var match2={user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.result_key||inviter.disc_type,score:score,description:desc};
+        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match1)}).catch(function(){});
+        fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match2)}).catch(function(){});
+        toast('✅ 已解锁！合拍度匹配已生成');
+      }
+    }).catch(function(){});
+  }
+
   applyUnlock();
   sendReport();
+}
+
+function generateShareId(){
+  var chars='abcdefghijklmnopqrstuvwxyz0123456789';
+  var id='';
+  for(var i=0;i<8;i++){id+=chars[Math.floor(Math.random()*chars.length)]}
+  return id;
+}
+
+function calcMatchScore(typeA,typeB){
+  var scores={'DD':50,'II':60,'SS':85,'CC':65,'DI':76,'ID':76,'DS':90,'SD':90,'DC':90,'CD':90,'IS':90,'SI':90,'IC':80,'CI':80,'SC':88,'CS':88};
+  var key=typeA+typeB,rev=typeB+typeA;
+  var score=scores[key]||scores[rev]||70;
+  var dimsA=typeA.split(''),dimsB=typeB.split('');
+  var overlap=dimsA.filter(function(d){return dimsB.indexOf(d)>=0}).length;
+  return Math.min(98,score+overlap*4);
+}
+
+function getMatchDesc(score){
+  if(score>=90)return '你们的性格高度互补，是非常合拍的组合！沟通和相处会非常顺畅，彼此能填补对方的短板。';
+  if(score>=80)return '你们有不错的性格契合度，相处会比较舒服。虽然有些差异，但恰好可以互相补充。';
+  if(score>=70)return '你们有各自的性格特点，需要一些相互理解。差异也是互补的机会，关键在于沟通。';
+  return '你们性格差异较大，但差异也可以成为互补。理解和尊重彼此的不同之处，关系会更融洽。';
 }
 
 function applyUnlock(){
@@ -1112,8 +1227,7 @@ function renderUnlockReport(){
   h+='<div class="report-sc">';
 
   // ── 1. Character Card (匹配角色卡设计_全预览) ──
-  let shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(key)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
-  let qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(shareUrl);
+  let qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.origin+location.pathname);
   h+='<div class="role-card'+(familyClass?' '+familyClass:'')+'" style="background-image:url('+imgUrl+')">';
   h+='<div class="card-inner">';
 
@@ -1260,6 +1374,81 @@ function sendReport(){
   }catch(e){console.log('[DB] skip:',e)}
 }
 
+// ══════════════════════════════════════════════════════════════ PERSONAL PAGE ══════════════════════════════════════════════════════════════
+function renderPersonalPage(userData){
+  var h='';
+  var key=resultKey||'D';
+  var charName=CHAR_NAME[key]||'';
+  var family=CHAR_FAMILY[key]||'';
+  var imgUrl=CHAR_IMG[key]||'';
+  var quote=selectedQuote||pickQuote(key);
+  var mainDim=key[0];
+
+  h+='<h2 style="text-align:center;font-family:var(--font-heading);color:var(--gold);margin-bottom:4px">'+userData.name+'的个人报告</h2>';
+  h+='<p style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:20px">'+label+' · '+family+' · '+charName+'</p>';
+
+  // Character card
+  var familyClass='';
+  switch(family){
+    case '破军虎': familyClass='ftiger'; break;
+    case '焰羽凤': familyClass='fphoenix'; break;
+    case '抱山熊': familyClass='fbear'; break;
+    case '玄机鹰': familyClass='feagle'; break;
+  }
+  var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.origin+location.pathname);
+  var summary='';
+  if(combo&&combo.id){summary=combo.id.replace(/<[^>]*>/g,'').trim();}
+  else{var p=PURE[mainDim];if(p)summary=p.oneliner||'';}
+
+  // Card
+  h+='<div class="role-card'+(familyClass?' '+familyClass:'')+'" style="background-image:url('+imgUrl+')">';
+  h+='<div class="card-inner">';
+  h+='<div class="card-image-area">';
+  h+='<div class="card-badge"><span class="card-name">'+charName+'</span><span class="card-sub">'+label+' · '+family+'</span></div>';
+  h+='<div class="card-quote"><span class="qm">"</span>'+quote+'<span class="qm">"</span></div>';
+  h+='</div>';
+  h+='<div class="card-text-area">';
+  h+='<div class="card-summary-bubble">'+summary+'</div>';
+  var scoresHtml='';
+  if(displaySc){
+    var order=['D','I','S','C'];
+    scoresHtml=order.map(function(d){return '<span class="s-item">'+(displaySc[d]||50)+' <span class="s-lbl">'+d+'</span></span>';}).join('');
+  }
+  h+='<div class="card-stats-row">'+scoresHtml+'</div>';
+  h+='<div class="card-footer"><div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div><span>扫码测测你的专属人格</span></div>';
+  h+='</div></div></div>';
+
+  // Match history
+  h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
+  h+='<div id="match-list" style="text-align:center;padding:16px;color:var(--text3)">加载中...</div></div>';
+
+  // Report sections
+  if(combo){
+    if(combo.rel)h+='<div class="rsc-section"><h4>💕 情感关系</h4><p>'+combo.rel+'</p></div>';
+    if(combo.pressure)h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
+    if(combo.grow)h+='<div class="rsc-section"><h4>🌱 成长方向</h4><p>'+combo.grow+'</p></div>';
+  }
+
+  $('personal-content').innerHTML=h;
+
+  // Load matches async
+  var phone=userData.phone;
+  var matchQuery='user_phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc';
+  fetch(SB_URL+'/rest/v1/matches?select=*&'+matchQuery,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
+    .then(function(r){return r.json()})
+    .then(function(matches){
+      var mh='';
+      if(!matches||matches.length===0){
+        mh='<p style="color:var(--text3);padding:16px">暂无匹配记录<br><span style="font-size:12px">分享你的测试链接给朋友，双方完成测试后自动生成</span></p>';
+      } else {
+        matches.forEach(function(m){
+          var scoreEmoji=m.score>=90?'🏆':m.score>=80?'🥈':'🥉';
+          mh+='<div class="match-item" style="text-align:left"><div class="match-type">'+scoreEmoji+' '+m.match_name+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">对方类型：'+m.match_type+' | '+m.description+'</div><div style="font-size:10px;color:var(--text3)">'+new Date(m.created_at).toLocaleDateString('zh-CN')+'</div></div>';
+        });
+      }
+      $('match-list').innerHTML=mh;
+    }).catch(function(e){$('match-list').innerHTML='<p style="color:var(--text3)">加载失败</p>';});
+}
 
 // ══════════════════════════════════════════════════════════════ SAVE ══════════════════════════════════════════════════════════════
 function saveResult(){
@@ -1301,8 +1490,7 @@ function composeCardToCanvas(){
     var statColor=famStatColor[family]||'#d4a853';
     var sumColor=famSumColor[family]||'#c8b890';
 
-    var shareUrl=location.origin+location.pathname+'?disc='+encodeURIComponent(key)+'&name='+encodeURIComponent(userInfo?userInfo.name:'');
-    var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(shareUrl);
+    var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(location.origin+location.pathname);
 
     var loaded=0,total=2;
     var charImg=new Image();
@@ -1525,8 +1713,25 @@ function showSaveOverlay(url){
 
 // ══════════════════════════════════════════════════════════════ INIT ══════════════════════════════════════════════════════════════
 (function(){
-  // Check for direct test link with ?disc= parameter
-  let p=new URLSearchParams(location.search);
+  var p=new URLSearchParams(location.search);
+  var shareParam=p.get('share');
+  if(shareParam){
+    shareInviter=shareParam;
+    // Show invite banner
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=name,disc_type,result_key',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.length>0){
+        shareInviterType=data[0].result_key||data[0].disc_type||'';
+        var banner=$('hepai-banner');
+        if(banner){
+          banner.style.display='block';
+          $('share-from-name').textContent=data[0].name+' 邀请你做合拍测试';
+          $('share-from-type').textContent='TA的性格类型：'+shareInviterType;
+        }
+      }
+    }).catch(function(){});
+  }
   if(p.get('disc'))checkHepaiShare();
 })();
 </script>
