@@ -1201,9 +1201,9 @@ function drawRadarCore(cvsId){
   let colors={D:'#c0392b',I:'#d68910',S:'#1e8449',C:'#2471a3'};
   // Use displayScores (0-100) for radar
   var ds=displaySc||{};
-  var mx=100;
+  var mx=60; // zoomed range (20-80) to amplify visual spread
 
-  let padL=10,padR=10,padT=22,padB=20;
+  let padL=18,padR=10,padT=22,padB=20;
   let plotW=w-padL-padR,plotH=h-padT-padB;
   let gap=plotW/(dims.length-1);
   let zeroY=padT+plotH/2;
@@ -1214,18 +1214,17 @@ function drawRadarCore(cvsId){
   ctx.fillStyle='rgba(36,113,163,0.04)';
   ctx.fillRect(padL,zeroY,plotW,plotH/2);
 
-  // Grid lines
-  ctx.strokeStyle='#2a2a34';ctx.lineWidth=0.5;
-  let gridN=6;
-  for(let r=0;r<=gridN;r++){
-    let y=padT+r*(plotH/gridN);
+  // Grid lines with score labels (zoomed to 20-80 range)
+  ctx.font='bold 10px sans-serif';ctx.textAlign='right';
+  var gridScores=[80,70,60,50,40,30,20];
+  gridScores.forEach(function(s){
+    var y=zeroY-(s-50)*plotH/mx;
+    ctx.strokeStyle=(s===50)?'#c9a96e':'rgba(200,180,170,.3)';ctx.lineWidth=(s===50)?1:0.5;
+    if(s===50)ctx.setLineDash([4,3]);else ctx.setLineDash([]);
     ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(w-padR,y);ctx.stroke();
-    // (grid labels removed)
-  }
-
-  // Midline (score=50)
-  ctx.strokeStyle='#c9a96e';ctx.lineWidth=1;ctx.setLineDash([4,3]);
-  ctx.beginPath();ctx.moveTo(padL,zeroY);ctx.lineTo(w-padR,zeroY);ctx.stroke();
+    ctx.fillStyle=(s===50)?'#c9a96e':'#b0a09c';
+    ctx.fillText(s,padL-2,y+4);
+  });
   ctx.setLineDash([]);
 
   // Vertical lines
@@ -1674,13 +1673,24 @@ function renderPersonalPage(userData){
 
   // Load matches async + populate share URL
   loadMatches(userData.phone);
-  // Look up share_id for this user
-  fetch(SB_URL+'/rest/v1/unlocks?select=share_id&phone=eq.'+encodeURIComponent(userData.phone)+'&limit=1',{
+  // Look up share_id for this user, generate one if missing
+  var phoneEnc=encodeURIComponent(userData.phone);
+  fetch(SB_URL+'/rest/v1/unlocks?select=share_id&phone=eq.'+phoneEnc+'&limit=1',{
     headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
   }).then(function(r){return r.json()}).then(function(d){
+    var el=$('personal-share-url');
     if(d&&d.length>0&&d[0].share_id){
       var shareUrl=location.origin+location.pathname+'?share='+d[0].share_id;
-      var el=$('personal-share-url');if(el)el.value=shareUrl;
+      if(el)el.value=shareUrl;
+    }else{
+      // Generate and persist new share_id
+      var sid=generateShareId();
+      fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+phoneEnc,{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:sid})
+      }).then(function(){
+        var shareUrl=location.origin+location.pathname+'?share='+sid;
+        if(el)el.value=shareUrl;
+      }).catch(function(){});
     }
   }).catch(function(){});
 }
