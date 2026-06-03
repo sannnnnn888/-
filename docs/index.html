@@ -1626,6 +1626,19 @@ function renderPersonalPage(userData){
   h+='<div class="card-footer"><div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div><span>扫码测测你的专属人格</span></div>';
   h+='</div></div></div>';
 
+  // Radar + detailed report (same as results page)
+  var mainDim2=key[0]||'D';
+  var bgUrl=FAMILY_IMG[mainDim2]||'';
+  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat;margin-top:16px">';
+  h+='<div class="rt-radar"><canvas id="radar-canvas-personal" width="200" height="240"></canvas></div>';
+  if(combo){
+    h+='<div class="rt-report">'+generateDetailedReport(combo,key,mainDim2)+'</div>';
+  } else {
+    var p2=PURE[mainDim2];
+    if(p2)h+='<div class="rt-report"><div class="dr-intro"><p>'+p2.ua+'</p></div></div>';
+  }
+  h+='</div>';
+
   // ── Emotional World (merged: style + relationship) ──
   var hasEmo2=userData.emotion_type&&EMOTION_STYLES[userData.emotion_type];
   var hasRel2=combo&&combo.rel;
@@ -1640,34 +1653,20 @@ function renderPersonalPage(userData){
     h+='</div>';
   }
 
-  // Radar + detailed report (same as results page)
-  var mainDim2=key[0]||'D';
-  var bgUrl=FAMILY_IMG[mainDim2]||'';
-  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat;margin-top:16px">';
-  h+='<div class="rt-radar"><canvas id="radar-canvas-personal" width="200" height="240"></canvas></div>';
+  // Report sections
   if(combo){
-    h+='<div class="rt-report">'+generateDetailedReport(combo,key,mainDim2)+'</div>';
-  } else {
-    var p2=PURE[mainDim2];
-    if(p2)h+='<div class="rt-report"><div class="dr-intro"><p>'+p2.ua+'</p></div></div>';
+    if(combo.pressure)h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
+    if(combo.grow)h+='<div class="rsc-section"><h4>🌱 成长方向</h4><p>'+combo.grow+'</p></div>';
   }
-  h+='</div>';
-
-  // Match history
-  // Share link
-  h+='<div class="rsc-section"><h4>🔗 邀请好友配对</h4>';
-  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">分享此链接给好友，对方完成测试后自动生成合拍度报告</p>';
-  h+='<div style="display:flex;gap:8px"><input type="text" id="personal-share-url" readonly style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:var(--font-body);background:var(--bg2);color:var(--text2);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="copyPersonalShare()" style="white-space:nowrap">📋 复制链接</button></div></div>';
 
   // Match history
   h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
   h+='<div id="match-list" style="text-align:center;padding:16px;color:var(--text3)">加载中...</div></div>';
 
-  // Report sections (rel already merged into Emotional World above)
-  if(combo){
-    if(combo.pressure)h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
-    if(combo.grow)h+='<div class="rsc-section"><h4>🌱 成长方向</h4><p>'+combo.grow+'</p></div>';
-  }
+  // Share link — at the very bottom
+  h+='<div class="rsc-section"><h4>🔗 邀请好友配对</h4>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">分享此链接给好友，对方完成测试后自动生成合拍度报告</p>';
+  h+='<div style="display:flex;gap:8px"><input type="text" id="personal-share-url" readonly style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:var(--font-body);background:var(--bg2);color:var(--text2);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="copyPersonalShare()" style="white-space:nowrap">📋 复制链接</button></div></div>';
 
   $('personal-content').innerHTML=h;
   // Draw radar on personal page
