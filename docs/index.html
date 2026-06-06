@@ -640,13 +640,13 @@ body{min-height:100vh;overflow-x:hidden}
 <section id="screen-test" class="screen">
 <div class="progress-wrap" id="progress-wrap">
   <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
-  <div id="progress-text" class="progress-text">0 / 28</div>
+  <div id="progress-text" class="progress-text">0 / 24</div>
 </div>
 <div class="test-instruct">📌 凭第一直觉，<strong>左侧</strong>选最像你的，<strong>右侧</strong>选最不像你的</div>
 <div id="questions-container"></div>
 <div class="nav-bar" id="nav-bar">
   <button id="nav-prev" class="nav-btn" onclick="goPrev()">← 上一题</button>
-  <span id="nav-page" class="pi">1 / 28</span>
+  <span id="nav-page" class="pi">1 / 24</span>
   <button id="nav-next" class="nav-btn" onclick="goNext()">下一题 →</button>
 </div>
 </section>
@@ -847,6 +847,8 @@ function backToResults(){
     setTimeout(function(){
       var le=$('lock-unified');if(le)le.style.display='none';
       var be=$('badge-unified');if(be)be.style.display='inline-flex';
+      var previewBlocks=document.getElementById('lock-preview-blocks');
+      if(previewBlocks)previewBlocks.style.display='none';
     },50);
   }
 }
@@ -1161,6 +1163,8 @@ function renderResults(){
 
     h+='<div style="position:relative">';
 
+    h+='<div id="lock-preview-blocks">';
+
     // Block 1: Character card
     h+='<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">';
     h+='<div style="font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:4px">\uD83C\uDFAD 专属角色卡 \u00B7 '+charName+'</div>';
@@ -1190,6 +1194,8 @@ function renderResults(){
       h+='<p style="font-size:12px;color:var(--text);line-height:1.8;margin:0">'+clipText(matchPreview, 55)+'</p>';
       h+='</div>';
     }
+
+    h+='</div>'; // end lock-preview-blocks
 
     // Gradient mask + unlock button
     h+='<div class="lock-overlay" id="lock-unified" style="position:absolute;bottom:0;left:0;width:100%;padding-top:60px;background:linear-gradient(transparent,rgba(255,255,255,.9) 40%,rgba(255,255,255,.98) 100%);display:flex;flex-direction:column;align-items:center">';
@@ -1326,6 +1332,8 @@ function checkUnlock(){
     setTimeout(function(){
       var lockEl=$('lock-unified');if(lockEl)lockEl.style.display='none';
       var badgeEl=$('badge-unified');if(badgeEl)badgeEl.style.display='inline-flex';
+      var previewBlocks=document.getElementById('lock-preview-blocks');
+      if(previewBlocks)previewBlocks.style.display='none';
     },100);
     return;
   }
