@@ -624,7 +624,6 @@ body{min-height:100vh;overflow-x:hidden}
     <button class="modal-close" onclick="closeModal('modal-unlock')">✕</button>
     <div style="font-size:40px;margin-bottom:8px">🔓</div>
     <h3>解锁完整解读</h3>
-    <p>输入手机号，解锁你的<br><b>专属角色卡 · 情感世界 · 压力状态 · 适配推荐</b></p>
     <div style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6;background:var(--bg2);padding:12px 16px;border-radius:8px">
       输入手机号，一键解锁你的：<br>
       <b>专属角色卡 · 情感世界 · 压力状态 · 适配推荐</b>
@@ -633,6 +632,19 @@ body{min-height:100vh;overflow-x:hidden}
     <input type="tel" id="input-phone" class="" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
     <div class="modal-tip">📩 仅用于报告存档，可在合拍度中登录匹配</div>
     <button class="btn btn-gold full-w" onclick="doUnlock()">🔓 解锁完整报告</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ DUP PHONE MODAL ════════════════════════════════════════════ -->
+<div id="modal-dup-phone" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-dup-phone')">✕</button>
+    <div style="font-size:40px;margin-bottom:12px">📱</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">该号码已有测试记录</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6">之前使用 <b id="dup-old-name" style="color:var(--rose-deep)">XXX</b> 的名字<br>做过 DISC 性格测试</div>
+    <button id="btn-view-old" style="display:block;width:100%;padding:12px;border:none;border-radius:var(--radius-sm);background:var(--rose-glow);color:var(--rose-deep);font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;font-family:var(--font-body)" onclick="viewOldReport()">📋 查看之前的报告</button>
+    <button id="btn-overwrite" style="display:block;width:100%;padding:12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:var(--font-body)" onclick="overwriteReport()">🔄 用新结果覆盖</button>
+    <div style="font-size:11px;color:var(--text3);margin-top:10px">覆盖后将更新个人报告，不影响已有合拍记录</div>
   </div>
 </div>
 
@@ -664,7 +676,6 @@ body{min-height:100vh;overflow-x:hidden}
 <div id="results-content"></div>
 <div class="action-bar">
   <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
-  <button class="btn btn-outline btn-sm" id="btn-save" onclick="saveResult()">📷 保存结果</button>
 </div>
 </section>
 
@@ -841,15 +852,43 @@ function $(id){return document.getElementById(id)}
 function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function toast(msg){let t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none'},2500)}
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+var dupPhoneData = null;
+var dupPhone = '';
+
+function viewOldReport(){
+  $('modal-dup-phone').classList.remove('active');
+  if(dupPhoneData){
+    resultKey = dupPhoneData.disc_type ? dupPhoneData.disc_type.replace('型','') : resultKey;
+    label = dupPhoneData.disc_type || label;
+    if(dupPhoneData.scores){ try{ sc = JSON.parse(dupPhoneData.scores); displaySc = JSON.parse(dupPhoneData.scores); }catch(e){} }
+    if(dupPhoneData.name && userInfo) userInfo.name = dupPhoneData.name;
+    combo = COMBOS[resultKey] || null;
+  }
+  sessionStorage.setItem('disc_unlocked','1');
+  if(dupPhone) sessionStorage.setItem('disc_unlock_phone', dupPhone);
+  applyUnlock();
+}
+
+function overwriteReport(){
+  $('modal-dup-phone').classList.remove('active');
+  sessionStorage.setItem('disc_unlocked','1');
+  if(dupPhone) sessionStorage.setItem('disc_unlock_phone', dupPhone);
+  sendReport();
+  applyUnlock();
+}
+
 function backToResults(){
   showScreen('screen-results');
+  // If already unlocked, show badge + hide lock overlay without redirecting
   if(sessionStorage.getItem('disc_unlocked')==='1'){
     setTimeout(function(){
-      var le=$('lock-unified');if(le)le.style.display='none';
-      var be=$('badge-unified');if(be)be.style.display='inline-flex';
-      var previewBlocks=document.getElementById('lock-preview-blocks');
-      if(previewBlocks)previewBlocks.style.display='none';
-    },50);
+      var lockEl=document.getElementById('lock-unified');
+      if(lockEl)lockEl.style.display='none';
+      var previewEl=document.getElementById('lock-preview-blocks');
+      if(previewEl)previewEl.style.display='none';
+      var badgeEl=document.getElementById('badge-unified');
+      if(badgeEl)badgeEl.style.display='inline-flex';
+    },100);
   }
 }
 
@@ -873,6 +912,10 @@ function submitName(){
 
 // ══════════════════════════════════════════════════════════════ TEST ══════════════════════════════════════════════════════════════
 function startTest(){
+  // Reset unlock state for new test
+  sessionStorage.removeItem('disc_unlocked');
+  sessionStorage.removeItem('disc_unlock_phone');
+  if(userInfo)userInfo.phone=null;
   ans=QBANK.map(()=>({most:null,least:null}));
   showScreen('screen-test');
   $('progress-wrap').style.display='block';
@@ -1328,13 +1371,7 @@ function checkUnlock(){
   if(sessionStorage.getItem('disc_unlocked')==='1'){
     let savedPhone=sessionStorage.getItem('disc_unlock_phone');
     if(savedPhone&&userInfo)userInfo.phone=savedPhone;
-    // Hide lock overlay if returning to results page
-    setTimeout(function(){
-      var lockEl=$('lock-unified');if(lockEl)lockEl.style.display='none';
-      var badgeEl=$('badge-unified');if(badgeEl)badgeEl.style.display='inline-flex';
-      var previewBlocks=document.getElementById('lock-preview-blocks');
-      if(previewBlocks)previewBlocks.style.display='none';
-    },100);
+    setTimeout(function(){ applyUnlock(); }, 50);
     return;
   }
 }
@@ -1342,61 +1379,65 @@ function checkUnlock(){
 function showUnlock(){$('modal-unlock').classList.add('active')}
 
 function doUnlock(){
-let phone=$('input-phone').value.trim();
-if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+  let phone=$('input-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
 
-sessionStorage.setItem('disc_unlocked','1');
-if(userInfo)userInfo.phone=phone;
-sessionStorage.setItem('disc_unlock_phone',phone);
-$('modal-unlock').classList.remove('active');
+  // Write session immediately
+  sessionStorage.setItem('disc_unlocked','1');
+  if(userInfo)userInfo.phone=phone;
+  sessionStorage.setItem('disc_unlock_phone',phone);
+  $('modal-unlock').classList.remove('active');
 
-// Check if phone already registered
-fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id&phone=eq.'+encodeURIComponent(phone)+'&limit=1',{
-  headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-}).then(function(r){return r.json()}).then(function(data){
-var isNew=!data||data.length===0;
-var existingShareId=(data&&data.length>0)?data[0].share_id:null;
+  // Check for existing record
+  fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id,name,disc_type,scores&phone=eq.'+encodeURIComponent(phone)+'&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(data){
+    var isNew=!data||data.length===0;
 
-  // Save/update report FIRST
-  sendReport();
+    if(!isNew){
+      dupPhoneData = data[0];
+      dupPhone = phone;
+      var el=document.getElementById('dup-old-name');
+      if(el)el.textContent = data[0].name || '未知';
+      $('modal-dup-phone').classList.add('active');
+      return;
+    }
 
-  // Generate share_id for new users (after sendReport creates the record)
-  if(!existingShareId){
-  var shareId=generateShareId();
-setTimeout(function(){
-    fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone),{
-    method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:shareId})
-}).catch(function(e){console.log('share_id patch error:',e)});
-},800);
-}
+    // New user — save in background
+    toast('✅ 已解锁！');
+    sendReport();
+    var shareId=generateShareId();
+    setTimeout(function(){
+      fetch(SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone),{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:shareId})
+      }).catch(function(e){console.log(e)});
+    },800);
 
-if(!isNew){toast('✅ 欢迎回来！报告已更新');}
-else{toast('✅ 已解锁！');}
-
-// Check if came from share link → auto-match
-var urlParams=new URLSearchParams(location.search);
-var shareParam=urlParams.get('share');
-if(shareParam){
-    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
-    }).then(function(r){return r.json()}).then(function(invData){
-      if(invData&&invData.length>0){
+    // Auto-match from share link
+    var urlParams=new URLSearchParams(location.search);
+    var shareParam=urlParams.get('share');
+    if(shareParam){
+      fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+        headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+      }).then(function(r){return r.json()}).then(function(invData){
+        if(invData&&invData.length>0){
           var inviter=invData[0];
-          if(inviter.phone===phone){return;}
-          var score=calcMatchScore(resultKey,inviter.result_key||inviter.disc_type||'');
+          if(inviter.phone===phone)return;
+          var score=calcMatchScore(resultKey,inviter.disc_type?inviter.disc_type.replace('型',''):'');
           var desc=getMatchDesc(score);
-          var match1={user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.result_key||inviter.disc_type,match_type:resultKey,score:score,description:desc};
-          var match2={user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.result_key||inviter.disc_type,score:score,description:desc};
-          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match1)}).catch(function(){});
-          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(match2)}).catch(function(){});
+          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify({user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:resultKey,score:score,description:desc})}).catch(function(){});
+          fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify({user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc})}).catch(function(){});
         }
       }).catch(function(){});
     }
-  }).catch(function(){});
 
-  applyUnlock();
+    applyUnlock();
+  }).catch(function(e){
+    console.log('Unlock fetch error:', e);
+    toast('⚠️ 网络异常，报告已本地解锁');
+    applyUnlock();
+  });
 }
-
 function generateShareId(){
   var chars='abcdefghijklmnopqrstuvwxyz0123456789';
   var id='';
@@ -1611,8 +1652,7 @@ function sendReport(){
     name:userInfo.name,
     phone:userInfo.phone,
     disc_type:label||'',
-    scores:displaySc||{},
-    emotion_type:resultKey||''
+    scores:displaySc||{}
   };
   try{
     // Check if phone already exists → update; otherwise insert
@@ -2114,11 +2154,11 @@ function showSaveOverlay(url){
   if(shareParam){
     shareInviter=shareParam;
     // Show invite banner
-    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=name,disc_type,result_key',{
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=name,disc_type',{
       headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
     }).then(function(r){return r.json()}).then(function(data){
       if(data&&data.length>0){
-        shareInviterType=data[0].result_key||data[0].disc_type||'';
+        shareInviterType=data[0].disc_type||'';
         var banner=$('hepai-banner');
         if(banner){
           banner.style.display='block';
@@ -2149,7 +2189,7 @@ function showSaveOverlay(url){
               if(!myData||myData.length===0)return;
               var me=myData[0];
               var myType=me.disc_type?me.disc_type.replace('型',''):'';
-              var invType=inviter.disc_type?inviter.disc_type.replace('型',''):(inviter.result_key||'');
+              var invType=inviter.disc_type?inviter.disc_type.replace('型',''):'';
               var score=calcMatchScore(myType,invType);
               var desc=getMatchDesc(score);
               var m1={user_phone:savedPhone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:myType,match_type:invType,score:score,description:desc};
