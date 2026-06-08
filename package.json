@@ -1,0 +1,28 @@
+{
+  "name": "disc-project",
+  "version": "1.0.0",
+  "description": "DISC personality test - build pipeline",
+  "private": true,
+  "scripts": {
+    "build": "node build/obfuscate.js"
+  },
+  "dependencies": {
+    "javascript-obfuscator": "^4.1.1"
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sannnnnn888/-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sannnnnn888/-/issues"
+  },
+  "homepage": "https://github.com/sannnnnn888/-#readme"
+}

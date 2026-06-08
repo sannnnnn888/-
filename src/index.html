@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="description" content="发现你的性格密码——DISC行为分析·情感风格洞察·合拍度匹配">
+<title>DISC 性格探索 — 破军虎·焰羽凤·抱山熊·玄机鹰</title>
+<style>
+/* ═══════════════ RESET & VARIABLES ═══════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#faf6f2;--bg2:#f5efec;--surface:#ffffff;--surface2:#faf5f2;--surface3:#f0eae6;
+  --border:#e8ddd8;--border-light:#f0e8e4;
+  --rose:#d4a0a8;--rose-deep:#c08088;--rose-light:#ecc8cc;--rose-glow:rgba(212,160,168,.15);--rose-glow-strong:rgba(212,160,168,.28);
+  --gold:#c9a96e;--gold-light:#e0d090;--gold-dim:#b8964a;--gold-glow:rgba(201,169,110,.12);
+  --text:#3a3030;--text2:#7a6a68;--text3:#b0a09c;--text-on-rose:#fff;
+  --d:#c0392b;--i:#d68910;--s:#1e8449;--c:#2471a3;
+  --d-soft:#e8a098;--i-soft:#e8c890;--s-soft:#90c8a0;--c-soft:#90b8d8;
+  --d-dim:#6a1a10;--i-dim:#7a4a08;--s-dim:#0e4a24;--c-dim:#104060;
+  --radius:16px;--radius-sm:8px;--border-gold:#c9a96e;
+  --shadow:0 2px 20px rgba(60,40,40,.06);--shadow-hover:0 8px 40px rgba(60,40,40,.10);
+  --transition:.35s cubic-bezier(.4,0,.2,1);
+  --font-display:'Playfair Display','Georgia',serif;
+  --font-heading-cn:'Noto Serif SC','STSong','SimSun',serif;
+  --font-body:'DM Sans',-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;
+}
+html{background:var(--bg);color:var(--text);font-family:var(--font-body);font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{min-height:100vh;overflow-x:hidden}
+.container{max-width:480px;margin:0 auto;padding:0 16px 60px;position:relative;z-index:2;overflow-x:hidden}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:14px 36px;border:none;border-radius:40px;font-size:16px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body);letter-spacing:.02em;position:relative;overflow:hidden}
+.btn-gold{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:var(--text-on-rose);box-shadow:0 4px 24px var(--rose-glow)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 36px var(--rose-glow-strong)}
+.btn-gold:active{transform:translateY(0)}
+.btn-outline{background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--rose-deep);border:1.5px solid var(--rose);font-weight:500}
+.btn-outline:hover{background:rgba(255,255,255,.9)}
+.btn-sm{padding:10px 22px;font-size:13px}
+.full-w{width:100%}
+
+/* ═══════════════ WELCOME ═══════════════ */
+.screen{display:none;animation:fadeIn .6s ease;overflow-x:hidden;contain:layout style paint}
+.screen.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.welcome{padding:40px 0 20px;text-align:center}
+.welcome-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--rose-deep);background:var(--rose-glow);padding:5px 18px;border-radius:30px;letter-spacing:.08em;margin-bottom:28px;font-weight:500}
+.welcome h1{font-family:var(--font-heading-cn);font-size:34px;font-weight:700;color:var(--text);letter-spacing:.06em;margin-bottom:4px;line-height:1.3}
+.welcome h1 em{font-style:normal;background:linear-gradient(135deg,var(--rose-deep),var(--gold),var(--rose-deep));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.welcome .subtitle{font-size:14px;color:var(--text2);margin-bottom:32px;line-height:1.9;letter-spacing:.02em}
+.welcome-deco{width:60px;height:1.5px;background:linear-gradient(90deg,transparent,var(--gold),var(--rose),transparent);margin:0 auto 24px}
+
+
+/* ── DISC Intro Accordion ── */
+.disc-intro{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:28px;overflow:hidden;text-align:left}
+.intro-header{padding:14px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;border-bottom:1px solid var(--border);user-select:none}
+.intro-header:hover{background:var(--surface2)}
+.intro-header .arrow{font-size:12px;color:var(--text3);transition:transform .3s;margin-left:auto}
+.intro-header .arrow.open{transform:rotate(180deg)}
+.intro-body{padding:0 20px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.intro-body.open{max-height:800px;padding:20px}
+.intro-pillars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+@media(max-width:400px){.intro-pillars{grid-template-columns:1fr}}
+.pillar{padding:12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg2)}
+.pillar-d{border-left:3px solid var(--d)}.pillar-i{border-left:3px solid var(--i)}
+.pillar-s{border-left:3px solid var(--s)}.pillar-c{border-left:3px solid var(--c)}
+.pillar-icon{font-size:18px;line-height:1}.pillar-lbl{font-size:13px;font-weight:700;color:var(--text);display:block;margin:4px 0 2px}
+.pillar-desc{font-size:12px;color:var(--text2);line-height:1.6}
+.usage-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+@media(max-width:400px){.usage-grid{grid-template-columns:1fr}}
+.usage-item{display:flex;gap:10px;align-items:flex-start}
+.usage-num{font-size:20px;font-weight:700;color:var(--gold-dim);font-family:var(--font-heading);flex-shrink:0;line-height:1.1}
+.usage-item strong{font-size:13px;color:var(--text);display:block}
+.usage-item p{font-size:12px;color:var(--text2);line-height:1.6}
+.intro-body p{font-size:13px;color:var(--text2);line-height:1.9;margin-bottom:8px}
+
+/* ═══════════════ MODAL ═══════════════ */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);z-index:1000;align-items:center;justify-content:center;animation:fadeIn .25s ease}
+.modal-overlay.active{display:flex}
+.modal-box{background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);border-radius:var(--radius);border:1px solid var(--border);box-shadow:0 16px 60px rgba(0,0,0,.10);padding:36px 28px 28px;max-width:380px;width:90%;text-align:center;animation:scaleIn .3s ease;position:relative}
+.modal-box h3{font-family:var(--font-heading-cn);font-size:20px;color:var(--text);margin-bottom:4px}
+.modal-box>p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.7}
+.modal-box input,.modal-box .input-field{width:100%;padding:13px 18px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:var(--font-body);margin-bottom:12px;outline:none;transition:var(--transition);background:rgba(255,255,255,.7);backdrop-filter:blur(4px);color:var(--text)}
+.modal-box input:focus,.modal-box .input-field:focus{border-color:var(--rose);box-shadow:0 0 0 4px var(--rose-glow)}
+.modal-box input::placeholder{color:var(--text3)}
+.modal-tip{font-size:11px;color:var(--text3);margin-top:-8px;margin-bottom:16px}
+.modal-close{position:absolute;top:14px;right:18px;font-size:20px;color:var(--text3);cursor:pointer;background:none;border:none;transition:var(--transition)}
+.modal-close:hover{color:var(--text)}
+
+/* ═══════════════ TEST PAGE ═══════════════ */
+.test-instruct{background:var(--rose-glow);border:1.5px solid var(--rose);border-radius:var(--radius);padding:10px 14px;margin-bottom:14px;text-align:center;font-size:13px;color:var(--rose-deep);line-height:1.7;font-weight:600;letter-spacing:.02em}
+.test-instruct strong{color:var(--rose-deep)}
+.progress-wrap{padding:16px 0 10px}
+.progress-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--rose));border-radius:2px;transition:width .4s ease}
+.progress-text{text-align:center;font-size:12px;color:var(--text3);margin-top:6px;letter-spacing:.04em}
+.q-section{display:none;animation:fadeIn .35s ease}
+.q-section.active{display:block}
+.q-block{background:rgba(255,255,255,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;transition:border-color .12s ease;box-shadow:var(--shadow);overflow:hidden}
+.q-block.done{border-color:var(--rose-light)}
+.q-num{font-size:10px;color:var(--rose-deep);font-weight:600;letter-spacing:.08em;margin-bottom:4px}
+.q-text{font-size:14px;font-weight:500;color:var(--text);line-height:1.6;margin-bottom:10px}
+/* ── Dual-Column Options (左右迫选) ── */
+.q-dual-options{display:flex;flex-direction:column;gap:10px}
+.q-dual-row{display:flex;align-items:stretch;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .12s ease,background .12s ease;background:rgba(255,255,255,.55);user-select:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.q-dual-row:hover{border-color:var(--rose-light)}
+.q-dual-row.most-selected{border-color:var(--rose);background:linear-gradient(90deg,var(--rose-glow),rgba(255,255,255,.55) 60%)}
+.q-dual-row.least-selected{border-color:var(--text3);background:linear-gradient(270deg,var(--surface3),rgba(255,255,255,.55) 60%)}
+.q-dual-row.most-selected.least-selected{border-color:var(--rose);background:linear-gradient(90deg,var(--rose-glow) 5%,rgba(255,255,255,.55) 40%,var(--surface3) 95%)}
+.q-dual-side{flex:0 0 52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;cursor:pointer;transition:opacity .12s ease;min-height:48px;touch-action:manipulation}
+.q-dual-most{border-right:1px solid var(--border-light)}
+.q-dual-least{border-left:1px solid var(--border-light)}
+.dual-dot{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);transition:border-color .12s ease,background .12s ease;position:relative;flex-shrink:0}
+.dual-dot::after{content:'';position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:transparent;transition:transform .12s ease;transform:scale(0)}
+.q-dual-most .dual-dot.selected{border-color:var(--rose);background:var(--rose-glow)}
+.q-dual-most .dual-dot.selected::after{background:var(--rose);transform:scale(1)}
+.q-dual-least .dual-dot.selected{border-color:var(--text2);background:var(--surface2)}
+.q-dual-least .dual-dot.selected::after{background:var(--text2);transform:scale(1)}
+.dual-side-label{font-size:9px;color:var(--text3);font-weight:500;letter-spacing:.04em;transition:color .12s ease,font-weight .12s ease;white-space:nowrap}
+.q-dual-most .dual-side-label.selected{color:var(--rose-deep);font-weight:600}
+.q-dual-least .dual-side-label.selected{color:var(--text2);font-weight:600}
+.q-dual-text{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;font-weight:500;color:var(--text);padding:10px 4px;line-height:1.5;letter-spacing:.02em;-webkit-text-size-adjust:100%;text-size-adjust:100%;max-height:999999px;min-width:0;overflow:hidden}
+
+/* ═══════════════ NAV ═══════════════ */
+.nav-bar{display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:8px}
+.nav-bar .pi{font-size:11px;color:var(--text3);flex-shrink:0;min-width:50px;text-align:center}
+.nav-btn{padding:8px 18px;border:1.5px solid var(--border);border-radius:30px;background:rgba(255,255,255,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.nav-btn:hover{border-color:var(--rose);color:var(--rose-deep)}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.nav-btn.primary{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;border-color:transparent}
+.nav-btn.primary:hover{box-shadow:0 4px 20px var(--rose-glow-strong)}
+
+/* ── Results ── */
+.result-box{display:flow-root;background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow)}
+.result-box .rt-radar{float:left;width:110px;margin:0 16px 10px 0;border-radius:10px;overflow:hidden}
+
+/* ── Result Top Box: radar float + wrap report ── */
+.result-top-box{display:block;overflow:hidden;background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px;position:relative;box-shadow:var(--shadow)}
+.result-top-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,.7);pointer-events:none;z-index:0}
+.result-top-box .rt-radar{float:left;width:120px;margin:0 14px 10px 0;position:relative;z-index:1;overflow:hidden;background:rgba(255,255,255,.6);border-radius:6px;box-shadow:0 0 0 1px var(--border),0 2px 12px rgba(0,0,0,.06)}
+.result-top-box .rt-radar canvas{width:100%;height:auto;border-radius:4px;display:block}
+.result-top-box .rt-report{font-size:13px;position:relative;z-index:1}
+.result-top-box .rt-report .dr-intro{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:12px}
+.result-top-box .rt-report .dr-section{margin-bottom:10px}
+.result-top-box .rt-report .dr-section:last-child{margin-bottom:0}
+.result-top-box .rt-report .dr-section-title{font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:2px;letter-spacing:.02em}
+.result-top-box .rt-report .dr-section-title .dim-badge{display:inline-block;font-size:10px;padding:1px 8px;border-radius:10px;margin-left:6px;vertical-align:middle;font-weight:400}
+.result-top-box .rt-report p{font-size:12px;color:var(--text);line-height:1.8;margin-bottom:0}
+
+/* ── Analysis Sections ── */
+.analysis-section{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.analysis-section h4,.rsc-section h4{font-size:13px;font-weight:700;color:var(--rose-deep);margin-bottom:8px;letter-spacing:.02em;display:flex;align-items:center;gap:6px}
+.analysis-section p,.rsc-section p{font-size:13px;color:var(--text);line-height:2}
+.analysis-lock{position:relative;overflow:hidden}
+.lock-overlay{display:flex;flex-direction:column;align-items:center;padding:16px 0 4px}
+.lock-overlay .lock-icon{font-size:24px;margin-bottom:4px}
+.lock-overlay .lock-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.lock-overlay .lock-sub{font-size:12px;color:var(--text3);margin-bottom:10px;text-align:center;line-height:1.6}
+.lock-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:var(--text-on-rose);border:none;border-radius:30px;font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.lock-btn:hover{box-shadow:0 4px 16px var(--rose-glow-strong)}
+.unlock-badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--s);background:rgba(30,132,73,.12);padding:2px 10px;border-radius:12px}
+
+/* ── Match & Hepai ── */
+.match-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.match-item:last-child{border-bottom:none}
+.match-type{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.match-type .m-score{font-size:12px;color:var(--rose);font-weight:600}
+.match-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.match-tip{font-size:11px;color:var(--gold-dim);margin-top:8px;font-style:italic}
+.hepai-box{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.hepai-box h3{font-size:14px;color:var(--rose-deep);margin-bottom:8px;font-weight:700}
+.hepai-intro{font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+.hepai-url{font-size:11px;color:var(--text3);word-break:break-all;background:rgba(255,255,255,.5);padding:10px;border-radius:6px;border:1px solid var(--border);margin-bottom:10px;line-height:1.5}
+.hepai-copy{padding:8px 18px;border:none;border-radius:20px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:var(--text-on-rose);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body)}
+.hepai-copy:hover{box-shadow:0 4px 16px var(--rose-glow-strong)}
+.hepai-compare{display:block;width:100%;padding:10px;border:1.5px solid var(--rose);border-radius:30px;background:transparent;color:var(--rose-deep);font-size:13px;font-weight:500;cursor:pointer;transition:var(--transition);font-family:var(--font-body);margin-top:10px}
+.hepai-compare:hover{background:var(--rose-glow)}
+.hepai-result{margin-top:12px;padding:16px;background:rgba(255,255,255,.5);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.hepai-result h4{font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px}
+.hepai-score{font-size:26px;font-weight:700;color:var(--rose);margin-bottom:4px}
+.hepai-score span{font-size:14px;color:var(--text3);font-weight:400}
+.hepai-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.hepai-tags{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.hepai-tag{padding:3px 10px;background:var(--rose-glow);color:var(--rose-deep);border-radius:16px;font-size:11px;font-weight:600}
+
+/* ── Hepai Banner (from share link) ── */
+.hepai-banner{background:linear-gradient(135deg,var(--rose-glow),rgba(255,255,255,.5));border:1px solid var(--rose-light);border-radius:var(--radius);padding:16px;margin-bottom:16px;text-align:center}
+.hepai-banner .hb-icon{font-size:24px;display:block;margin-bottom:4px}
+.hepai-banner .hb-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:2px}
+.hepai-banner .hb-type{font-size:12px;color:var(--rose-deep);margin-bottom:4px}
+.hepai-banner .hb-tip{font-size:11px;color:var(--text3)}
+.hepai-banner .hb-login-tip{font-size:10px;color:#888;margin-top:4px}
+
+/* ── Role Card (暗金武侠风格，匹配角色卡设计_全预览) ── */
+.role-card{
+  border-radius:10px;overflow:hidden;position:relative;
+  background:#12100e;max-width:320px;width:100%;margin:0 auto 16px;flex-shrink:0;
+  background-size:100% auto;background-position:top center;background-repeat:no-repeat;
+  border:2px solid rgba(201,169,110,.35);
+  transition:transform .4s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.85),
+    0 0 0 4px rgba(201,169,110,.08),
+    0 0 20px rgba(0,0,0,.6),
+    0 8px 32px rgba(0,0,0,.5);
+}
+.role-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(201,169,110,.7);
+  box-shadow:
+    0 0 0 3px rgba(0,0,0,.85),
+    0 0 0 4px rgba(201,169,110,.15),
+    0 0 28px rgba(0,0,0,.7),
+    0 12px 40px rgba(0,0,0,.6);
+}
+.role-card::before{
+  content:'';position:absolute;top:-1px;left:8px;right:8px;
+  height:3px;z-index:5;border-radius:2px;
+  background:linear-gradient(90deg,transparent,rgba(212,168,83,.4),transparent);
+}
+.role-card::after{
+  content:'';position:absolute;top:5px;right:5px;
+  width:6px;height:6px;border-radius:50%;z-index:5;pointer-events:none;
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+.role-card .card-inner{position:relative;z-index:1;overflow:hidden}
+.role-card .card-inner::before{
+  content:'';position:absolute;top:5px;left:5px;
+  width:6px;height:6px;border-radius:50%;z-index:5;pointer-events:none;
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+
+/* Image area - 3:4 poster */
+.card-image-area{
+  aspect-ratio:3/4;
+  background:transparent;
+  position:relative;
+  overflow:hidden;
+}
+.card-image-area::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:50%;
+  background:linear-gradient(0deg,rgba(10,10,12,1) 0%,transparent 100%);
+  pointer-events:none;z-index:1;
+}
+
+/* Top-left badge */
+.card-badge{
+  position:absolute;top:14px;left:14px;z-index:3;
+  text-shadow:
+    0 0 8px rgba(0,0,0,.95),
+    0 0 3px rgba(0,0,0,1),
+    0 2px 6px rgba(0,0,0,.9);
+}
+.card-badge .card-name{
+  font-size:22px;font-weight:800;letter-spacing:4px;
+  display:block;line-height:1.2;
+}
+.card-badge .card-sub{
+  display:block;font-size:10px;letter-spacing:2px;opacity:.9;margin-top:2px;
+}
+
+/* 金句 - on image, NO bubble */
+.card-quote{
+  position:absolute;left:16px;right:16px;z-index:2;
+  bottom:28px;
+  font-size:15px;font-weight:800;letter-spacing:2px;
+  text-align:center;
+  color:#d4a853;
+  text-shadow:
+    0 0 10px rgba(0,0,0,.9),
+    0 0 4px rgba(0,0,0,1),
+    0 2px 6px rgba(0,0,0,.8);
+}
+.card-quote .qm{opacity:.6}
+
+/* Text area - bottom, dark background */
+.card-text-area{
+  background:linear-gradient(to bottom, #0a0a0c 0%, rgba(10,10,12,0.7) 5%, #0a0a0c 20%, #0a0a0c 100%);
+  padding:3px 12px 5px;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+/* 总结 bubble */
+.card-summary-bubble{
+  font-size:11px;line-height:1.5;letter-spacing:.5px;
+  padding:6px 10px;
+  background:rgba(0,0,0,.55);
+  border-radius:6px;
+  text-shadow:0 1px 3px rgba(0,0,0,.6);
+}
+
+/* Stats row */
+.card-stats-row{
+  display:flex;gap:10px;justify-content:center;
+}
+.card-stats-row .s-item{
+  font-size:10px;font-weight:700;letter-spacing:1px;
+}
+.card-stats-row .s-lbl{
+  font-size:7px;font-weight:400;opacity:.4;margin-left:1px;
+}
+
+/* Footer */
+.card-footer{
+  display:flex;align-items:center;gap:6px;
+  font-size:8px;letter-spacing:1px;opacity:.4;
+}
+.card-footer .qr-icon{width:36px;height:36px;border-radius:4px;flex-shrink:0}
+.card-footer .qr-icon img{width:100%;height:100%;display:block;border-radius:4px}
+
+/* ── Family Color Variants ── */
+
+/* Tiger - 破军虎 赤金 */
+.role-card.ftiger::before{
+  background:linear-gradient(90deg,transparent,rgba(232,116,90,.4),transparent);
+}
+.role-card.ftiger::after,.role-card.ftiger .card-inner::before{
+  background:rgba(232,116,90,.25);
+  box-shadow:0 0 6px rgba(232,116,90,.12),0 0 0 1px rgba(232,116,90,.08);
+}
+.role-card.ftiger .card-badge .card-name{color:#e8a090}
+.role-card.ftiger .card-badge .card-sub{color:#e8a090}
+.role-card.ftiger .card-stats-row .s-item{color:#e8745a}
+.role-card.ftiger .card-summary-bubble{color:#c8a090}
+
+/* Phoenix - 焰羽凤 暖金 */
+.role-card.fphoenix::before{
+  background:linear-gradient(90deg,transparent,rgba(212,168,83,.45),transparent);
+}
+.role-card.fphoenix::after,.role-card.fphoenix .card-inner::before{
+  background:rgba(212,168,83,.25);
+  box-shadow:0 0 6px rgba(212,168,83,.12),0 0 0 1px rgba(212,168,83,.08);
+}
+.role-card.fphoenix .card-badge .card-name{color:#e8d090}
+.role-card.fphoenix .card-badge .card-sub{color:#e8d090}
+.role-card.fphoenix .card-stats-row .s-item{color:#d4a853}
+.role-card.fphoenix .card-summary-bubble{color:#c8b890}
+
+/* Bear - 抱山熊 墨青 */
+.role-card.fbear::before{
+  background:linear-gradient(90deg,transparent,rgba(90,160,120,.4),transparent);
+}
+.role-card.fbear::after,.role-card.fbear .card-inner::before{
+  background:rgba(90,160,120,.25);
+  box-shadow:0 0 6px rgba(90,160,120,.12),0 0 0 1px rgba(90,160,120,.08);
+}
+.role-card.fbear .card-badge .card-name{color:#90c0a0}
+.role-card.fbear .card-badge .card-sub{color:#90c0a0}
+.role-card.fbear .card-stats-row .s-item{color:#5aa078}
+.role-card.fbear .card-summary-bubble{color:#90b8a0}
+
+/* Eagle - 玄机鹰 冷金 */
+.role-card.feagle::before{
+  background:linear-gradient(90deg,transparent,rgba(120,140,180,.4),transparent);
+}
+.role-card.feagle::after,.role-card.feagle .card-inner::before{
+  background:rgba(120,140,180,.25);
+  box-shadow:0 0 6px rgba(120,140,180,.12),0 0 0 1px rgba(120,140,180,.08);
+}
+.role-card.feagle .card-badge .card-name{color:#a0b0d0}
+.role-card.feagle .card-badge .card-sub{color:#a0b0d0}
+.role-card.feagle .card-stats-row .s-item{color:#788cb4}
+.role-card.feagle .card-summary-bubble{color:#a0a8c0}
+
+.rsc-section{background:rgba(255,255,255,.75);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:12px;box-shadow:var(--shadow)}
+.report-sc{animation:fadeIn .4s ease}
+
+/* ── Action Buttons ── */
+.action-bar{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+
+/* ── Toast ── */
+.toast{display:none;position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,.9);backdrop-filter:blur(12px);color:var(--text);border:1px solid var(--border);padding:12px 28px;border-radius:30px;font-size:14px;z-index:999;animation:fadeIn .25s ease;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+
+/* ── Family Card with Image ── */
+.family-img-row{display:flex;justify-content:center;gap:10px;margin:0 0 28px;flex-wrap:wrap}
+.family-img-card{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);transition:var(--transition);cursor:default;width:76px}
+.family-img-card:hover{border-color:var(--border-gold)}
+.family-img-card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;display:block;background:var(--bg2)}
+.family-img-card .fi-name{font-size:11px;color:var(--text2);font-weight:600;letter-spacing:.02em}
+
+
+/* ── Match items (in analysis-section style) ── */
+.analysis-match{margin-top:4px}
+.analysis-match .match-item{padding:8px 0;border-bottom:1px solid var(--border)}
+.analysis-match .match-item:last-child{border-bottom:none}
+.analysis-match .match-type{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;display:flex;align-items:center;gap:8px}
+.analysis-match .match-type .m-score{font-size:12px;color:var(--gold);font-weight:600}
+.analysis-match .match-desc{font-size:12px;color:var(--text2);line-height:1.7}
+.analysis-match .match-tip{font-size:11px;color:var(--gold-dim);margin-top:6px;font-style:italic}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+
+/* ═══════════ ROSE GOLD DECORATIVE ═══════════ */
+.deco-layer{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.bg-art{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.bg-art svg{position:absolute;width:100%;height:100%;left:0;top:0}
+
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:hidden}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:0;animation:floatParticle 8s infinite ease-in-out}
+@keyframes floatParticle{
+  0%{opacity:0;transform:translateY(100vh) translateX(0) scale(0)}
+  10%{opacity:.5}30%{opacity:.8}50%{opacity:.3}70%{opacity:.6}90%{opacity:.2}
+  100%{opacity:0;transform:translateY(-10vh) translateX(40px) scale(1)}
+}
+.particle:nth-child(1){left:12%;animation-delay:0s;width:2px;height:2px}
+.particle:nth-child(2){left:25%;animation-delay:1.2s;width:3px;height:3px}
+.particle:nth-child(3){left:38%;animation-delay:2.5s;width:2px;height:2px;background:var(--gold-light)}
+.particle:nth-child(4){left:50%;animation-delay:.6s;width:4px;height:4px;opacity:.4}
+.particle:nth-child(5){left:62%;animation-delay:3.8s;width:2px;height:2px}
+.particle:nth-child(6){left:75%;animation-delay:1.8s;width:3px;height:3px;background:var(--gold-light)}
+.particle:nth-child(7){left:88%;animation-delay:4.2s;width:2px;height:2px}
+.particle:nth-child(8){left:5%;animation-delay:5.5s;width:3px;height:3px}
+.particle:nth-child(9){left:45%;animation-delay:3s;width:2px;height:2px;background:var(--gold-light)}
+.particle:nth-child(10){left:70%;animation-delay:6s;width:2px;height:2px}
+.particle:nth-child(11){left:18%;animation-delay:4s;width:3px;height:3px}
+.particle:nth-child(12){left:92%;animation-delay:2s;width:2px;height:2px;background:var(--gold-light)}
+.particle:nth-child(13){left:33%;animation-delay:7s;width:4px;height:4px;opacity:.3}
+.particle:nth-child(14){left:55%;animation-delay:.3s;width:2px;height:2px}
+.particle:nth-child(15){left:80%;animation-delay:5s;width:3px;height:3px;background:var(--gold-light)}
+.particle:nth-child(16){left:8%;animation-delay:6.5s;width:2px;height:2px}
+.particle:nth-child(17){left:30%;animation-delay:1s;width:2px;height:2px}
+.particle:nth-child(18){left:68%;animation-delay:4.5s;width:2px;height:2px}
+
+.glow-orb{position:absolute;border-radius:50%;pointer-events:none;z-index:0;opacity:.4;animation:orbPulse 6s ease-in-out infinite}
+.glow-orb:nth-child(1){width:300px;height:300px;top:-80px;right:-60px;background:radial-gradient(circle,rgba(212,160,168,.20) 0%,transparent 70%);animation-delay:0s}
+.glow-orb:nth-child(2){width:250px;height:250px;bottom:10%;left:-80px;background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);animation-delay:2s}
+.glow-orb:nth-child(3){width:200px;height:200px;top:45%;right:20%;background:radial-gradient(circle,rgba(212,160,168,.12) 0%,transparent 70%);animation-delay:4s}
+@keyframes orbPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.5;transform:scale(1.08)}}
+
+.gold-shimmer{position:absolute;pointer-events:none;z-index:1;width:200%;height:1px;background:linear-gradient(90deg,transparent 0%,rgba(201,169,110,.15) 30%,rgba(201,169,110,.3) 50%,rgba(201,169,110,.15) 70%,transparent 100%);animation:shimmerSlide 8s linear infinite;transform:rotate(-25deg);top:30%;left:-50%;opacity:.5}
+@keyframes shimmerSlide{0%{transform:rotate(-25deg) translateX(-30%)}100%{transform:rotate(-25deg) translateX(30%)}}
+
+/* ── Emotion Style Tag ── */
+.emotion-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 18px;border-radius:30px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--rose-glow),var(--gold-glow));border:1px solid var(--rose-light);color:var(--rose-deep);margin-bottom:4px}
+.emotion-label{font-size:10px;color:var(--text3);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+</style>
+</head>
+<body>
+<div class="deco-layer">
+
+<!-- ════════ FLOWING GOLD THREADS SVG ════════ -->
+<div class="bg-art">
+<svg viewBox="0 0 480 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="rgba(201,169,110,0)"/><stop offset="30%" stop-color="rgba(201,169,110,.12)"/>
+<stop offset="50%" stop-color="rgba(201,169,110,.18)"/><stop offset="70%" stop-color="rgba(201,169,110,.08)"/>
+<stop offset="100%" stop-color="rgba(201,169,110,0)"/>
+</linearGradient>
+<linearGradient id="g2" x1="100%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="rgba(212,160,168,0)"/><stop offset="30%" stop-color="rgba(212,160,168,.10)"/>
+<stop offset="50%" stop-color="rgba(212,160,168,.16)"/><stop offset="70%" stop-color="rgba(212,160,168,.06)"/>
+<stop offset="100%" stop-color="rgba(212,160,168,0)"/>
+</linearGradient>
+<linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="rgba(201,169,110,0)"/><stop offset="40%" stop-color="rgba(201,169,110,.10)"/>
+<stop offset="60%" stop-color="rgba(201,169,110,.15)"/><stop offset="100%" stop-color="rgba(201,169,110,0)"/>
+</linearGradient>
+<filter id="glow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="glowSoft"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<path d="M-20,120 C100,80 180,200 260,180 C340,160 380,260 500,220" fill="none" stroke="url(#g1)" stroke-width="2.5" filter="url(#glow)" opacity="0.8">
+<animate attributeName="d" dur="10s" repeatCount="indefinite" values="M-20,120 C100,80 180,200 260,180 C340,160 380,260 500,220;M-20,130 C100,100 180,180 260,200 C340,220 380,240 500,230;M-20,120 C100,80 180,200 260,180 C340,160 380,260 500,220"/>
+</path>
+<path d="M-10,280 C120,320 200,240 300,300 C380,360 430,280 510,310" fill="none" stroke="url(#g2)" stroke-width="2" filter="url(#glow)" opacity="0.6">
+<animate attributeName="d" dur="12s" repeatCount="indefinite" values="M-10,280 C120,320 200,240 300,300 C380,360 430,280 510,310;M-10,290 C120,300 200,260 300,280 C380,340 430,300 510,320;M-10,280 C120,320 200,240 300,300 C380,360 430,280 510,310"/>
+</path>
+<path d="M-30,400 C80,370 150,450 250,420 C350,390 400,460 520,430" fill="none" stroke="url(#g3)" stroke-width="1.8" filter="url(#glow)" opacity="0.5">
+<animate attributeName="d" dur="8s" repeatCount="indefinite" values="M-30,400 C80,370 150,450 250,420 C350,390 400,460 520,430;M-30,410 C80,390 150,430 250,440 C350,450 400,440 520,420;M-30,400 C80,370 150,450 250,420 C350,390 400,460 520,430"/>
+</path>
+<path d="M-20,550 C140,520 200,620 340,580 C420,560 460,640 520,600" fill="none" stroke="url(#g2)" stroke-width="2.5" filter="url(#glow)" opacity="0.5">
+<animate attributeName="d" dur="14s" repeatCount="indefinite" values="M-20,550 C140,520 200,620 340,580 C420,560 460,640 520,600;M-20,560 C140,540 200,600 340,600 C420,600 460,620 520,590;M-20,550 C140,520 200,620 340,580 C420,560 460,640 520,600"/>
+</path>
+<path d="M30,700 C120,660 200,740 300,700 C370,670 420,730 500,690" fill="none" stroke="url(#g1)" stroke-width="1.2" filter="url(#glow)" opacity="0.4">
+<animate attributeName="d" dur="9s" repeatCount="indefinite" values="M30,700 C120,660 200,740 300,700 C370,670 420,730 500,690;M30,710 C120,680 200,720 300,720 C370,720 420,710 500,700;M30,700 C120,660 200,740 300,700 C370,670 420,730 500,690"/>
+</path>
+<path d="M280,-10 C320,40 260,80 340,120 C400,160 380,200 520,180" fill="none" stroke="url(#g1)" stroke-width="2" filter="url(#glow)" opacity="0.6">
+<animate attributeName="d" dur="11s" repeatCount="indefinite" values="M280,-10 C320,40 260,80 340,120 C400,160 380,200 520,180;M280,-20 C330,30 270,90 350,110 C410,140 390,190 520,170;M280,-10 C320,40 260,80 340,120 C400,160 380,200 520,180"/>
+</path>
+<path d="M-20,820 C100,780 180,880 300,840 C380,820 430,900 520,860" fill="none" stroke="url(#g3)" stroke-width="1.5" filter="url(#glow)" opacity="0.35">
+<animate attributeName="d" dur="13s" repeatCount="indefinite" values="M-20,820 C100,780 180,880 300,840 C380,820 430,900 520,860;M-20,830 C100,800 180,860 300,860 C380,860 430,880 520,850;M-20,820 C100,780 180,880 300,840 C380,820 430,900 520,860"/>
+</path>
+<circle cx="120" cy="100" r="1.5" fill="rgba(201,169,110,.4)" filter="url(#glow)"/>
+<circle cx="240" cy="190" r="1" fill="rgba(212,160,168,.4)" filter="url(#glow)"/>
+<circle cx="350" cy="170" r="2" fill="rgba(201,169,110,.3)" filter="url(#glow)"/>
+<circle cx="180" cy="310" r="1.5" fill="rgba(201,169,110,.35)" filter="url(#glow)"/>
+<circle cx="320" cy="290" r="1" fill="rgba(212,160,168,.3)" filter="url(#glow)"/>
+<circle cx="100" cy="430" r="2" fill="rgba(201,169,110,.25)" filter="url(#glow)"/>
+<circle cx="280" cy="410" r="1.5" fill="rgba(201,169,110,.3)" filter="url(#glow)"/>
+<circle cx="160" cy="560" r="1" fill="rgba(212,160,168,.4)" filter="url(#glow)"/>
+<circle cx="380" cy="570" r="2" fill="rgba(201,169,110,.25)" filter="url(#glow)"/>
+<circle cx="220" cy="680" r="1.5" fill="rgba(201,169,110,.3)" filter="url(#glow)"/>
+<circle cx="80" cy="750" r="1" fill="rgba(201,169,110,.35)" filter="url(#glow)"/>
+<circle cx="400" cy="810" r="1.5" fill="rgba(212,160,168,.3)" filter="url(#glow)"/>
+<ellipse cx="120" cy="150" rx="80" ry="40" fill="rgba(201,169,110,.04)" filter="url(#glowSoft)"/>
+<ellipse cx="350" cy="350" rx="70" ry="50" fill="rgba(212,160,168,.04)" filter="url(#glowSoft)"/>
+<ellipse cx="200" cy="550" rx="90" ry="40" fill="rgba(201,169,110,.03)" filter="url(#glowSoft)"/>
+<ellipse cx="380" cy="700" rx="60" ry="45" fill="rgba(212,160,168,.035)" filter="url(#glowSoft)"/>
+</svg>
+</div>
+
+<!-- ════════ GOLD DUST PARTICLES ════════ -->
+<div class="particles">
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+<div class="particle"></div><div class="particle"></div><div class="particle"></div>
+</div>
+
+<!-- ════════ GLOW ORBS ════════ -->
+<div class="glow-orb"></div>
+<div class="glow-orb"></div>
+<div class="glow-orb"></div>
+
+<!-- ════════ GOLD SHIMMER LINE ════════ -->
+<div class="gold-shimmer"></div>
+
+</div><!-- /deco-layer -->
+
+<div class="container">
+
+<!-- ════════════════════════════════════════════ WELCOME ════════════════════════════════════════════ -->
+<section id="screen-welcome" class="screen active">
+<div class="welcome">
+  <div class="welcome-badge">✦ 玫瑰金 · 流金丝线</div>
+  <h1>发现你的<em>性格密码</em></h1>
+  <div class="welcome-deco"></div>
+  <p class="subtitle">
+    凭第一直觉，选出最像你的一面<br>
+    发现你的性格底色与关系密码
+  </p>
+  <div style="text-align:right;margin-bottom:8px"><span style="font-size:14px;font-weight:600;color:var(--gold-dim);cursor:pointer" onclick="showLoginModal()">已完成报告？→ 登录</span></div>
+
+  <div class="family-img-row">
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/cb97e09e052d366cdaafb65b6859a78e23283a98afa15ee303d1753225a19a40.png" alt="破军虎" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--d)">D · 破军虎</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">支配本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/54d9f978a8b709653cae1706e9626082b02f4b13706c0a5fe167dc8d507efea4.png" alt="焰羽凤" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--i)">I · 焰羽凤</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">影响本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1c9e09d0fe76fcce8cbe0420c4388cbb35436ae6c82b8ff6b6c7a8ecfd35c9a7.png" alt="抱山熊" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--s)">S · 抱山熊</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">稳健本源</span>
+    </div>
+    <div class="family-img-card">
+      <img src="https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/84989227246db753e99cf310965c180ddaf0bd9743236d5feea0b612fff0e014.png" alt="玄机鹰" crossorigin="anonymous" loading="lazy">
+      <span class="fi-name" style="color:var(--c)">C · 玄机鹰</span>
+      <span style="font-size:10px;color:var(--text3);letter-spacing:.02em">谨慎本源</span>
+    </div>
+  </div>
+
+  <div class="disc-intro">
+    <div class="intro-header" onclick="toggleIntro()">
+      <span style="font-size:14px">📖 DISC 是什么？</span>
+      <span class="arrow" id="intro-arrow">▾</span>
+    </div>
+    <div class="intro-body" id="intro-body">
+      <p><strong>DISC 理论</strong>由美国心理学家 <strong>威廉·马斯顿</strong>（William Moulton Marston）于 1928 年在《正常人的情绪》一书中首次提出。与传统的"病理学"人格研究不同，马斯顿关注的是<strong>正常人的行为模式</strong>——他认为，人的行为可以归纳为<strong>四个基本维度</strong>，每个人在这四个维度上的不同组合，构成了独一无二的"行为密码"。</p>
+      <p>近一个世纪以来，DISC 已被全球超过 <strong>5000 万</strong>人次使用，是 <strong>世界 500 强企业</strong>应用最广的性格分析工具之一。它被广泛应用于<strong>人才选拔、团队建设、领导力发展、职业规划和婚恋关系优化</strong>等领域，拥有超过 200 篇同行评审研究支持其效度。</p>
+      <p><strong>DISC 不评判好坏</strong>——它只是帮助你理解：<strong>为什么有些人一见如故，有些人却总是合不来？为什么同样的压力，有人越战越勇，有人却想逃离？为什么同一个团队，有人关注目标，有人关注关系，有人关注流程，有人关注细节？</strong></p>
+      <div class="intro-pillars">
+        <div class="pillar pillar-d"><span class="pillar-icon">🔴</span><span class="pillar-lbl">D 支配型</span><span class="pillar-desc">果断·直接·目标导向<br>关注"做什么"和"什么时候做完"</span></div>
+        <div class="pillar pillar-i"><span class="pillar-icon">🟠</span><span class="pillar-lbl">I 影响型</span><span class="pillar-desc">热情·乐观·善社交<br>关注"谁来做"和"开不开心"</span></div>
+        <div class="pillar pillar-s"><span class="pillar-icon">🟢</span><span class="pillar-lbl">S 稳健型</span><span class="pillar-desc">温和·耐心·可靠<br>关注"怎么做"和"稳不稳定"</span></div>
+        <div class="pillar pillar-c"><span class="pillar-icon">🔵</span><span class="pillar-lbl">C 谨慎型</span><span class="pillar-desc">严谨·精确·逻辑强<br>关注"为什么这么做"和"对不对"</span></div>
+      </div>
+      <p>DISC 关注你的<strong>外显行为</strong>——你实际做了什么，而不是你为什么这么做。这使它更真实地反映你的行为偏好，帮你认识自己、理解关系。</p>
+      <div class="usage-grid">
+        <div class="usage-item"><span class="usage-num">01</span><div><strong>认识自己</strong><p>了解你的行为偏好、内在驱动和独特的"江湖人格"</p></div></div>
+        <div class="usage-item"><span class="usage-num">02</span><div><strong>理解关系</strong><p>看清情感关系中的相处模式与深层需求</p></div></div>
+        <div class="usage-item"><span class="usage-num">03</span><div><strong>应对压力</strong><p>发现压力下的本能反应模式，学会自我调节</p></div></div>
+        <div class="usage-item"><span class="usage-num">04</span><div><strong>找到适配</strong><p>了解哪些性格类型与你最合拍，优化人际关系</p></div></div>
+      </div>
+      <p style="margin-top:12px"><strong>完成测试你将获得：</strong>专属江湖角色卡 · 五维度性格图谱 · 情感风格洞察 · 合拍度匹配推荐。整个过程只需 3-5 分钟。</p>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">📌 DISC 测试仅供自我探索参考，不构成心理诊断或专业咨询建议。</p>
+    </div>
+  </div>
+
+  <button class="btn btn-gold" onclick="showNameModal()">✦ 开始探索</button>
+</div>
+
+<!-- ════════════════════════════════════════════ HEPAI BANNER ════════════════════════════════════════════ -->
+<div id="hepai-banner" class="hepai-banner" style="display:none">
+  <span class="hb-icon">💌</span>
+  <div class="hb-name" id="share-from-name"></div>
+  <div class="hb-type" id="share-from-type"></div>
+  <div class="hb-tip">完成测试后自动显示合拍分析</div>
+  <div class="hb-login-tip">已有报告？点击右上角登录即可查看匹配结果</div>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ NAME MODAL ════════════════════════════════════════════ -->
+<div id="modal-name" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-name')">✕</button>
+    <h3>✦ 步入江湖</h3>
+    <p>只需 3 分钟，测出你的江湖人格<br>让我们从认识你开始</p>
+    <input type="text" id="input-name" placeholder="你希望怎么称呼？" maxlength="20">
+    <select id="input-gender" style="width:100%;padding:13px 18px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;font-family:var(--font-body);margin-bottom:12px;outline:none;background:rgba(255,255,255,.7);color:var(--text);appearance:none;cursor:pointer">
+      <option value="m">♂ 男</option>
+      <option value="f">♀ 女</option>
+    </select>
+    <div class="modal-tip">💡 一个称呼即可开始</div>
+    <button class="btn btn-gold full-w" onclick="submitName()">✦ 步入江湖</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ LOGIN MODAL ════════════════════════════════════════════ -->
+<div id="modal-login" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-login')">✕</button>
+    <h3>🔑 登录个人报告</h3>
+    <p>输入测试时使用的手机号<br>回看你的性格报告和匹配记录</p>
+    <input type="tel" id="login-phone" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
+    <button class="btn btn-gold full-w" onclick="loginUser()">🔑 登录查看报告</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ MATCH DETAIL MODAL ════════════════════════════════════════════ -->
+<div id="modal-match-detail" class="modal-overlay">
+  <div class="modal-box" style="max-width:440px;text-align:left">
+    <button class="modal-close" onclick="closeModal('modal-match-detail')">✕</button>
+    <div id="match-detail-content"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ UNLOCK MODAL ════════════════════════════════════════════ -->
+<div id="modal-unlock" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-unlock')">✕</button>
+    <div style="font-size:40px;margin-bottom:8px">🔓</div>
+    <h3>解锁完整解读</h3>
+    <div style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.6;background:var(--bg2);padding:12px 16px;border-radius:8px">
+      输入手机号，一键解锁你的：<br>
+      <b>专属角色卡 · 情感世界 · 压力状态 · 适配推荐</b>
+    </div>
+    <div style="text-align:center;font-size:12px;color:var(--gold-dim);margin-bottom:14px;line-height:1.5">💡 手机号码将用于事后登录回看报告及合拍度匹配记录</div>
+    <input type="tel" id="input-phone" class="" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
+    <div class="modal-tip">📩 仅用于报告存档，可在合拍度中登录匹配</div>
+    <button class="btn btn-gold full-w" onclick="doUnlock()">🔓 解锁完整报告</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ DUP PHONE MODAL ════════════════════════════════════════════ -->
+<div id="modal-dup-phone" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-dup-phone')">✕</button>
+    <div style="font-size:40px;margin-bottom:12px">📱</div>
+    <div style="font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px">该号码已有测试记录</div>
+    <div style="font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6">之前使用 <b id="dup-old-name" style="color:var(--rose-deep)">XXX</b> 的名字<br>做过 DISC 性格测试</div>
+    <button id="btn-view-old" style="display:block;width:100%;padding:12px;border:none;border-radius:var(--radius-sm);background:var(--rose-glow);color:var(--rose-deep);font-size:14px;font-weight:600;cursor:pointer;margin-bottom:8px;font-family:var(--font-body)" onclick="viewOldReport()">📋 查看之前的报告</button>
+    <button id="btn-overwrite" style="display:block;width:100%;padding:12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;font-family:var(--font-body)" onclick="overwriteReport()">🔄 用新结果覆盖</button>
+    <div style="font-size:11px;color:var(--text3);margin-top:10px">覆盖后将更新个人报告，不影响已有合拍记录</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ HEPAI SHARE MODAL ════════════════════════════════════════════ -->
+<div id="modal-hepai-share" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-hepai-share')">✕</button>
+    <div style="font-size:40px;margin-bottom:8px">💑</div>
+    <h3>开启合拍度匹配</h3>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:14px;line-height:1.7">手机号用于关联你与TA的匹配结果，同时解锁你的完整性格报告。不打扰、不推送——仅在你回来查看时识别身份。输入后立刻生成邀请链接。</p>
+    <input type="tel" id="input-hepai-phone" class="" placeholder="请输入手机号（11位）" maxlength="11" style="width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:var(--font-body);margin-bottom:10px;outline:none;transition:var(--transition);background:var(--bg2);color:var(--text)">
+    <div class="modal-tip">📩 仅用于报告存档与匹配关联，不发送短信</div>
+    <button class="btn btn-gold full-w" onclick="doHepaiShare()">💑 生成邀请链接</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ TEST ════════════════════════════════════════════ -->
+<section id="screen-test" class="screen">
+<div class="progress-wrap" id="progress-wrap">
+  <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width:0%"></div></div>
+  <div id="progress-text" class="progress-text">0 / 24</div>
+</div>
+<div class="test-instruct">📌 凭第一直觉，<strong>左侧</strong>选最像你的，<strong>右侧</strong>选最不像你的</div>
+<div id="questions-container"></div>
+<div class="nav-bar" id="nav-bar">
+  <button id="nav-prev" class="nav-btn" onclick="goPrev()">← 上一题</button>
+  <span id="nav-page" class="pi">1 / 24</span>
+  <button id="nav-next" class="nav-btn" onclick="goNext()">下一题 →</button>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ RESULTS ════════════════════════════════════════════ -->
+<section id="screen-results" class="screen">
+<div id="results-content"></div>
+<div class="action-bar" id="results-action-bar">
+  <button class="btn btn-outline btn-sm" id="btn-back-to-report" style="display:none" onclick="showScreen('screen-report')">📖 查看完整报告</button>
+  <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
+</div>
+</section>
+
+<!-- ════════════════════════════════════════════ PERSONAL ════════════════════════════════════════════ -->
+<section id="screen-personal" class="screen">
+<div style="padding:20px 16px 60px;max-width:480px;margin:0 auto">
+  <div id="personal-content"></div>
+  <div class="action-bar">
+    <button class="btn btn-outline btn-sm" onclick="showScreen('screen-welcome')">← 返回首页</button>
+    <button class="btn btn-outline btn-sm btn-save-rs" onclick="saveResult()">📷 保存卡片</button>
+  </div>
+</div>
+</section>
+
+</div><!-- /container -->
+
+<!-- ════════════════════════════════════════════ UNLOCKED REPORT SCREEN ════════════════════════════════════════════ -->
+<section id="screen-report" class="screen">
+<div style="padding:20px 16px 60px;max-width:480px;margin:0 auto">
+  <div id="report-content"></div>
+  <div class="action-bar">
+    <button class="btn btn-outline btn-sm" onclick="backToResults()">← 返回结果页</button>
+    <button class="btn btn-outline btn-sm btn-save-rs" onclick="saveResult()">📷 保存卡片</button>
+    <button class="btn btn-outline btn-sm" onclick="location.reload()">🔄 重新测试</button>
+  </div>
+</div>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════ DATA ══════════════════════════════════════════════════════════════
+const QBANK=[
+// ═══ 24 道经典 DISC 形容词迫选 ═══
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'爱尝鲜敢冒险的'},{d:'I',t:'充满热情的'},{d:'S',t:'沉稳有耐心的'},{d:'C',t:'追求精确的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'果断不犹豫的'},{d:'I',t:'天生乐观的'},{d:'S',t:'温和好相处的'},{d:'C',t:'严谨周到的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'不服输好胜的'},{d:'I',t:'善于交际的'},{d:'S',t:'随和不计较的'},{d:'C',t:'喜欢分析的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'直率不绕弯的'},{d:'I',t:'有说服力的'},{d:'S',t:'友善亲切的'},{d:'C',t:'做事有系统的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'胆大敢闯的'},{d:'I',t:'活泼爱笑的'},{d:'S',t:'情绪稳定的'},{d:'C',t:'细致入微的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'独立自主的'},{d:'I',t:'鼓舞人心的'},{d:'S',t:'忠诚可靠的'},{d:'C',t:'标准很高的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'意志坚定的'},{d:'I',t:'感性走心的'},{d:'S',t:'安静内敛的'},{d:'C',t:'追求完美的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'竞争意识强的'},{d:'I',t:'外向活跃的'},{d:'S',t:'行事可靠的'},{d:'C',t:'理性客观的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'敢作敢当的'},{d:'I',t:'有感染力的'},{d:'S',t:'体贴周到的'},{d:'C',t:'条理分明的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'勇于挑战的'},{d:'I',t:'热情洋溢的'},{d:'S',t:'乐于助人的'},{d:'C',t:'追求品质的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'自信有底气的'},{d:'I',t:'善于表达的'},{d:'S',t:'平易近人的'},{d:'C',t:'深思熟虑的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'雷厉风行的'},{d:'I',t:'热爱社交的'},{d:'S',t:'从一而终的'},{d:'C',t:'注重细节的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'目标明确的'},{d:'I',t:'人缘很好的'},{d:'S',t:'团队至上的'},{d:'C',t:'用数据说话的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'能主导局面的'},{d:'I',t:'善于激励的'},{d:'S',t:'善于配合的'},{d:'C',t:'严格把关的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'直接了当的'},{d:'I',t:'生动活泼的'},{d:'S',t:'亲切温和的'},{d:'C',t:'严谨细致的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'敢于冒险的'},{d:'I',t:'善于交际的'},{d:'S',t:'善于倾听的'},{d:'C',t:'善于分析的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'自我驱动的'},{d:'I',t:'人际导向的'},{d:'S',t:'稳定可靠的'},{d:'C',t:'规则导向的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'说干就干的'},{d:'I',t:'爱说爱笑的'},{d:'S',t:'稳稳当当的'},{d:'C',t:'想清楚再做的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'能掌控全场的'},{d:'I',t:'活跃气氛的'},{d:'S',t:'维护和谐的'},{d:'C',t:'把控细节的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'不惧冲突的'},{d:'I',t:'善于化解冲突的'},{d:'S',t:'回避冲突的'},{d:'C',t:'冷静分析冲突的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'结果导向的'},{d:'I',t:'感受导向的'},{d:'S',t:'关系导向的'},{d:'C',t:'原则导向的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'行动迅速的'},{d:'I',t:'反应灵活的'},{d:'S',t:'节奏稳定的'},{d:'C',t:'步骤严谨的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'勇于担当的'},{d:'I',t:'善于带动的'},{d:'S',t:'乐于配合的'},{d:'C',t:'精于规划的'}]},
+{type:'disc',h:'选择一个最像你和最不像你的描述：',o:[{d:'D',t:'敢于挑战常规的'},{d:'I',t:'善于联结人的'},{d:'S',t:'遵从共识的'},{d:'C',t:'遵循规则的'}]},
+];
+
+const RELATION_STYLES={
+  D:'在感情中，你是天然的引领者。你不会等别人来追——你追别人。你表达感情的方式直截了当：喜欢就说，想要就争取，从不绕弯子。这种坦率在暧昧横行的时代是一股清流，但也需要留意节奏感——不是每个人都能跟上你的速度。你习惯在关系中掌握方向和主导权，渴望一个能欣赏你魄力、同时不被你气场压倒的伴侣。你最怕的不是争吵，而是无聊——一段没有挑战、没有成长的关系会让你迅速冷却。你需要学会的是在强势中留出空间，偶尔把方向盘交给对方。当你学会在"带领"和"倾听"之间找到平衡，你的感情会变得既有力量又有温度。你的另一半会明白：被一个D型人爱着，是世界上最踏实的事——因为你说到的，一定会做到。',
+  I:'你的感情世界像一场永不落幕的盛宴——热闹、浪漫、充满惊喜。你相信爱需要表达、需要仪式、需要被看见。你不是在"秀恩爱"，你只是太想把快乐分享给全世界。你会为一次约会精心准备三天，会记住每一个纪念日，会在凌晨三点突然说"我们去看日出吧"。但甜蜜背后有一个容易被忽略的挑战：你需要被持续关注和回应。沉默和冷淡是你最怕的东西，比吵架更让你难受的是"没反应"。你有时会为了维持气氛而回避严肃的对话，担心一旦认真起来就会破坏关系的美好滤镜。但真正的亲密不只是分享快乐，也包括一起面对不快乐。学会在关系中偶尔放下"气氛担当"的角色，让对方看到你真实的、不完美的一面——你会发现，真正爱你的人不只需要你的阳光，也愿意接住你的阴影。',
+  S:'你的爱是安静的、持续的、润物无声的。你不擅长制造轰轰烈烈的浪漫场面，但你会在对方开口之前就把水杯倒满，会在TA加班时默默点好外卖，会在每个平凡的日子里用一万件小事说"我在乎你"。这种稳定和可靠是你最珍贵的情感天赋——在你的身边，人会觉得安全、被接纳、不需要伪装。但你的挑战在于：你的努力太安静了，安静到对方可能浑然不觉。你不太表达自己的需求和感受，习惯把对方的开心放在第一位，有时甚至忘了问自己"我快乐吗"。你需要的伴侣是那种能读懂你沉默背后深情的人——TA不会把你的稳定当成理所当然，不会把你的包容当成软弱。学会偶尔大声说出"我也需要你"，这不是索取，而是给对方一个机会走近你。你的爱像大地一样深沉，但大地也需要被雨水滋润。',
+  C:'你在感情中是最认真的那个——但"认真"的载体不是甜言蜜语，而是深度的思考和精确的行动。你花很多时间在脑子里分析这段关系：我们的价值观匹配吗？长期目标一致吗？冲突解决机制有效吗？你把感情当成一道需要严谨解答的题目，但感情有时候并不需要答案，只需要陪伴。你表达爱的方式偏理性：帮对方梳理问题、给出建设性建议、在对方迷茫时画出一张清晰的地图。但你可能忽略了——对方在情绪低落时有时候不需要解决方案，只需要你坐在旁边说一句"没事，我在"。你需要学会让自己偶尔"不精确"：一个没有计划的周末，一句没有经过仔细推敲的"我想你"，一次没有提前准备好的拥抱。当你允许自己在感情中不完美，你的爱会少一些理性带来的距离感，多一些让人真正靠近的温度。',
+  DI:'你在感情中是热情与方向感的结合体——你既能点燃一段关系的激情，又有能力为两人的未来定方向。你的恋爱风格是"冲就完了"：喜欢就追，爱了就全情投入，不拖泥带水。你的伴侣会被你的能量和真诚打动，但同时也会感到一种被"带着跑"的节奏——你太习惯掌握主导权了。偶尔停下来，让对方决定今天去哪里吃饭、看什么电影，这些小放手能让关系更平衡。你需要的伴侣是一个既能欣赏你的冲劲、又有足够独立性的搭档——TA不会在你的能量面前迷失自己，而是用自己的方式与你并肩前行。学会在热情之外留一点"耐心的空白"，让对方有机会用TA自己的节奏来回应你的爱。',
+  DS:'你的感情像一座山——沉稳、可靠、不动声色但力量巨大。你不会说太多漂亮话，但你的行动比任何承诺都更有说服力。在亲密关系中你是最持久的守护者，不轻易动心，但一旦认定了就会用一生的时间去证明。你的挑战在于：沉默有时被误解为冷漠，稳重有时被误读为无趣。你需要学会在"行动"之外加上"表达"——让对方不只感受到你的存在，也听到你的心意。你渴望的伴侣是懂你节奏的人，不催你、不逼你，能欣赏你的稳重而不是嫌你不够浪漫。当你在关系中学会偶尔的主动表达——一句"我在想你"、一次意外的惊喜——你会发现，那些话并不需要很多，但效果远超你想象。',
+  DC:'在感情中你是一个精准的指挥官——你既敢爱敢恨，又会把关系当成一门需要精研的学问。你不会轻易进入一段感情，但一旦决定投入，就会带着清晰的规划和坚定的承诺。你的高标准有时会让伴侣感到压力——你对自己要求严格，对关系质量也同样严格。你不太会说软话，但你会在对方最需要的时候拿出最靠谱的解决方案。你需要学会的是在"精确"和"温度"之间找到平衡：不是所有的问题都需要分析，不是所有的情绪都需要解决方案。偶尔让自己放松标准，允许关系中有不那么完美的时刻——那些"不完美"恰恰是最真实、最温暖的瞬间。你需要的伴侣是既能欣赏你的理性和能力，又能在你紧绷时轻轻告诉你"够了，已经够好了"的人。',
+  ID:'你的感情世界有光、有火、有方向。你既懂得如何让关系保持温暖和活力，又有能力在关键时刻给出清晰的指引。你是那种"既浪漫又靠谱"的伴侣——可以在周五晚上策划一场惊喜约会，也能在周六早上坐下来认真讨论两人的五年计划。你的挑战在于：你的精力太旺盛了，有时候让对方跟不上节奏。学会在关系中留出安静的空间，让彼此有机会在"热闹"之外体验"静默"的亲密。你需要的伴侣是一个愿意跟你一起探索世界的人——TA不必和你一样外向，但必须能理解你的热情不是浮躁，而是对生活的真诚热爱。当你学会把"感染力"适当地转化为"倾听力"，你的关系会从精彩走向深刻。',
+  IS:'在感情中，你是最温暖的存在。你拥有出色的共情能力——你能精准地感知对方的情绪变化，在对方还没说出口之前就准备好了安慰。你的爱藏在日常的每一件小事里：一杯泡好的茶、一句"怎么了，你看起来不太开心"、一个不需要理由的拥抱。但你的挑战也很明显：你太善于照顾别人的感受了，有时候忘了照顾自己。你害怕冲突，习惯用妥协来维护和谐，但长期积累的委屈最终会在某个瞬间无声地爆发。你需要的伴侣是一个懂得珍惜你的温柔的人——TA不会利用你的包容，而是在你退让时轻轻拉住你说"这次轮到你说了"。学会对自己温柔，和对别人温柔一样重要。你的柔情是这个世界上最珍贵的东西之一，别让它只流向别人。',
+  IC:'你的感情兼具浪漫的灵感和严谨的品质——你既能把爱经营得像一件艺术品，又能确保这段关系经得起现实的考验。你追求的不是"过得去"的感情，而是值得细细品味、经得起时间冲刷的深度连接。你在关系中既会制造让人心动的小惊喜，也会冷静地评估两人的匹配度和成长空间。但这种双重要求有时让你难以满足——你既想要火花四射的浪漫，又想要滴水不漏的合拍。你需要学会接受关系中的"不完美美"：有些时候，一个笨拙但真诚的表达比一个精心策划的惊喜更有力量。你需要的伴侣是同时欣赏你的创造力和标准的人——TA愿意和你一起把感情打磨成一件共同的作品，而不是被动地接受你的"完美安排"。',
+  SD:'你表面温和，内心有不可动摇的坚持——在感情中同样如此。你不会大张旗鼓地宣示主权，但你会在对方需要时第一时间出现；你不太会制造戏剧化的浪漫场面，但你的每一次出现都是实打实的承诺。你的爱是一种"细水长流的深度"——开始时不温不火，但时间越久越能感受到你的力量。你的挑战在于：你的温和外壳让人以为你什么都接受，但你心里有一条清晰的底线，一旦被触碰到，对方会惊讶于你突然的坚硬。学会在"温和"和"坚定"之间找到更早发声的时机——你的边界值得被提前看见，而不是等到被踩到才亮出来。你需要的伴侣是一个能看懂你内在结构的人——TA不只被你的温柔吸引，也深深尊重你沉默背后的原则。',
+  SI:'在感情中你是最持久的陪伴者——你不是来制造一场风暴的，你是来做一棵可以依靠的树的。你的温柔和稳定让人感到安心，你的存在本身就是一种治愈力。你倾听的时候真正在听，你陪伴的时候真正在场——这种深度的陪伴是很多人一生都在寻找却找不到的东西。但你的温柔有时也是你的枷锁：你太习惯把自己的需求往后排了。你不太会主动表达"我想要"，因为怕给对方添麻烦。你需要的伴侣是能读懂你安静背后深情的人——TA不会把你的沉默当成无所谓，不会把你的妥协当成理所当然。学会在关系中为自己发声：说出你的需求不是自私，而是让爱流动的必要条件。你的爱像冬日里的暖炉——不刺眼，但让靠近你的人都不想离开。',
+  SC:'你的感情世界像一座精心守护的城池——有规矩、有边界、有温度。你不会轻易打开城门让人进来，但一旦认同了这段关系，就会用最严谨的态度和最持久的耐心去经营。你在感情中极度可靠——你的承诺不是随口说说的情话，而是经过深思熟虑后刻在石头上的契约。你的挑战在于：谨慎有时让对方觉得你"不够热烈"，标准有时让伴侣感到压力。你的爱不是火焰型的，是基石型的——不够耀眼，但足够承重。你需要的伴侣是一个真正理解"稳"的价值的人——TA不是嫌你太慢，而是感激你每一步都走得那么踏实。学会偶尔打破自己的规则：一次没有提前计划的旅行、一句未经分析就说出口的情话——那些"不规矩"的瞬间，往往是关系中最鲜活的记忆。',
+  CD:'你在感情中是一个冷静的战略家——你不会被一时的情绪牵着走，而是用清晰的思维去理解关系、规划未来。你的爱是深思熟虑后的选择，不是一时的冲动——这让你在关系中极为可靠。当伴侣遇到问题时，你不会只是安慰，而是帮TA找到真正的解决方案。但你的理性有时会筑起一道墙——你在分析情绪，而不是感受情绪。对方有时候不需要你的"正确答案"，只需要你坐在TA身边说一句"我也不确定怎么办，但我在这儿"。你渴望的伴侣是能同时欣赏你的头脑和你的内心的人——TA不害怕你的高标准，因为TA知道你的严格要求背后是对关系质量的真诚承诺。学会在"分析"和"感受"之间留出空间，偶尔让自己的情感不受逻辑的约束地流淌出来。',
+  CI:'你的感情中有一种"安静的浪漫"——你不喜欢浮夸的表达，但你会用最深度的思考和最细腻的感知去对待你在乎的人。你注意到别人注意不到的细节：对方换了香水、语气中的微小变化、一个没有说出口但你已经读懂的情绪。你的爱深沉而含蓄，像一本需要耐心阅读的书——不是每个人都能翻到最后一页，但翻到的人会发现一个无比丰富的世界。你的挑战在于：你把自己的情感包裹在理性和冷静的外壳里，有时候对方需要很久才能确认"你是真的在乎的"。你需要学会在"含蓄"之外加一些"直白"：不是要你变得浮夸，而是偶尔把内心的温柔说出口。你需要的伴侣是那种愿意慢慢读懂你的人——TA不催促、不逼问，用耐心和欣赏走近你深藏的情感世界。',
+  CS:'在感情中你是最细腻的观察者——一叶落而知秋，一个表情你就知道对方今天过得好不好。你不善于大声喧哗的表达，但你的温柔藏在每一个精准的细节里：对方不经意提到的一本书第二天就出现在桌上，说过一次的口味偏好你从此再也没记错过。你的爱是一种"润物细无声"的渗透——不张扬，但无处不在。你的挑战在于：你太安静了，安静到对方有时完全不知道你在付出。你把每一件事都做得太好、太自然，以至于被当成理所当然。你需要学会偶尔停下来，让对方意识到你的存在不是空气，而是一棵为TA遮风挡雨的大树。你需要的伴侣是懂得在平静的表面下看见深流的人——TA会注意到你的每一个小动作，并为此深深感动。大胆一点，偶尔大声说出"我爱你"——不是为了证明，而是为了让你的深情不再只有你自己知道。',
+};
+
+const CHAR_IMG={
+  'D':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/674c45d55490825c470ed552e2220f293afd179beeffc526b3d332b5dfc43c10.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/4a1431d79d6f8239a7b545cede17fced520a3ed29b9a513dcb2d2e26ba68c691.png'},
+  'DI':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/c7a6eae17fefdd83b1cf1cbf2466142a82a2e8f9f0c4a4aee1714c8a4edcee50.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/2c4475a3a1e4348f0123a612453a3cecf5a1e670207a5f5ce183995d7f31cde4.png'},
+  'DS':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/86d4ec5f5cd21c9b22906229ba884b637a9eb2f5be73305f669a8f20793275cc.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/dd2912d740d1e165a92283a9cbecdcc16cde6409af52a0eb0397426fb4007991.png'},
+  'DC':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/8c1c1c555e889aeb803157f9be709bc4b0fef10a89938a2f15ee7b0c185b3cc9.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/2f35e3b9e77d06ac57832b3cf825b7649e19909e104f363a800a97c987d30c5a.png'},
+  'I':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/0d12a669f410a6fb217a5ab3dc54378c99581ed83bf56d5f91f58f2fa85f70cf.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1d1a3f6b243e114ac050186a92b06be2904ad26d8027b37fa01e2827561b776f.png'},
+  'ID':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/daefe3fd7954362d27768556c42c82b85600f4b252376ea98efe33243ea4bebf.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/5a95abc18dc6c312a48c2839eec397c6229f24ac3a940ad8bee73167d5f226c3.png'},
+  'IS':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/fc2109f0fe3f0af28a086c79060dc5cbb4e8f045e14b663286e84d1a2897df00.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/83cbdfbadd83b7ba6cd7c85adffad8a816281e9d3b146d1d5ddade2157964390.png'},
+  'IC':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/bee014701571c5020b22252624b67183d3ac3f5b91490f4b58a85db5aa257812.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/55c009abac2d843fab8fc2a26f16786e99c20c4b648d359e08d1c9594d4b40e3.png'},
+  'S':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/10bb7d87ccebafefb7e09411a39fee1d4572422db1ab891098e17aff4b9eb482.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/db0274850603b497aad319d47eb4bc1fcac491a21a35fb813a598921f2880208.png'},
+  'SD':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/f13c1acec05ac5b3bbaea8dbdf49ef905887e4daa9e8da0c4cbac2bc20bdae96.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/565b70eb3354706deb5fe44f60531ea679ae81779ed4fa76dbd24415e274f821.png'},
+  'SI':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/0c8dcf2fb17afd7f31cfe1cf2f75d88d4ad794bb219ac63780067e2d94354a92.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/7efcc9d62274baea6136f503504ed91e119995deaff73d6d7eb9acb0dfb379d3.png'},
+  'SC':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/d6821366ec76fe9989952694af85b1157e79319449c2cd3531a2505586d0dea3.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/609cce0f98061eb57ff3c0cfe26d303a3cacfb6844a06a7e6b000383e48c06b0.png'},
+  'C':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/302c72c503f385b0ef33b1c07ba4dc0c5ad0098390addc3621ad628820095936.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/5f28fadf3cf5e7fabe4f289a7cdbcf6420db2c7d69daa54ab7129abd1d6ccdb7.png'},
+  'CD':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/f695ed0cb8c86691b862c7cbafe4a89dc8c4491b3453aeac6603452eba432773.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/81a29cd45adc325b2d7c218c81ec65602edbbc0dac98ba8adefd0a16a5c1a9b6.png'},
+  'CI':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/0b216f485ccc12d27e08e9f145720a7cfacb01815caf36ec48571edb591175b5.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/b187a58b3327bd469f563ce58c004285fdf95dcee322be166e13bb101ed0118a.png'},
+  'CS':{m:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/2fd6312085122bc8c09ff620aa610df5372e45d8430ff671fca5e0095727461b.png',f:'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/7673a21d904ff4f6b76144bfc122c852a13e7c40e85992fbea78caa9546b0257.png'}
+};
+const FAMILY_IMG={
+  'D':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/cb97e09e052d366cdaafb65b6859a78e23283a98afa15ee303d1753225a19a40.png',
+  'I':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/54d9f978a8b709653cae1706e9626082b02f4b13706c0a5fe167dc8d507efea4.png',
+  'S':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/1c9e09d0fe76fcce8cbe0420c4388cbb35436ae6c82b8ff6b6c7a8ecfd35c9a7.png',
+  'C':'https://libtv-res.liblib.art/sd-gen-save-img/genius_playground/image/a40790abd22f4ad4bdde97533beb111d/84989227246db753e99cf310965c180ddaf0bd9743236d5feea0b612fff0e014.png'
+};
+const CHAR_NAME={'D':'镇北侯','DI':'鸣镝使','DS':'镇山河','DC':'射天狼','I':'醉花仙','ID':'燎原君','IS':'沐春风','IC':'画魂师','S':'守山人','SD':'藏锋客','SI':'听雪客','SC':'守墨君','C':'弈星君','CD':'破阵尊','CI':'观星客','CS':'知秋客'};
+const CHAR_FAMILY={'D':'破军虎','DI':'破军虎','DS':'破军虎','DC':'破军虎','I':'焰羽凤','ID':'焰羽凤','IS':'焰羽凤','IC':'焰羽凤','S':'抱山熊','SD':'抱山熊','SI':'抱山熊','SC':'抱山熊','C':'玄机鹰','CD':'玄机鹰','CI':'玄机鹰','CS':'玄机鹰'};
+const CHAR_QUOTES={
+  D:['万人避让的路，我一个人走。','挡我者，退后三步。','不解释——看结果。','孤峰顶上，自有风景。'],
+  DI:['跟上我，方向没错。','旗帜所向，即是前方。','我不等风来——我造风。','方向对了，路自然直。','冲就完了，回头再想。'],
+  DS:['稳不是慢，是每一步都踩实了。','大山不响，自有分量。','你急你的，我走我的。','沉默是最响亮的回答。'],
+  DC:['不出手则已，出手必中。','靶心只有一个，偏一点都不行。','先看清楚，再打出去。','精确是另一种暴力。'],
+  I:['我不追光——我就是光。','你来人间一趟，得让人记住你的名字。','热闹是本事，温暖是底色。','笑着把事办了。','冷场？不存在的。'],
+  ID:['旗子在哪，人心就在哪。','跟我来，前面有好风景。','一个人走得快，一群人走得远。','来吧，这条路我探过了。'],
+  IS:['温暖不是我的技能，是我的本能。','你不用说，我都懂。','这杯茶，刚刚好。','温柔的人，骨头最硬。'],
+  IC:['好想法不值钱，把好想法做出来才值钱。','灵感会飞，你得抓住它。','浪漫要有，严谨也不能少。','做梦的人很多，把梦做出来的人很少。'],
+  S:['山不走，山等你。','你尽管跑，我在这里。','稳得住，才走得远。','不急，路还长。'],
+  SD:['温和是我的教养，不是我的软肋。','别把我的沉默当软弱。','肩膀在这，你靠得住。','水最柔，也最能穿石。'],
+  SI:['我在，就是最好的回答。','不用多说，我都知道。','陪伴是最长情的告白。','静静地，就好。'],
+  SC:['规矩不是束缚，是底线。','稳得住的人，才守得住远方。','一砖一瓦，皆是功夫。','不越线，也不让步。'],
+  C:['我不站队，我站逻辑。','数据不会骗人，人会。','想清楚了——再动手。','准确是我的礼貌。'],
+  CD:['所有人都说不行？那我找到路给你看。','逻辑到位，路就有了。','破局者，不抱怨规则。','看清楚，想明白，然后出手。'],
+  CI:['严肃是我的保护色，有趣是我的底色。','你不要被我冷静的外表骗了。','我有我的逻辑浪漫。','精确也可以很迷人。'],
+  CS:['一叶落，我就知道秋天来了。','细节里藏着答案。','不用大声——我看见了。','安静的人，看得最清楚。']
+};
+
+const COMBOS={
+DI:{name:'开拓者',oneliner:'你不是在等风向——你就是风。',id:'你是 <b>天生的开拓者</b>——兼具 D 型的目标驱动和 I 型的热情感染力。你能在拍板之后让一桌人笑着跟你走。你的核心优势是 <b>行动力 × 影响力</b>。',life:'日常中的你是团队的"引擎"——新项目交给你，方向就有了。你需要学会"回头看"——偶尔停顿确认身后的人是否还在同一条船上。',work:'工作中你雷厉风行又善于激励。你敢做决定，也能让别人愿意跟你走。但注意不要同时推进太多方向。',pressure:'压力之下你变成"双倍加速器"——D 的控制欲和 I 的表达欲同时飙升。你说话更快，决策更急，恨不得一人扛下所有。但越是这种时候，越需要停一下，深呼吸——问问自己"我到底在急什么"，再问问身边的人"你怎么想"。慢半拍，不会错过机会，反而能看清方向。',rel:'亲密关系中你是主动且热烈的引导者——你习惯掌握方向和节奏，喜欢带着对方一起冲刺人生目标。但偶尔，试着退后一步，让对方来决定方向。学会问一句"你觉得呢"，这比任何惊喜都更能让对方感到被尊重。你的热情是礼物，但偶尔的示弱能让关系更平衡。',grow:'你的成长关键词是 <b>"节奏感"</b>。适度控制承诺量，学会区分"我想要"和"我能给"。',gold:'跟我走，方向是对的。'},
+ID:{name:'激励家',oneliner:'你不只能让房间亮起来——你还能让房间朝一个方向跑。',id:'你是 <b>天生的激励家</b>——I 的感染力让你一进场气场就活了，D 的目标驱动让你的"嗨"是有方向的。<b>魅力 × 实力</b> 是你的硬通货。',life:'你能让一个沉闷的团队重新燃起来，同时带着目标意识推动落地。但要小心：你的社交广度有时会分散精力。',work:'你是"氛围引擎+推进器"。你擅长在人际和任务之间找到平衡。学会对有趣的事说不，是最重要的功课。',pressure:'压力来袭时你的第一反应是"把气氛撑住"——你会本能地调动所有能量让场面继续好看，哪怕自己已经快撑不住了。但真正强大的关系不怕你露出脆弱的一面。你需要学会承认"我现在也不OK"，这不仅不会削弱你的魅力，反而让人感受到你的真实。',rel:'你既温暖又有主见——属于"既懂你又有方向感"的伴侣。你能在对方低落时点亮一盏灯，也能在迷茫时给出方向。但偶尔你会因为想保持好氛围而回避严肃对话，其实那些沉默的议题不会自己消失。学会在关系里勇敢面对冲突，你会发现自己比想象中更擅长处理它。',grow:'你的成长关键词是 <b>"聚焦"</b>。分清"浮现的灵感"和"当前的优先事项"。',gold:'跟着我，既有方向又有温度。'},
+DS:{name:'沉稳推手',oneliner:'你不是在咆哮，你是在"等"——但你知道终点在哪。',id:'你是 <b>不怒自威的推手</b>——D 让你清楚自己要去哪，S 让你有耐心走到那。<b>目标 × 耐心</b> 让你成为最难被击倒的那类人。',life:'你是"定海神针"型——目标清晰但不急躁，推动但不撕扯。适时地表达方向和态度能把你的影响力放大三倍。',work:'工作中你稳扎稳打，适合长期项目。但沉默有时候让人猜不透——多表达方向感能让团队更安心。',pressure:'高压下你会进入"静默推土机"模式——不说话，但动作不停，一个人默默把所有问题扛下来处理。你相信行动胜过言语，但身边的人可能会因为沉默而感到不安。偶尔说一句"我有点压力"，不会让你打折，反而让在乎你的人有机会靠近你。',rel:'在关系中你是稳重的靠山——你习惯用行动证明承诺，用沉默承载责任。但有时稳到对方以为你不在意，因为你太少把心里的话说出来。试试在行动之外加一句"我在想你"——不需要长篇大论，一句话就够。让温度不只是被感受到，也能被听见。',grow:'你的成长关键词是 <b>"表达"</b>。沉默不等于没意见。学会在最开始就把你的立场摆出来。',gold:'我在路上等你，不急。'},
+SD:{name:'韧性执行者',oneliner:'你跑得不快——但你不会停。',id:'你是 <b>表面温和但内核坚硬</b> 的韧性执行者。S 让你看起来好说话，D 让你在碰到底线时忽然变成最硬的那个。<b>温和 × 坚定</b> 的反差有杀伤力十倍。',life:'你是组织里的"中流砥柱"——别人在争地盘你不吭声，一旦动荡来临，所有人发现你是唯一没动摇的人。',work:'你是"马拉松型"管理者——不是冲在最前面的先锋，而是整个赛程里一直保持节奏的人。主动比被动更建设性。',pressure:'压力下你先忍、再忍、最后忽然爆发——你习惯把情绪积压在心底，直到最后一根稻草压垮沉默。但爆发之后往往又后悔，觉得本可以处理得更好。在"还好"和"爆发"之间给自己留三个台阶：深呼吸一次、走开五分钟、说出第一句真实感受。',rel:'你对感情的投入是深度的、持久的——你从不轻易开始一段关系，但一旦认定了，就会用日复一日的行动去守护。但正因为你太稳定了，对方可能把你的付出当作理所当然。偶尔做一次意料之外的惊喜——提醒对方：我不是习惯，我是选择。你的深情值得被看见。',grow:'你的成长关键词是 <b>"主动"</b>。不要只在被需要时才出声。',gold:'我在这里，风浪过了山顶还在。'},
+DC:{name:'精密指挥官',oneliner:'你把枪擦了又擦才开枪——但一旦开枪，弹无虚发。',id:'你是 <b>"逻辑武装的指挥官"</b>——D 让你敢闯，C 让你不盲闯。<b>勇气 × 精度</b> 让你成为高难度项目的最佳负责人。',life:'你是最好的"难项目负责人"——你有勇气和精度两项硬通货。试着在提标准之前先问一句"你怎么想"。',work:'你在高风险场景中冷静排雷，也能在模棱两可的局面中厘清方向。但高标准有时被队友体验成"挑剔"。',pressure:'高压下你进入"冷酷分析+强硬执行"模式——极度理性，情感通道几乎关闭。你的效率在飙升，但身边的人可能会觉得你变得不近人情。偶尔让人看到你还在乎——一句"我只是想把事情做好"比一百句沉默的加班更有温度。',rel:'你表达在乎的方式是先帮对方把问题想清楚——你相信解决问题就是最好的安慰。但不是所有情绪都需要解决方案，对方有时候不需要你的"正确分析"，只需要你坐下来陪在身边说一句"我也不确定怎么办但我在这儿"。你的存在本身，比你的分析更有力量。',grow:'你的成长关键词是 <b>"温度"</b>。精确是能力，但温度是连接。',gold:'方向我定，细节我查，结果我扛。'},
+CD:{name:'战略分析家',oneliner:'你不是犹豫——你是在计算最优解。',id:'你是 <b>冷静的战略分析家</b>——C 让你把每个细节都想清楚，D 让你在分析完毕后果断出手。<b>精度 × 决断</b> 让你在复杂局面中总能找到最优路径。',life:'你是"幕后军师"型——别人看到结果时你已经把所有可能都推演完了。但有时你的高标准让队友压力很大。',work:'你的分析能力让团队少走弯路，你的决断力让团队不卡在犹豫上。注意："先出手再优化"有时比"想完美再出手"更有效。',pressure:'压力下你会更加依赖分析和逻辑——这让你高效决策，但也让你离人更远。你越来越冷静，但也越来越孤立。你的判断力依然精准，但同理心会暂时下线。提醒自己：事情可以慢慢分析，但人需要现在就被理解。',rel:'在关系中你是"最靠谱的问题终结者"——你的分析能力和执行力让对方在现实层面从不缺乏安全感。但感情不是你用逻辑就能解开的方程。对方有时候不需要你终结问题，只需要你陪着一起面对。放下"解决它"的本能，学会"我在呢"的陪伴。',grow:'你的成长关键词是 <b>"行动"</b>。80%的准备+100%的执行，往往胜过100%的准备+0的行动。',gold:'想清楚了，做就对了。'},
+IS:{name:'温暖凝聚者',oneliner:'你不需要站在C位——你是让C位发光的那个人。',id:'你是 <b>天生的温暖凝聚者</b>——I 让你能感知每个人的情绪，S 让你有耐心一一回应。<b>共情 × 稳定</b> 让你成为最值得信赖的朋友和伴侣。',life:'你是团队的"情绪温度计"和"安全感来源"。你的陷阱：你把所有人的情绪都接住了，唯独忘了自己。',work:'你是团队中最让人舒服的存在。但注意不要因为照顾所有人的感受而忘记推动事情向前。',pressure:'压力下你进入"超级照顾者"模式——你忙着安抚所有人，把每个人的情绪都接住，却把自己的焦虑压到心底。你习惯了说"没事""我来""别担心"，但这些话越多，压力就越得不到释放。你需要学会说"我也需要帮助"——这不是软弱，而是给自己一个喘息的机会。',rel:'在亲密关系中你是最温暖的存在——你能第一时间察觉到对方的情绪波动，细心到连对方自己都没说出口的需求你都能接住。但你有取悦倾向，偶尔会因为想维护和谐而牺牲自己的需求，把委屈咽下去。真正成熟的爱不是单方面付出，而是敢说"我也想要"。',grow:'你的成长关键词是 <b>"边界"</b>。你的温暖是礼物，但不是义务。',gold:'你不用开口，我都懂。'},
+SI:{name:'温柔守护者',oneliner:'你不是没脾气——你只是选择了温柔。',id:'你是 <b>温柔而坚定的守护者</b>——S 让你像大地一样稳定，I 让你在稳定中带着温暖。<b>稳定 × 温暖</b> 让你成为最持久的陪伴者。',life:'你是"定心丸"——不是最显眼的那个，但一定是"少了你就觉得不对劲"的那个。',work:'你是"稳定器+润滑剂"——你的耐心让项目不脱轨，你的温暖让团队不散架。但注意不要总在幕后。',pressure:'压力下你先扛着，然后用微笑掩饰——你不愿意给别人添麻烦，哪怕天塌下来也想自己顶住。但你的微笑骗得过大多数人，却骗不了真正在乎你的人。允许自己不用"没事"来挡住所有关心。说一句"其实有点累"，世界不会崩塌，但你会轻松很多。',rel:'在亲密关系中你是"恒温型"伴侣——你给的爱不炙热也不冰冷，稳定得让人安心。但恒温有时被当作理所当然，你的包容被误以为没有底线，你的安静被误以为没有需求。别让你的稳定变成透明。偶尔表达一次"我不喜欢这样"，会让对方意识到你有多重要。',grow:'你的成长关键词是 <b>"发声"</b>。你的安静很美，但你的想法值得被听见。',gold:'我在这里，一直都在。'},
+IC:{name:'创意策展人',oneliner:'你既浪漫又严谨——灵感来了你接住，细节你也不放过。',id:'你是 <b>灵感与品质的策展人</b>——I 让你源源不断地产生创意，C 让你把创意打磨成精品。<b>创意 × 精度</b> 让你成为最有品质的创造者。',life:'你的想法总是既有新意又经得起推敲。但有时你会因为"还不够好"而迟迟不出手。',work:'你是"品质担当+创意引擎"。但完美主义可能让你错过窗口期——学会"先发布再迭代"。',pressure:'压力下你的创意通道会收窄——你的大脑从"无限可能性"模式切换成"检查每个细节"模式，灵感被焦虑堵住了出口。你越想拿出完美的作品，就越不敢动手。你需要找到一个"不完美但能推进"的出口——先交一份60分的初稿，你会发现在做的过程中灵感自己回来了。',rel:'你既浪漫又理性——你会精心策划一次约会、挑选一份恰到好处的礼物，同时也会冷静地分析这段关系的发展方向。但你的分析有时让对方觉得"太冷静了"，好像一切都在计算之中。偶尔让心说话，别只让脑子说话。有些事不需要想清楚，只需要去感受。',grow:'你的成长关键词是 <b>"完成"</b>。70分的完成品永远比100分的半成品更有力量。',gold:'好想法值得被好好做出来。'},
+CI:{name:'严谨创新家',oneliner:'你不是没有创意——你只是不允许自己拿出未经打磨的创意。',id:'你是 <b>有品质保证的创新家</b>——C 让你把每个细节都想到位，I 让你在严谨中不失灵感。<b>严谨 × 创意</b> 让你成为"又稳又新"的存在。',life:'你是"深度思考者+隐藏的灵感工厂"——你的外表冷静理性，但你的内在世界丰富得令人意外。',work:'你的标准让团队有了质量底线，你的创意让团队有了突破可能。但"够好"比"完美"更合适。',pressure:'压力下你会更依赖逻辑和规则——你相信只要流程正确、分析到位，就没有解决不了的问题。但创造力不是用逻辑可以框住的。你需要刻意给自己留一点"胡思乱想"的空间——走一条没走过的路，听一首没听过的歌，那些看似无关的事恰恰是灵感的来源。',rel:'你是"深沉的浪漫主义者"——你的浪漫从不挂在嘴边，而是藏在精心准备的细节里：一杯刚好温度的茶、一本对方无意中提到过的书。但正因为你不常说，对方可能需要很久才能读懂你的心意。学会即兴表达——不是让你变得浮夸，而是让爱意不用等到被发现，而是直接被感受到。',grow:'你的成长关键词是 <b>"释放"</b>。粗糙的开始胜过精心的犹豫。',gold:'想清楚了，但也要敢于即兴。'},
+SC:{name:'稳健精算师',oneliner:'你不是慢——你是把每一步都算好了再走。',id:'你是 <b>最让人放心的精算师</b>——S 让你稳如磐石，C 让你精确如钟表。<b>稳定 × 精确</b> 让你成为最可靠的后方保障。',life:'你是"最安全的存在"——你的节奏不快，但每一步都踩实了。',work:'你是"质量守门员"。但你的节奏有时跟不上变化的步伐——学会在"稳"和"快"之间找平衡。',pressure:'压力下你会更加内缩——你的第一反应是把自己关起来，用沉默建一座堡垒，以为这样就能挡住所有不确定性。但封闭不是保护，反而让你在孤独中放大焦虑。你需要一个安全的出口——写下来让思路清晰，说出来让情绪释放，走出去让身体替大脑松绑。',rel:'你是"最让人安心的伴侣"——你的稳定和可靠是关系里最坚实的锚点，对方知道无论发生什么，你都会在那里。但你的谨慎有时让对方觉得"不够热烈"，你的深思熟虑被误会为犹豫不决。偶尔大胆一次——不是让你改变自己，而是让关系里的那个你也有一点意外的惊喜。',grow:'你的成长关键词是 <b>"突破"</b>。试试做一件"不太像你会做的事"。',gold:'稳是底色，偶尔冒个险也挺好。'},
+CS:{name:'精准守护者',oneliner:'你不是冷——你是把温柔藏在了细节里。',id:'你是 <b>温柔的精准守护者</b>——C 让你对每个细节都精准把控，S 让你用耐心和温和去守护你在意的人。<b>精确 × 温和</b> 让你成为最有质感的陪伴者。',life:'你是"细节中的温柔"——你不善言辞，但你的行动比语言更有说服力。',work:'你是"品质守护者"。但过度追求完美可能让团队等待太久——有时候"够好"比"完美"更实用。',pressure:'压力下你会更加沉默和内缩——你越是焦虑就越不说话，把所有问题关在脑袋里反复推演。你习惯了一个人处理一切，因为觉得说出来也只是给别人添麻烦。但你需要学会在外部寻找支持——不是所有事都需要你自己扛，信任别人也是对自己的善待。',rel:'你是"细节里的浪漫"——你的爱从不轰轰烈烈，而是像春雨一样"润物细无声"：你记得对方的每一个小习惯，在对方开口之前就把事情做好了。但正因为太安静了，对方有时候需要更直白的表达才能收到你的心意。不是要你变成另一个人，只是偶尔把"我爱你"说出口，一切会不一样。',grow:'你的成长关键词是 <b>"表达"</b>。从"我在乎你"这四个字开始。',gold:'不说，但都做了。'}
+};
+
+const PURE={
+D:{name:'指挥官',oneliner:'你不是在等人跟——你是在确认方向后第一个冲出去的人。',ua:'你是人群中的 <b>天然指挥官</b>——目标感是你的本能，决断力是你的武器。你不怕做决定，不怕承担责任，不怕一个人走在前面。但注意：速度不是一切——偶尔慢下来，等等身后的人。'},
+I:{name:'社交家',oneliner:'你不需要麦克风——你本身就是舞台。',ua:'你是人群中的 <b>自然发光体</b>——你的存在本身就带着温度和光芒。你的核心优势是 <b>感染力 + 连接力</b>。但注意：发光的时候别忘了自己也需要充电。'},
+S:{name:'守护者',oneliner:'你不是喊冲的那个人，但你是所有人回头时永远站在那里的人。',ua:'你是 <b>深沉而稳定的守护者</b>——力量不在音量上，在耐力上。你的核心优势是 <b>稳定 + 可靠</b>。是时候大声一点了——"我的看法是___"值得被听见。'},
+C:{name:'分析师',oneliner:'别人上头的时候你还能冷静地问——这个逻辑对吗？',ua:'你是 <b>冷静的分析师</b>——世界对你来说是需要解开的谜题。你的核心优势是 <b>精确 + 严谨</b>。但别忘了：世界需要的不总是"完美"，有时候"足够好"比"再改一次"更聪明。'}
+};
+
+const MATCH={
+DI:{best:'ISC',score:92,desc:'ISC型的温暖和稳定完美接住你的速度和热情——你们像风和大地。你负责奔跑和探索，TA负责接纳和扎根。在这段关系里，你不需要放慢脚步，因为有人会用自己的方式跟上你、托住你。'},sec:'SC',secScore:88,secDesc:'SC型的精准和耐心能帮你把速度转化为成果。你的冲动需要TA的冷静来校准，你的热情需要TA的细致来落地。你们在一起时，快与慢不是冲突而是互补——TA把方向感变成每一步踏实的脚印。',
+ID:{best:'SC',score:90,desc:'SC型的稳重和细致刚好接住你的热情和速度。当你点子太多、方向太杂的时候，TA就是你的定盘星——帮你理清优先级，把发散的能量汇聚成一条清晰的河流。'},sec:'ISC',secScore:86,secDesc:'ISC型既能理解你的社交需求，又能给你稳定的后方。TA不嫉妒你的光芒，反而愿意在你发光的时候帮你看着脚下的路。你在前场奔跑时，TA为你守住了后方一切周全。',
+DS:{best:'IC',score:90,desc:'IC型的创意和品质感能让你的沉稳多一抹亮色。你习惯了稳重和计划，而TA带来的灵感就像在灰色画布上泼了一笔意想不到的色彩。TA帮你在不动摇底色的前提下，活得更自由一些。'},sec:'IS',secScore:85,secDesc:'IS型的温暖和耐心让你在长期奋斗中有温暖的港湾。你从不轻易喊累，但TA能看出你什么时候需要休息。与TA在一起，你不需要解释为什么沉默，TA会安静地陪你坐着。',
+SD:{best:'IC',score:88,desc:'IC型让坚持有方向、有品质。你已经有持久的耐力，而TA为你的马拉松增加了创意的补给站。当你被惯性困住时，TA用新的视角让你看到不一样的可能——坚守不止是重复，也可以有惊喜。'},sec:'IS',secScore:84,secDesc:'IS型的温暖让你在沉默坚持中有被理解的感觉。你习惯了什么都不说，但TA能从你的表情里读出你的疲惫。跟TA在一起，沉默不再是一种孤独，而是一种被允许的状态。',
+DC:{best:'IS',score:90,desc:'IS型的温暖和耐心能融化你的理性外壳。你习惯了用逻辑保护自己，但TA不急于突破，只是用恒久的温柔一点一点融化你的防线。TA不评判你的冷静，只是静静地告诉你——在这里，你不必事事都算清楚。'},sec:'SI',secScore:86,secDesc:'SI型的稳定温柔让你在追求卓越的路上不孤独。你习惯了一个人扛着高标准前行，而TA就是那个默默走在旁边、帮你分担重量的人。你不是变弱了，而是找到了一个不用逞强的地方。',
+CD:{best:'IS',score:88,desc:'IS型让你在冷静分析之外有了被温暖包裹的空间。你的世界建立在逻辑和标准的框架里，但TA让你发现——有些事不需要被分析，只需要被感受。TA的温暖像一床毯子，在你思考到疲惫时轻轻裹住你。'},sec:'SI',secScore:84,secDesc:'SI型的稳定和温柔让你在精密的世界里有柔软的着陆点。当你把自己逼得太紧的时候，TA的存在就是提醒你：世界不只有标准答案。在TA身边，你可以放下完美的枷锁，轻松地喘一口气。',
+IS:{best:'DC',score:90,desc:'DC型给你方向和安全感——你负责温暖，TA负责决断。当你因为照顾所有人的感受而犹豫不决时，TA帮你划出清晰的边界。你给出的爱需要一个骨架来支撑，而TA就是那个骨架。'},sec:'CD',secScore:86,secDesc:'CD型的理性和精确帮你做判断，你的温暖帮TA做连接。你们是棋逢对手的互补——TA帮你把善心变成有策略的行动，你帮TA把逻辑变成有温度的关系。一起搭档时，理性与感性的配比刚刚好。',
+SI:{best:'DC',score:86,desc:'DC型给你安全感和方向。你习惯于守护和等待，而TA就是那个主动牵起你的手、告诉你"跟我走"的人。在TA身边，你不必一直做那个最稳的人，可以偶尔依赖、偶尔任性。'},sec:'CD',secScore:84,secDesc:'CD型的精确让你的温柔有了方向和品质。你的好需要有策略地安放，才不会在错的地方浪费。TA帮你筛选出最值得投入的人和事，让你的善意不再是漫无目的地付出。',
+IC:{best:'DS',score:90,desc:'DS型让你的创意有了稳定的落地点。你的灵感像烟花，绚烂但容易消散——而TA就是那个帮你把烟花变成灯塔的人。TA的稳重让你的天马行空不至于演变成空想，而是每一步都扎实有力。'},sec:'SD',secScore:86,secDesc:'SD型的韧性让你的好想法不再只是想法。你的创意从不缺乏，缺的是把想法执行到底的耐力——而TA最擅长的就是"不放弃"。与TA搭档，你的每一个灵感都能找到抵达终点的路。',
+CI:{best:'DS',score:86,desc:'DS型让你的严谨有了温度和目标。你习惯在出手之前把所有细节都打磨到完美，而TA帮你看到——完成比完美更重要。TA的踏实和行动力让你从"再想想"的循环里走出来，真正去推动事情发生。'},sec:'SD',secScore:84,secDesc:'SD型的稳重和韧性能托住你高标准下的压力。你是天生的完美主义者，对自己严苛到苛刻——而TA就是那个在你自我怀疑时接住你的人。TA不催你放低标准，但会让你在追高的路上不那么孤单。',
+SC:{best:'DI',score:88,desc:'DI型让你从舒适区里被温柔地推出去。你习惯待在熟悉的领地，因为那里安全、可控——但TA的出现像一道光，照进了你从未探索过的世界。TA不会粗暴地拉你，而是用热情和信任告诉你：外面的世界没那么可怕。'},sec:'ID',secScore:84,secDesc:'ID型的热情和方向感让"稳"有了奔头。你的稳是一种力量，但有时也需要一个方向去安放。TA给你一个值得奔赴的目标——让你的稳定不再是静止，而是有节奏的推进。',
+CS:{best:'ID',score:86,desc:'ID型的热情和方向感让你的"稳"有了奔头。你习惯把一切都安排得井井有条，但有时会忘了问自己"这一切是为了什么"。TA的出现恰好回答了这个问题——TA的目标感和活力让你的精密齿轮转动得更有意义。'},sec:'DI',secScore:84,secDesc:'DI型的速度和感染力让你的精准有了更大的舞台。你的细致和严谨需要被更多人看见才有价值——而TA就是那个把你从幕后推到台前的人。TA的影响力加上你的品质感，能创造出真正令人惊叹的东西。',
+D:{best:'ISC',score:88,desc:'ISC型的温暖和耐心刚好接住你的速度和强势。你习惯了冲锋陷阵、说一不二，但再强的将领也需要一个能安心休整的后方。TA不跟你争主导权，而是用包容让你的锋芒不至于刺伤自己。在TA面前，你可以放下铠甲。'},
+I:{best:'SC',score:90,desc:'SC型的稳重和细致让你在热情之外有了安定的后方。你的世界繁花似锦、人来人往，但有时候热闹过后只剩疲惫。TA的沉默不是无趣，而是一种为你保留的安静空间。在TA那里，你不需要表演，不需要维持气氛。'},
+S:{best:'DC',score:90,desc:'DC型的方向感和决断力让你在温和之外有了依靠。你习惯为别人着想、为大局让步，但有时候你也需要一个替你拿主意的人。TA不犹豫、不含糊，在你温柔的外壳下成为你敢于依靠的那根柱子。'},
+C:{best:'IS',score:88,desc:'IS型的温暖和耐心让你的严谨有了温度和归属。你的世界由逻辑和标准构成，精确但不一定温暖。TA就像一道照进实验室的阳光，让你的严谨有了人情味。在TA身边，你不必一直保持正确，可以犯错、可以柔软。'}
+};
+
+// ══════════════════════════════════════════════════════════════ STATE ══════════════════════════════════════════════════════════════
+const QPP=1,TP=24; // 24 questions, one per page
+let userInfo=null,ans=[],curPage=0,shuffles=[];
+let sc=null,displaySc=null,label='',combo=null,labelPos=[],resultKey='',selectedQuote='';
+
+// ══════════════════════════════════════════════════════════════ UTILITY ══════════════════════════════════════════════════════════════
+function $(id){return document.getElementById(id)}
+function copyToClipboard(text){
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(text).catch(function(){fallbackCopy(text)});
+  }else{
+    fallbackCopy(text);
+  }
+}
+function fallbackCopy(text){
+  var ta=document.createElement('textarea');
+  ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy')}catch(e){}
+  document.body.removeChild(ta);
+}
+function getShareMessage(shareUrl){
+  return '我测了 DISC 性格，想看看我们合不合拍？来测一下 👇\n' + shareUrl;
+}
+function getCharImg(key){
+  var g=(userInfo&&userInfo.gender)||'m';
+  var entry=CHAR_IMG[key];
+  if(!entry)return'';
+  return entry[g]||entry.m||'';
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function toast(msg){let t=$('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>{t.style.display='none'},2500)}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active')}
+var dupPhoneData = null;
+var dupPhone = '';
+
+function viewOldReport(){
+  $('modal-dup-phone').classList.remove('active');
+  // Save current test type before overwriting with old report data
+  var currentType=resultKey;
+  if(dupPhoneData){
+    resultKey = dupPhoneData.disc_type ? dupPhoneData.disc_type.replace('型','') : resultKey;
+    label = dupPhoneData.disc_type || label;
+    if(dupPhoneData.scores){ sc=dupPhoneData.scores; displaySc=dupPhoneData.scores; }
+    // Keep current test name; PATCH DB to update name and gender
+    if(userInfo && userInfo.name && dupPhoneData.id){
+      var patchBody={name:userInfo.name};
+      if(userInfo.gender) patchBody.gender=userInfo.gender;
+      fetch(SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(dupPhoneData.id),{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify(patchBody)
+      }).catch(function(){});
+    }
+    combo = COMBOS[resultKey] || null;
+  }
+  sessionStorage.setItem('disc_unlocked','1');
+  if(dupPhone) sessionStorage.setItem('disc_unlock_phone', dupPhone);
+  // Auto-match from share link (using current test type, not old report type)
+  var shareParam=new URLSearchParams(location.search).get('share');
+  if(shareParam&&dupPhone){
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=phone,name,disc_type',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(invData){
+      if(invData&&invData.length>0){
+        var inviter=invData[0];
+        if(inviter.phone===dupPhone)return;
+        var score=calcMatchScore(currentType,inviter.disc_type?inviter.disc_type.replace('型',''):'');
+        var desc=getMatchDesc(score);
+        upsertMatch({user_phone:inviter.phone,match_phone:dupPhone,match_name:userInfo?userInfo.name:'',user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:currentType,score:score,description:desc});
+        upsertMatch({user_phone:dupPhone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:currentType,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc});
+      }
+    }).catch(function(){});
+  }
+  applyUnlock();
+}
+
+function overwriteReport(){
+  $('modal-dup-phone').classList.remove('active');
+  sessionStorage.setItem('disc_unlocked','1');
+  if(dupPhone) sessionStorage.setItem('disc_unlock_phone', dupPhone);
+  // PATCH directly by id when available (avoids the upsert round-trip in sendReport)
+  if(dupPhoneData&&dupPhoneData.id&&userInfo&&userInfo.phone){
+    var payload={
+      name:userInfo.name,
+      phone:userInfo.phone,
+      gender:userInfo.gender||'m',
+      disc_type:label||'',
+      scores:displaySc||{}
+    };
+    fetch(SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(dupPhoneData.id),{
+      method:'PATCH',headers:sbHeaders(),body:JSON.stringify(payload)
+    }).then(function(r){
+      if(r&&r.ok)toast('✅ 报告已更新');
+      else toast('⚠️ 更新失败');
+      // Auto-match from share link
+      var shareParam=new URLSearchParams(location.search).get('share');
+      if(shareParam&&dupPhone){
+        fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=phone,name,disc_type',{
+          headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+        }).then(function(r2){return r2.json()}).then(function(invData){
+          if(invData&&invData.length>0){
+            var inviter=invData[0];
+            if(inviter.phone===dupPhone)return;
+            var score=calcMatchScore(resultKey,inviter.disc_type?inviter.disc_type.replace('型',''):'');
+            var desc=getMatchDesc(score);
+            upsertMatch({user_phone:inviter.phone,match_phone:dupPhone,match_name:userInfo?userInfo.name:'',user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:resultKey,score:score,description:desc});
+            upsertMatch({user_phone:dupPhone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc});
+          }
+        }).catch(function(){});
+      }
+    }).catch(function(){toast('⚠️ 网络异常');});
+  } else {
+    sendReport();
+  }
+  applyUnlock();
+}
+
+function backToResults(){
+  showScreen('screen-results');
+  // If already unlocked, show badge + hide lock overlay without redirecting
+  if(sessionStorage.getItem('disc_unlocked')==='1'){
+    setTimeout(function(){
+      var lockEl=document.getElementById('lock-unified');
+      if(lockEl)lockEl.style.display='none';
+      var previewEl=document.getElementById('lock-preview-blocks');
+      if(previewEl)previewEl.style.display='none';
+      var badgeEl=document.getElementById('badge-unified');
+      if(badgeEl)badgeEl.style.display='inline-flex';
+      // Show re-entry button to full report
+      var btnReport=document.getElementById('btn-back-to-report');
+      if(btnReport)btnReport.style.display='inline-flex';
+      // Populate share URL
+      generateAndShowShareUrl();
+    },100);
+  }
+}
+
+function toggleIntro(){
+  $('intro-body').classList.toggle('open');
+  $('intro-arrow').classList.toggle('open');
+}
+
+function closeModal(id){$(id).classList.remove('active')}
+
+// ══════════════════════════════════════════════════════════════ WELCOME / NAME ══════════════════════════════════════════════════════════════
+function showNameModal(){$('modal-name').classList.add('active')}
+
+function submitName(){
+  let name=$('input-name').value.trim();
+  let gender=$('input-gender').value;
+  if(!name){toast('请输入你的称呼');return}
+  userInfo={name,phone:null,gender:gender||'m',time:new Date().toLocaleString('zh-CN')};
+  $('modal-name').classList.remove('active');
+  startTest();
+}
+
+// ══════════════════════════════════════════════════════════════ TEST ══════════════════════════════════════════════════════════════
+function startTest(){
+  // Reset unlock state for new test
+  sessionStorage.removeItem('disc_unlocked');
+  sessionStorage.removeItem('disc_unlock_phone');
+  if(userInfo)userInfo.phone=null;
+  shuffle(QBANK);
+  ans=QBANK.map(()=>({most:null,least:null}));
+  showScreen('screen-test');
+  $('progress-wrap').style.display='block';
+  $('nav-bar').style.display='flex';
+  shuffles=ans.map(()=>shuffle([0,1,2,3]));
+  buildQuestions();
+  showPage(0);
+  window.scrollTo(0,0);
+}
+
+function buildQuestions(){
+  let c=$('questions-container');c.innerHTML='';
+  for(let i=0;i<QBANK.length;i++){
+    let sec=document.createElement('div');sec.className='q-section';sec.id='qs-'+i;
+    let q=QBANK[i],sh=shuffles[i];
+    let html='<div class="q-block" id="qb-'+i+'">';
+    html+='<div class="q-num">第 '+(i+1)+' / '+QBANK.length+' 题</div>';
+    html+='<div class="q-text" style="text-align:center">'+q.h+'</div>';
+    html+='<div class="q-dual-options" id="qopts-'+i+'">';
+    sh.forEach(j=>{
+      let opt=q.o[j];
+      html+='<div class="q-dual-row" id="qdr-'+i+'-'+opt.d+'">';
+      html+='<div class="q-dual-side q-dual-most" onclick="pickMost('+i+',\''+opt.d+'\')">';
+      html+='<div class="dual-dot" id="dot-m-'+i+'-'+opt.d+'"></div>';
+      html+='<span class="dual-side-label" id="lbl-m-'+i+'-'+opt.d+'">最像我</span>';
+      html+='</div>';
+      html+='<div class="q-dual-text">'+opt.t+'</div>';
+      html+='<div class="q-dual-side q-dual-least" onclick="pickLeast('+i+',\''+opt.d+'\')">';
+      html+='<div class="dual-dot" id="dot-l-'+i+'-'+opt.d+'"></div>';
+      html+='<span class="dual-side-label" id="lbl-l-'+i+'-'+opt.d+'">最不像我</span>';
+      html+='</div>';
+      html+='</div>';
+    });
+    html+='</div></div>';
+    sec.innerHTML=html;
+    c.appendChild(sec);
+  }
+}
+
+function pickMost(i,d){
+  let a=ans[i];
+  if(a.most===d){a.most=null}
+  else{if(a.least===d)a.least=null;a.most=d}
+  applyOptState(i);
+}
+function pickLeast(i,d){
+  let a=ans[i];
+  if(a.least===d){a.least=null}
+  else{if(a.most===d)a.most=null;a.least=d}
+  applyOptState(i);
+}
+
+function applyOptState(i){
+  let a=ans[i],q=QBANK[i];
+  q.o.forEach(opt=>{
+    let d=opt.d,row=$('qdr-'+i+'-'+d);if(!row)return;
+    row.classList.remove('most-selected','least-selected');
+    let dotM=$('dot-m-'+i+'-'+d),lblM=$('lbl-m-'+i+'-'+d);
+    let dotL=$('dot-l-'+i+'-'+d),lblL=$('lbl-l-'+i+'-'+d);
+    if(!dotM||!dotL)return;
+    dotM.classList.remove('selected');lblM.classList.remove('selected');
+    dotL.classList.remove('selected');lblL.classList.remove('selected');
+    if(a.most===d){
+      row.classList.add('most-selected');
+      dotM.classList.add('selected');lblM.classList.add('selected');
+    }
+    if(a.least===d){
+      row.classList.add('least-selected');
+      dotL.classList.add('selected');lblL.classList.add('selected');
+    }
+  });
+  let bl=$('qb-'+i);bl.classList.toggle('done',!!(a.most&&a.least));
+  updateProgress();
+}
+
+function updateProgress(){
+  let done=ans.filter(a=>a.most&&a.least).length;
+  $('progress-fill').style.width=Math.round(done/QBANK.length*100)+'%';
+  $('progress-text').textContent=done+' / '+QBANK.length;
+}
+
+function showPage(p){
+  document.querySelectorAll('.q-section').forEach(s=>s.classList.remove('active'));
+  $('qs-'+p).classList.add('active');curPage=p;
+  $('nav-prev').style.visibility=p===0?'hidden':'visible';
+  let bn=$('nav-next');
+  if(p===TP-1){bn.textContent='✨ 查看结果';bn.className='nav-btn primary';bn.onclick=submitTest}
+  else{bn.textContent='下一题 →';bn.className='nav-btn';bn.onclick=goNext}
+  $('nav-page').textContent=(p+1)+' / '+TP;
+  window.scrollTo(0,0);
+}
+
+function goNext(){
+  if(!ans[curPage].most||!ans[curPage].least){toast('请选出最像你和最不像你的选项');return}
+  showPage(curPage+1);
+}
+function goPrev(){showPage(curPage-1)}
+
+// ══════════════════════════════════════════════════════════════ LOGIN ══════════════════════════════════════════════════════════════
+function showLoginModal(){$('modal-login').classList.add('active')}
+function loginUser(){
+  var phone=$('login-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+  fetch(SB_URL+'/rest/v1/unlocks?select=*&phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc&limit=1',{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
+    .then(function(r){return r.json()})
+    .then(function(data){
+      if(!data||data.length===0){toast('未找到该手机号的记录，请先完成测试');return}
+      $('modal-login').classList.remove('active');
+      var userData=data[0];
+      userInfo={name:userData.name,phone:userData.phone,gender:userData.gender||'m',time:userData.created_at};
+      displaySc=userData.scores||{};
+      // Derive type from scores — match submitTest() logic exactly
+      var dims=['D','I','S','C'];
+      var sorted=dims.slice().sort(function(a,b){return (displaySc[b]!=null?displaySc[b]:50)-(displaySc[a]!=null?displaySc[a]:50)});
+      var pos=sorted.filter(function(d){return (displaySc[d]!=null?displaySc[d]:50)>50});
+      label=(pos.length>0?pos:sorted.slice(0,2)).join('')+'型';
+      resultKey=pos.length>0?(pos.length>=2?pos[0]+pos[1]:pos[0]):(sorted[0]+(sorted[1]||''));
+      var key=resultKey;
+      var fam=CHAR_FAMILY[key]||'';
+      var main=(resultKey||'D')[0];
+      combo=COMBOS[resultKey]||null;
+      if(!combo&&resultKey.length===2){
+        var sw=resultKey[1]+resultKey[0];
+        if(COMBOS[sw]){combo=COMBOS[sw];resultKey=sw;}
+      }
+      if(!combo){
+        var allSorted=Object.keys(displaySc||{}).sort(function(a,b){return (displaySc[b]||50)-(displaySc[a]||50)});
+        for(var i=1;i<allSorted.length;i++){var k=key[0]+allSorted[i];if(COMBOS[k]){combo=COMBOS[k];break;}}
+      }
+      selectedQuote='';
+      sessionStorage.setItem('disc_unlocked','1');
+      sessionStorage.setItem('disc_unlock_phone',phone);
+      // Auto-match from share link
+      var urlParams=new URLSearchParams(location.search);
+      var shareParam=urlParams.get('share');
+      if(shareParam){
+        fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+          headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+        }).then(function(r){return r.json()}).then(function(invData){
+          if(invData&&invData.length>0){
+            var inviter=invData[0];
+            if(inviter.phone===phone){toast("这是你自己发出的邀请链接，已为你登录个人报告");return;}
+            var score=calcMatchScore(resultKey,inviter.disc_type?inviter.disc_type.replace('型',''):'');
+            var desc=getMatchDesc(score);
+            upsertMatch({user_phone:inviter.phone,match_phone:phone,match_name:userInfo.name,user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:resultKey,score:score,description:desc});
+            upsertMatch({user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc});
+            loadMatches(phone);
+          }
+        }).catch(function(){});
+      }
+      renderPersonalPage(userData);
+      showScreen('screen-personal');
+    }).catch(function(e){toast('登录失败，请重试');console.log(e)});
+}
+
+// ══════════════════════════════════════════════════════════════ RESULTS ══════════════════════════════════════════════════════════════
+function submitTest(){
+  let allDone=ans.filter(a=>a.most&&a.least).length;
+  if(allDone<QBANK.length){toast('还有 '+(QBANK.length-allDone)+' 题没选完');return}
+
+  // ═══ DISC Scoring (24 questions only) ═══
+  sc={D:0,I:0,S:0,C:0};
+  QBANK.forEach((q,i)=>{
+    if(q.type!=='disc')return;
+    let a=ans[i];
+    if(a.most)sc[a.most]+=3;
+    if(a.least)sc[a.least]-=3;
+  });
+
+  // Display scores (0-100 normalization, 24 questions: range = -72~72)
+  displaySc={};
+  ['D','I','S','C'].forEach(function(d){
+    displaySc[d]=Math.round((sc[d]+72)/144*100);
+  });
+
+  let dims=['D','I','S','C'];
+  let posDims=dims.filter(d=>sc[d]>0);
+  labelPos=posDims.length>0?posDims.sort((a,b)=>sc[b]-sc[a]):dims.slice().sort((a,b)=>sc[b]-sc[a]);
+  label=labelPos.join('')+'型';
+
+  let allSorted=dims.slice().sort((a,b)=>sc[b]-sc[a]);
+  let main=allSorted[0];
+
+  // Build resultKey from POSITIVE dimensions only
+  if(posDims.length===0){
+    resultKey=allSorted[0]+(allSorted[1]||'');
+  }else if(posDims.length===1){
+    resultKey=posDims[0];
+  }else{
+    resultKey=posDims[0]+posDims[1];
+  }
+
+  combo=COMBOS[resultKey]||null;
+  if(!combo&&resultKey.length===2){
+    var sw=resultKey[1]+resultKey[0];
+    if(COMBOS[sw]){combo=COMBOS[sw];resultKey=sw;}
+  }
+  if(!combo){
+    for(let i=1;i<allSorted.length;i++){
+      let k=main+allSorted[i];
+      if(COMBOS[k]){resultKey=k;combo=COMBOS[k];break;}
+    }
+  }
+
+  showScreen('screen-results');
+  renderResults();
+  // checkHepaiShare(); // blocked pending 合拍度 flow redesign
+  window.scrollTo(0,0);
+}
+
+function generateDetailedReport(combo, key, main) {
+  if (!combo) {
+    let p = PURE[main];
+    if (p) return '<div class="dr-intro"><p>' + p.ua + '</p></div>';
+    return '<div class="dr-intro"><p>你的性格类型分析。</p></div>';
+  }
+
+  // Opening — already praise-focused
+  let opening = combo.id.replace(/<[^>]*>/g, '').trim();
+
+  // Life: first sentence = praise, rest = suggestion
+  let lifeSents = combo.life.split('。').filter(s => s.trim());
+  let lifePraise = lifeSents[0] || '';
+  let lifeSugg = lifeSents.slice(1).join('。').trim();
+
+  // Work: first sentence = praise, rest = suggestion
+  let workSents = combo.work.split('。').filter(s => s.trim());
+  let workPraise = workSents[0] || '';
+  let workSugg = workSents.slice(1).join('。').trim();
+
+  let growText = combo.grow;
+
+  let natureMap = { D: '支配', I: '影响', S: '稳健', C: '谨慎' };
+  let mainDim = main || key[0] || 'D';
+  let badge = '<span class="dim-badge" style="background:var(--' + mainDim.toLowerCase() + '-dim);color:var(--' + mainDim.toLowerCase() + ')">' + mainDim + ' · ' + natureMap[mainDim] + '</span>';
+
+  let html = '<div class="dr-intro"><p>' + opening + '</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">🌿 自然状态 ' + badge + '</div><p>' + lifePraise;
+  if (lifeSugg) html += ' 不过，' + lifeSugg + '。';
+  html += ' 这种"有方向感但不急躁"的特质，让你在生活中既能稳步推进，又不失人情味。</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">💼 工作中</div><p>' + workPraise;
+  if (workSugg) html += ' 建议：' + workSugg;
+  html += ' 若能找到一个与你互补的搭档（比如在你有短板的地方能补位的队友），你的效能会翻倍。</p></div>';
+
+  html += '<div class="dr-section"><div class="dr-section-title">🌱 成长方向</div><p>' + growText;
+  html += ' 同时也提醒你：优势用过头就是劣势——学会在"坚持自我"和"调整适应"之间灵活切换。你的目标不是变成另一个人，而是成为更好的自己。</p></div>';
+
+  return html;
+}
+
+function pickQuote(key){
+  if(selectedQuote)return selectedQuote;
+  let pool=CHAR_QUOTES[key]||[''];
+  selectedQuote=pool[Math.floor(Math.random()*pool.length)];
+  return selectedQuote;
+}
+
+function renderResults(){
+  let h='';
+  let key=resultKey||'D';
+  let charName=CHAR_NAME[key]||'';
+  let family=CHAR_FAMILY[key]||'';
+  selectedQuote='';let quote=pickQuote(key);
+  let main=(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a]):['D'])[0];
+
+  // 1. Top box: header + radar float + detailed report + watermark bg
+  let natureMap={D:'支配',I:'影响',S:'稳健',C:'谨慎'};
+  let firstDim=key[0];
+  let natureText=firstDim+' 型性格本源 · '+natureMap[firstDim]+' · '+family;
+  let mainDim=main||key[0]||'D';
+  let bgUrl=FAMILY_IMG[mainDim]||'';
+  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat">';
+  var userName=(userInfo&&userInfo.name)?userInfo.name:'';
+  if(userName)h+='<div style="text-align:center;font-size:15px;color:var(--text2);letter-spacing:.04em;margin-bottom:4px;position:relative;z-index:1">'+userName+'，你的性格类型是</div>';
+  h+='<div class="rh-type" style="text-align:center;font-family:var(--font-heading);font-size:42px;font-weight:700;color:var(--gold);letter-spacing:.06em;line-height:1.1;margin-bottom:2px;position:relative;z-index:1">'+label+'</div>';
+  h+='<div class="rh-nature" style="text-align:center;font-size:13px;color:var(--text2);letter-spacing:.04em;margin-bottom:10px;position:relative;z-index:1">✦ 属于 '+natureText+'</div>';
+  h+='<div class="rt-radar"><canvas id="radar-canvas" width="200" height="240"></canvas></div>';
+  if(combo){
+    h+='<div class="rt-report">'+generateDetailedReport(combo,key,main)+'</div>';
+  } else {
+    let p=PURE[main];
+    if(p)h+='<div class="rt-report"><div class="dr-intro"><p>'+p.ua+'</p></div></div>';
+  }
+  h+='</div>';
+
+  // 4. Unified paywall with partial content preview
+  if(combo){
+    // Prepare preview data
+    charName = combo.name;
+    var charOneLiner = combo.oneliner;
+    var relPreview = RELATION_STYLES[resultKey] || '';
+    var pressPreview = combo.pressure || '';
+    var matchData = MATCH[resultKey];
+    var matchPreview = matchData ? matchData.desc : '';
+
+    // Clip function: truncate to last period or comma
+    function clipText(text, maxLen) {
+      if (!text) return '';
+      if (text.length <= maxLen) return text;
+      var clipped = text.substring(0, maxLen);
+      var lastPeriod = Math.max(clipped.lastIndexOf('\u3002'), clipped.lastIndexOf('\uFF0C'), clipped.lastIndexOf('\u2026'));
+      if (lastPeriod > maxLen * 0.6) clipped = clipped.substring(0, lastPeriod);
+      return clipped + '\u2026';
+    }
+
+    h+='<div class="analysis-section analysis-lock" id="section-unified">';
+    h+='<h4>\uD83D\uDCDC 完整报告 <span class="unlock-badge" id="badge-unified" style="display:none">\u2705 已解锁</span></h4>';
+
+    h+='<div style="position:relative">';
+
+    h+='<div id="lock-preview-blocks">';
+
+    // Block 1: Character card
+    h+='<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">';
+    h+='<div style="font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:4px">\uD83C\uDFAD 专属角色卡 \u00B7 '+charName+'</div>';
+    h+='<p style="font-size:12px;color:var(--text);line-height:1.8;margin:0">'+clipText(charOneLiner, 55)+'</p>';
+    h+='</div>';
+
+    // Block 2: Relationship world
+    if (relPreview) {
+      h+='<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">';
+      h+='<div style="font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:4px">\uD83D\uDC95 情感世界</div>';
+      h+='<p style="font-size:12px;color:var(--text);line-height:1.8;margin:0">'+clipText(relPreview, 55)+'</p>';
+      h+='</div>';
+    }
+
+    // Block 3: Pressure state
+    if (pressPreview) {
+      h+='<div style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">';
+      h+='<div style="font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:4px">\uD83D\uDD25 压力状态</div>';
+      h+='<p style="font-size:12px;color:var(--text);line-height:1.8;margin:0">'+clipText(pressPreview, 55)+'</p>';
+      h+='</div>';
+    }
+
+    // Block 4: Match recommendation
+    if (matchPreview) {
+      h+='<div style="margin-bottom:12px">';
+      h+='<div style="font-size:12px;font-weight:700;color:var(--rose-deep);margin-bottom:4px">\uD83D\uDC91 适配推荐</div>';
+      h+='<p style="font-size:12px;color:var(--text);line-height:1.8;margin:0">'+clipText(matchPreview, 55)+'</p>';
+      h+='</div>';
+    }
+
+    h+='</div>'; // end lock-preview-blocks
+
+    // Gradient mask + unlock button
+    h+='<div class="lock-overlay" id="lock-unified" style="position:absolute;bottom:0;left:0;width:100%;padding-top:60px;background:linear-gradient(transparent,rgba(255,255,255,.9) 40%,rgba(255,255,255,.98) 100%);display:flex;flex-direction:column;align-items:center">';
+    h+='<button class="lock-btn" onclick="showUnlock()" style="font-size:14px;padding:10px 28px">查看我的完整报告</button>';
+    h+='<div style="font-size:11px;color:var(--text3);margin-top:8px">解锁全部 4 大板块 \u00B7 约 3000 字专业解读</div>';
+    h+='</div>';
+
+    h+='</div>'; // end position:relative wrapper
+    h+='</div>'; // end analysis-section
+  }
+
+  // 4.5. Invited user prompt (if came via ?share=)
+  if((window._shareInviterData || window._pendingShareId) && sessionStorage.getItem('disc_unlocked')!=='1'){
+    var inviterName2=((window._shareInviterData&&window._shareInviterData.name)||'好友');
+    h+='<div style="background:linear-gradient(135deg,rgba(201,169,110,.12),rgba(212,160,168,.10));border:1.5px solid var(--gold-light);border-radius:var(--radius);padding:14px 16px;margin-bottom:14px;text-align:center">';
+    h+='<div style="font-size:13px;color:var(--text);line-height:1.8;font-weight:500">📨 '+inviterName2+' 邀请你做合拍分析</div>';
+    h+='<div style="font-size:12px;color:var(--text2);line-height:1.7;margin-top:4px">输入手机号完成身份认证后，系统将自动关联你与 '+inviterName2+' 的合拍度结果。</div>';
+    h+='<button class="btn btn-gold btn-sm" onclick="showUnlock()" style="margin-top:10px">📱 输入手机号 · 解锁合拍度</button>';
+    h+='</div>';
+  }
+
+  // 5. 合拍度 section
+  if(sessionStorage.getItem('disc_unlocked')==='1'){
+    h+='<div class="hepai-box" id="hepai-share-box"><h3>💑 合拍度测试 <span style="font-size:11px;color:var(--s);font-weight:400">✅ 已解锁</span></h3>';
+    h+='<div class="hepai-intro">邀请好友测试，看看你们的性格合拍度有多高。</div>';
+    h+='<div id="hepai-share-url" style="display:none">';
+    h+='<div class="hepai-url" id="hepai-url-text"></div>';
+    h+='<button class="hepai-copy" onclick="copyHepaiUrl()">📋 复制邀请链接</button>';
+    h+='</div>';
+    h+='<button class="hepai-compare" id="btn-hepai-invite" onclick="generateAndCopyShareUrl()">📋 复制邀请链接</button>';
+    h+='</div>';
+  } else {
+    h+='<div class="hepai-box" id="hepai-share-box"><h3>💑 合拍度测试</h3>';
+    h+='<div class="hepai-intro">邀请好友测试，看看你们的性格合拍度有多高。</div>';
+    h+='<div id="hepai-share-url" style="display:none">';
+    h+='<div class="hepai-url" id="hepai-url-text"></div>';
+    h+='<button class="hepai-copy" onclick="copyHepaiUrl()">📋 复制邀请链接</button>';
+    h+='</div>';
+    h+='<button class="hepai-compare" id="btn-hepai-invite" onclick="showHepaiShare()">📋 复制邀请链接</button>';
+    h+='</div>';
+  }
+
+  $('results-content').innerHTML=h;
+  setTimeout(()=>{drawRadar()},100);
+}
+
+// ══════════════════════════════════════════════════════════════ RADAR ══════════════════════════════════════════════════════════════
+function drawRadarPersonal(){if(displaySc)drawRadarCore('radar-canvas-personal')}
+function drawRadar(cvsId){
+  cvsId=cvsId||'radar-canvas';
+  drawRadarCore(cvsId);
+}
+function drawRadarCore(cvsId){
+  let cvs=$(cvsId);if(!cvs)return;
+  let dpr=window.devicePixelRatio||1;
+  let W=parseInt(cvs.getAttribute('width')),H=parseInt(cvs.getAttribute('height'));
+  cvs.width=W*dpr;cvs.height=H*dpr;
+  let ctx=cvs.getContext('2d');
+  ctx.scale(dpr,dpr);
+  let w=W,h=H;
+
+  let dims=['D','I','S','C'];
+  let colors={D:'#c0392b',I:'#d68910',S:'#1e8449',C:'#2471a3'};
+  // Use displayScores (0-100) for radar
+  var ds=displaySc||{};
+  var mx=60; // zoomed range (20-80) to amplify visual spread
+
+  let padL=18,padR=10,padT=22,padB=20;
+  let plotW=w-padL-padR,plotH=h-padT-padB;
+  let gap=plotW/(dims.length-1);
+  let zeroY=padT+plotH/2;
+
+  // Background
+  ctx.fillStyle='rgba(201,169,110,0.04)';
+  ctx.fillRect(padL,padT,plotW,plotH/2);
+  ctx.fillStyle='rgba(36,113,163,0.04)';
+  ctx.fillRect(padL,zeroY,plotW,plotH/2);
+
+  // Grid lines with score labels (zoomed to 20-80 range)
+  ctx.font='bold 10px sans-serif';ctx.textAlign='right';
+  var gridScores=[80,70,60,50,40,30,20];
+  gridScores.forEach(function(s){
+    var y=zeroY-(s-50)*plotH/mx;
+    ctx.strokeStyle=(s===50)?'#c9a96e':'rgba(200,180,170,.3)';ctx.lineWidth=(s===50)?1:0.5;
+    if(s===50)ctx.setLineDash([4,3]);else ctx.setLineDash([]);
+    ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(w-padR,y);ctx.stroke();
+    ctx.fillStyle=(s===50)?'#c9a96e':'#b0a09c';
+    ctx.fillText(s,padL-2,y+4);
+  });
+  ctx.setLineDash([]);
+
+  // Vertical lines
+  ctx.strokeStyle='#1a1a22';ctx.lineWidth=0.5;
+  dims.forEach((d,i)=>{if(i>0){let x=padL+i*gap;ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,h-padB);ctx.stroke()}});
+
+  // Data points & labels
+  var pts=[];
+  dims.forEach(function(d,i){
+    var x=padL+i*gap;
+    var val=ds[d]||50;
+    var y=zeroY-(val-50)*(plotH/mx);
+    pts.push({x:x,y:y,d:d});
+
+    ctx.fillStyle=d===labelPos[0]?'#c9a96e':colors[d];
+    var labSz=(d===labelPos[0])?13:11;
+    ctx.font='bold '+labSz+'px sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText(d,x,h-padB+14);
+
+    ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);
+    ctx.fillStyle=colors[d];ctx.fill();
+    ctx.strokeStyle='#08080a';ctx.lineWidth=1.5;ctx.stroke();
+
+    // (data point value label removed - show shape only)
+  });
+
+  // Line
+  ctx.strokeStyle='#5ba8a0';ctx.lineWidth=2;ctx.lineJoin='round';
+  ctx.beginPath();
+  pts.forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)});
+  ctx.stroke();
+
+  // Area
+  ctx.lineTo(pts[pts.length-1].x,zeroY);
+  ctx.lineTo(pts[0].x,zeroY);
+  ctx.closePath();
+  let grad=ctx.createLinearGradient(0,padT,0,h-padB);
+  grad.addColorStop(0,'rgba(91,168,160,0.12)');
+  grad.addColorStop(0.5,'rgba(91,168,160,0.03)');
+  grad.addColorStop(1,'rgba(91,168,160,0.08)');
+  ctx.fillStyle=grad;ctx.fill();
+}
+
+function showUnlock(){$('modal-unlock').classList.add('active')}
+
+function doUnlock(){
+  let phone=$('input-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+
+  // Write session immediately
+  sessionStorage.setItem('disc_unlocked','1');
+  if(userInfo)userInfo.phone=phone;
+  sessionStorage.setItem('disc_unlock_phone',phone);
+  $('modal-unlock').classList.remove('active');
+
+  // Check for existing record
+  fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id,name,disc_type,scores&phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(data){
+    var isNew=!data||data.length===0;
+
+    if(!isNew){
+      dupPhoneData = data[0];
+      dupPhone = phone;
+      // PATCH update name and gender to current test values before showing modal
+      if(userInfo && userInfo.name && data[0].id){
+        var patchBody={name:userInfo.name};
+        if(userInfo.gender) patchBody.gender=userInfo.gender;
+        fetch(SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(data[0].id),{
+          method:'PATCH',headers:sbHeaders(),body:JSON.stringify(patchBody)
+        }).catch(function(){});
+      }
+      var el=document.getElementById('dup-old-name');
+      if(el)el.textContent = data[0].name || '未知';
+      $('modal-dup-phone').classList.add('active');
+      return;
+    }
+
+    // New user — save in background
+    toast('✅ 已解锁！');
+    sendReport().then(function(savedId){
+      var shareId=generateShareId();
+      var patchUrl=savedId
+        ? SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(savedId)
+        : SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone);
+      fetch(patchUrl,{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:shareId})
+      }).catch(function(e){console.log(e)});
+    });
+
+    // Auto-match from share link
+    var urlParams=new URLSearchParams(location.search);
+    var shareParam=urlParams.get('share');
+    if(shareParam){
+      fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+        headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+      }).then(function(r){return r.json()}).then(function(invData){
+        if(invData&&invData.length>0){
+          var inviter=invData[0];
+          if(inviter.phone===phone){toast("这是你自己发出的邀请链接，已为你登录个人报告");return;}
+          var score=calcMatchScore(resultKey,inviter.disc_type?inviter.disc_type.replace('型',''):'');
+          var desc=getMatchDesc(score);
+          upsertMatch({user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:resultKey,score:score,description:desc});
+          upsertMatch({user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc});
+        }
+      }).catch(function(){});
+    }
+
+    applyUnlock();
+  }).catch(function(e){
+    console.log('Unlock fetch error:', e);
+    toast('⚠️ 网络异常，报告已本地解锁');
+    applyUnlock();
+  });
+}
+function generateShareId(){
+  var chars='abcdefghijklmnopqrstuvwxyz0123456789';
+  var id='';
+  for(var i=0;i<8;i++){id+=chars[Math.floor(Math.random()*chars.length)]}
+  return id;
+}
+
+function showHepaiShare(){
+  // If already unlocked, skip modal and show share URL directly
+  if(sessionStorage.getItem('disc_unlocked')==='1'){
+    generateAndShowShareUrl();
+    return;
+  }
+  $('modal-hepai-share').classList.add('active');
+}
+
+function doHepaiShare(){
+  var phone=$('input-hepai-phone').value.trim();
+  if(!phone||phone.length<11){toast('请输入完整的11位手机号');return}
+
+  sessionStorage.setItem('disc_unlocked','1');
+  if(!userInfo)userInfo={};
+  userInfo.phone=phone;
+  sessionStorage.setItem('disc_unlock_phone',phone);
+
+  // 检查是否与邀请人是同一个手机号（自己发 fetch 获取邀请人手机号）
+  var shareInUrl = new URLSearchParams(location.search).get('share');
+  if (shareInUrl) {
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareInUrl)+'&select=phone&limit=1',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    }).then(function(r){return r.json()}).then(function(data){
+      if(data&&data.length>0&&data[0].phone===phone){
+        $('modal-hepai-share').classList.remove('active');
+        toast('这是你自己的手机号，已为你解锁');
+        applyUnlock();
+        return;
+      }
+      proceedWithDupCheck();
+    }).catch(function(){
+      proceedWithDupCheck();
+    });
+    return;
+  }
+  proceedWithDupCheck();
+
+  function proceedWithDupCheck(){
+  // Check for existing record FIRST (same pattern as doUnlock)
+  fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id,name,disc_type,scores&phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(data){
+    var isNew=!data||data.length===0;
+
+    if(!isNew){
+      // Existing record found — show dup-phone modal instead of overwriting
+      dupPhoneData = data[0];
+      dupPhone = phone;
+      // PATCH update name and gender to current test values before showing modal
+      if(userInfo && userInfo.name && data[0].id){
+        var patchBody={name:userInfo.name};
+        if(userInfo.gender) patchBody.gender=userInfo.gender;
+        fetch(SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(data[0].id),{
+          method:'PATCH',headers:sbHeaders(),body:JSON.stringify(patchBody)
+        }).catch(function(){});
+      }
+      var el=document.getElementById('dup-old-name');
+      if(el)el.textContent = data[0].name || '未知';
+      $('modal-hepai-share').classList.remove('active');
+      $('modal-dup-phone').classList.add('active');
+      return;
+    }
+
+    // New user — persist
+    $('modal-hepai-share').classList.remove('active');
+    toast('✅ 已解锁！正在生成邀请链接...');
+
+    sendReport().then(function(savedId){
+      // PATCH share_id using the record id (not phone) to avoid multi-row updates
+      var shareId=generateShareId();
+      var patchUrl=savedId
+        ? SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(savedId)
+        : SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone);
+      return fetch(patchUrl,{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:shareId})
+      }).then(function(){
+        // Auto-match from share link
+        var urlParams=new URLSearchParams(location.search);
+        var shareParam=urlParams.get('share');
+        if(shareParam){
+          fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(shareParam)+'&select=*',{
+            headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+          }).then(function(r){return r.json()}).then(function(invData){
+            if(invData&&invData.length>0){
+              var inviter=invData[0];
+              if(inviter.phone!==phone){
+                var score=calcMatchScore(resultKey,inviter.disc_type?inviter.disc_type.replace('型',''):'');
+                var desc=getMatchDesc(score);
+                upsertMatch({user_phone:inviter.phone,match_phone:phone,match_name:userInfo?userInfo.name:'',user_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',match_type:resultKey,score:score,description:desc});
+                upsertMatch({user_phone:phone,match_phone:inviter.phone,match_name:inviter.name||'',user_type:resultKey,match_type:inviter.disc_type?inviter.disc_type.replace('型',''):'',score:score,description:desc});
+              }
+            }
+          }).catch(function(){});
+        }
+
+        generateAndShowShareUrl();
+        var lockOverlay=$('lock-unified');
+        if(lockOverlay)lockOverlay.style.display='none';
+      }).catch(function(e){
+        console.log('share_id patch error:',e);
+        generateAndShowShareUrl();
+        var lockOverlay=$('lock-unified');
+        if(lockOverlay)lockOverlay.style.display='none';
+      });
+    });
+  }).catch(function(e){
+    console.log('HepaiShare fetch error:', e);
+    toast('⚠️ 网络异常，请重试');
+  });
+  }
+}
+
+function generateAndShowShareUrl(){
+  var phone=userInfo&&userInfo.phone;
+  if(!phone)return;
+
+  return fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id&phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(data){
+    var sid='';
+    if(data&&data.length>0&&data[0].share_id){
+      sid=data[0].share_id;
+    } else {
+      sid=generateShareId();
+      var recordId=data&&data.length>0?data[0].id:null;
+      var patchUrl=recordId
+        ? SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(recordId)
+        : SB_URL+'/rest/v1/unlocks?phone=eq.'+encodeURIComponent(phone);
+      fetch(patchUrl,{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:sid})
+      }).catch(function(){});
+    }
+    var shareUrl=location.origin+location.pathname+'?share='+sid;
+    var urlEl=$('hepai-url-text');
+    if(urlEl)urlEl.textContent=shareUrl;
+    var urlBox=$('hepai-share-url');
+    if(urlBox)urlBox.style.display='block';
+    var btn=$('btn-hepai-invite');
+    if(btn)btn.style.display='none';
+  }).catch(function(e){
+    console.log('fetch share_id error:',e);
+  });
+}
+
+function copyHepaiUrl(){
+  var url=$('hepai-url-text');
+  if(!url||!url.textContent){toast('请先生成邀请链接');return}
+  copyToClipboard(getShareMessage(url.textContent));
+  toast('✅ 邀请链接已复制，发送给好友即可');
+}
+
+function generateAndCopyShareUrl(){
+  var p=generateAndShowShareUrl();
+  if(p&&p.then){
+    p.then(function(){
+      var urlEl=$('hepai-url-text');
+      if(urlEl&&urlEl.textContent){
+        copyToClipboard(getShareMessage(urlEl.textContent));
+        toast('✅ 链接已复制');
+      }
+    });
+  }
+}
+
+function calcMatchScore(typeA,typeB){
+  var scores={'DD':50,'II':60,'SS':85,'CC':65,'DI':76,'ID':76,'DS':90,'SD':90,'DC':90,'CD':90,'IS':90,'SI':90,'IC':80,'CI':80,'SC':88,'CS':88};
+  var key=typeA+typeB,rev=typeB+typeA;
+  var score=scores[key]||scores[rev]||70;
+  var dimsA=typeA.split(''),dimsB=typeB.split('');
+  var overlap=dimsA.filter(function(d){return dimsB.indexOf(d)>=0}).length;
+  return Math.min(98,score+overlap*4);
+}
+
+function getMatchDesc(score){
+  if(score>=90)return '你们的性格高度互补，是非常合拍的组合！沟通和相处会非常顺畅，彼此能填补对方的短板。';
+  if(score>=80)return '你们有不错的性格契合度，相处会比较舒服。虽然有些差异，但恰好可以互相补充。';
+  if(score>=70)return '你们有各自的性格特点，需要一些相互理解。差异也是互补的机会，关键在于沟通。';
+  return '你们性格差异较大，但差异也可以成为互补。理解和尊重彼此的不同之处，关系会更融洽。';
+}
+
+function applyUnlock(){
+  showScreen('screen-report');
+  renderUnlockReport();
+}
+
+function renderUnlockReport(){
+  let key=resultKey||(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a])[0]:'')||'D';
+  selectedQuote=''; // Reset to prevent stale quote from previous key
+  let imgUrl=getCharImg(key);
+  let charName=CHAR_NAME[key]||'';
+  let family=CHAR_FAMILY[key]||'';
+  let quote=pickQuote(key);
+  let main=(sc?Object.keys(sc).sort((a,b)=>sc[b]-sc[a]):['D'])[0];
+
+  // Family color class matching the reference design
+  let familyClass='';
+  switch(family){
+    case '破军虎': familyClass='ftiger'; break;
+    case '焰羽凤': familyClass='fphoenix'; break;
+    case '抱山熊': familyClass='fbear'; break;
+    case '玄机鹰': familyClass='feagle'; break;
+  }
+
+  // Summary text — use full combo.id text
+  let summary='';
+  if(combo&&combo.id){
+    summary=combo.id.replace(/<[^>]*>/g,'').trim();
+  }else{
+    let p=PURE[main];
+    if(p)summary=p.oneliner||'';
+  }
+
+  // Format dimension scores — always show D/I/S/C in that order (0-100 scale)
+  let scoresHtml='';
+  if(displaySc){
+    let order=['D','I','S','C'];
+    scoresHtml=order.map(function(d){
+      return '<span class="s-item">'+(displaySc[d]||50)+' <span class="s-lbl">'+d+'</span></span>';
+    }).join('');
+  }else{
+    scoresHtml='<span class="s-item">0 <span class="s-lbl">D</span></span><span class="s-item">0 <span class="s-lbl">I</span></span><span class="s-item">0 <span class="s-lbl">S</span></span><span class="s-item">0 <span class="s-lbl">C</span></span>';
+  }
+
+  let h='';
+  h+='<div class="report-sc">';
+
+  // ── 1. Character Card (匹配角色卡设计_全预览) ──
+  let qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.origin+location.pathname);
+  h+='<div class="role-card'+(familyClass?' '+familyClass:'')+'" style="background-image:url('+imgUrl+')">';
+  h+='<div class="card-inner">';
+
+  // Image area (3:4 poster)
+  h+='<div class="card-image-area">';
+
+  // Top-left badge: character name (large) + DISC type + family (small)
+  h+='<div class="card-badge">';
+  h+='<span class="card-name">'+charName+'</span>';
+  h+='<span class="card-sub">'+label+' · '+family+'</span>';
+  h+='</div>';
+
+  // Golden quote at bottom of image
+  h+='<div class="card-quote"><span class="qm">"</span>'+quote+'<span class="qm">"</span></div>';
+
+  h+='</div>'; // card-image-area
+
+  // Bottom text area
+  h+='<div class="card-text-area">';
+
+  // Summary bubble
+  h+='<div class="card-summary-bubble">'+summary+'</div>';
+
+  // Dimension scores
+  h+='<div class="card-stats-row">'+scoresHtml+'</div>';
+
+  // Footer with QR
+  h+='<div class="card-footer">';
+  h+='<div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div>';
+  h+='<span>扫码测测你的专属人格</span>';
+  h+='</div>';
+
+  h+='</div>'; // card-text-area
+  h+='</div>'; // card-inner
+  h+='</div>'; // role-card
+
+  // ── 2. Emotional World (DISC-based) ──
+  var relStyle=RELATION_STYLES[resultKey];
+  var hasRel=combo&&combo.rel;
+  if(relStyle||hasRel){
+    h+='<div class="rsc-section"><h4>💕 情感世界</h4>';
+    if(relStyle){
+      h+='<p style="line-height:1.9;text-align:justify;color:var(--text2)">'+relStyle+'</p>';
+    }
+    if(hasRel){
+      h+='<p style="margin-top:8px">'+combo.rel+'</p>';
+    }
+    h+='</div>';
+  }
+
+  // ── 3. Stress State ──
+  if(combo&&combo.pressure){
+    h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
+  }
+
+  // ── 4. Match Recommendations ──
+  let m=MATCH[key]||null;
+  if(m){
+    h+='<div class="rsc-section"><h4>💑 适配推荐</h4>';
+    h+='<div class="analysis-match">';
+    h+='<div class="match-item"><div class="match-type">🏆 最适配：'+m.best+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">'+m.desc+'</div></div>';
+    if(m.sec)h+='<div class="match-item"><div class="match-type">🥈 次适配：'+m.sec+' <span class="m-score">'+m.secScore+'分</span></div><div class="match-desc">'+m.secDesc+'</div></div>';
+    h+='<div class="match-tip">💡 DISC适配只是参考——真正的感情匹配远比性格标签更丰富，沟通和理解才是关键。</div>';
+    h+='</div></div>';
+  }
+
+  h+='</div>';
+
+  // 合拍度分享区块
+  h+='<div class="hepai-box" style="margin-top:16px">';
+  h+='<h3>💑 合拍度测试</h3>';
+  h+='<div class="hepai-intro">邀请好友测试，看看你们的性格合拍度有多高。</div>';
+  h+='<button class="hepai-compare" onclick="generateAndCopyShareUrl()">📋 复制邀请链接</button>';
+  h+='</div>';
+
+  $('report-content').innerHTML=h;
+}
+
+// ══════════════════════════════════════════════════════════════ HEPAI ══════════════════════════════════════════════════════════════
+function showCompare(){
+  let input=prompt('请输入对方的DISC类型（如：DI、SC、IS等）：');
+  if(!input)return;
+  input=input.trim().toUpperCase().replace('型','').replace(' ','');
+  let valid=['DI','ID','DS','SD','DC','CD','IS','SI','IC','CI','SC','CS','D','I','S','C'];
+  if(!valid.includes(input)){toast('请输入正确的DISC类型');return}
+  compareHepai(label.replace('型',''),input);
+}
+
+function compareHepai(typeA,typeB){
+  let scores={'DD':50,'II':60,'SS':85,'CC':65,'DI':76,'ID':76,'DS':90,'SD':90,'DC':90,'CD':90,'IS':90,'SI':90,'IC':80,'CI':80,'SC':88,'CS':88};
+  let key=typeA+typeB,rev=typeB+typeA;
+  let score=scores[key]||scores[rev]||70;
+  let dimsA=typeA.split(''),dimsB=typeB.split('');
+  let overlap=dimsA.filter(d=>dimsB.includes(d)).length;
+  score=Math.min(98,score+overlap*4);
+
+  let desc=score>=90?'你们的性格高度互补，是非常合拍的组合！':score>=80?'你们有不错的性格契合度，沟通和相处会比较顺畅。':score>=70?'你们有各自的性格特点，需要一些相互理解和磨合。':'你们性格差异较大，但差异也可以成为互补，关键在于理解和沟通。';
+  let emoji=score>=90?'🏆':score>=80?'🥈':'🥉';
+
+  let tags='';
+  if(dimsA.includes('D')&&dimsB.includes('S'))tags+='<span class="hepai-tag">目标×耐心</span>';
+  if(dimsA.includes('I')&&dimsB.includes('C'))tags+='<span class="hepai-tag">热情×严谨</span>';
+  if(dimsA.includes('S')&&dimsB.includes('D'))tags+='<span class="hepai-tag">稳健×果断</span>';
+  if(dimsA.includes('C')&&dimsB.includes('I'))tags+='<span class="hepai-tag">精确×感染</span>';
+
+  let html='<h4>'+emoji+' 合拍度：'+typeA+' × '+typeB+'</h4>';
+  html+='<div class="hepai-score">'+score+'<span> / 100</span></div>';
+  html+='<div class="hepai-desc">'+desc+'</div>';
+  if(tags)html+='<div class="hepai-tags">'+tags+'</div>';
+
+  let r=$('hepai-result');
+  if(r){r.innerHTML=html;r.style.display='block';r.scrollIntoView({behavior:'smooth',block:'nearest'})}
+}
+
+
+// ══════════════════════════════════════════════════════════════ SUPABASE ══════════════════════════════════════════════════════════════
+const SB_URL='https://ihtlypzusfsgpieeomhi.supabase.co';
+const SB_KEY='sb_publishable_6Tu-LDqldC7AJMAjC0TXVQ_5gQql6Eu';
+function sbHeaders(){return{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'}}
+
+// ══════════════════════════════════════════════════════════════ PUSH ══════════════════════════════════════════════════════════════
+function sendReport(){
+  // NOTE: This function does internal GET→PATCH (upsert) as a data-integrity safety net.
+  // Callers MUST check for duplicates first — see doUnlock() and doHepaiShare().
+  if(!userInfo||!userInfo.phone)return Promise.resolve(null);
+  var payload={
+    name:userInfo.name,
+    phone:userInfo.phone,
+    gender:userInfo.gender||'m',
+    disc_type:label||'',
+    scores:displaySc||{}
+  };
+  // Check if phone already exists → update; otherwise insert
+  return fetch(SB_URL+'/rest/v1/unlocks?select=id&phone=eq.'+encodeURIComponent(userInfo.phone)+'&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(data){
+    if(data&&data.length>0){
+      // Update existing — use id (primary key) for reliable PATCH
+      var existingId=data[0].id;
+      return fetch(SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(existingId),{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify(payload)
+      }).then(function(r){
+        if(r&&!r.ok)console.log('[DB] error:',r.status);else console.log('[DB] saved');
+        return existingId;
+      });
+    } else {
+      // Insert new
+      return fetch(SB_URL+'/rest/v1/unlocks',{
+        method:'POST',headers:sbHeaders(),body:JSON.stringify(payload)
+      }).then(function(r){
+        if(r&&!r.ok){console.log('[DB] error:',r.status);return null;}
+        console.log('[DB] saved');
+        // Fetch the newly-created id for caller use
+        return fetch(SB_URL+'/rest/v1/unlocks?select=id&phone=eq.'+encodeURIComponent(userInfo.phone)+'&order=created_at.desc&limit=1',{
+          headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+        }).then(function(r2){return r2.json()}).then(function(d2){return d2&&d2.length>0?d2[0].id:null;});
+      });
+    }
+  }).catch(function(e){console.log('[DB] error:',e);return null;});
+}
+
+// ══════════════════════════════════════════════════════════════ MATCH UPSERT (dedup) ══════════════════════════════════════════════════════════════
+function upsertMatch(payload){
+  if(payload.user_phone===payload.match_phone)return;
+  // Dedup: check existing pair first, PATCH if exists, POST if new
+  var phoneA=payload.user_phone, phoneB=payload.match_phone;
+  return fetch(SB_URL+'/rest/v1/matches?select=id&user_phone=eq.'+encodeURIComponent(phoneA)+'&match_phone=eq.'+encodeURIComponent(phoneB)+'&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(existing){
+    if(existing&&existing.length>0){
+      return fetch(SB_URL+'/rest/v1/matches?id=eq.'+encodeURIComponent(existing[0].id),{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({score:payload.score,description:payload.description})
+      });
+    } else {
+      return fetch(SB_URL+'/rest/v1/matches',{method:'POST',headers:sbHeaders(),body:JSON.stringify(payload)});
+    }
+  }).catch(function(e){console.log('[Match] error:',e)});
+}
+
+// ══════════════════════════════════════════════════════════════ PERSONAL PAGE ══════════════════════════════════════════════════════════════
+function renderPersonalPage(userData){
+  var h='';
+  var key=resultKey||'D';
+  var charName=CHAR_NAME[key]||'';
+  var family=CHAR_FAMILY[key]||'';
+  var imgUrl=getCharImg(key);
+  var quote=selectedQuote||pickQuote(key);
+  var mainDim=key[0];
+
+  h+='<h2 style="text-align:center;font-family:var(--font-heading);color:var(--gold);margin-bottom:4px">'+userData.name+'的个人报告</h2>';
+  h+='<p style="text-align:center;font-size:13px;color:var(--text2);margin-bottom:20px">'+label+' · '+family+' · '+charName+'</p>';
+
+  // Character card
+  var familyClass='';
+  switch(family){
+    case '破军虎': familyClass='ftiger'; break;
+    case '焰羽凤': familyClass='fphoenix'; break;
+    case '抱山熊': familyClass='fbear'; break;
+    case '玄机鹰': familyClass='feagle'; break;
+  }
+  var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data='+encodeURIComponent(location.origin+location.pathname);
+  var summary='';
+  if(combo&&combo.id){summary=combo.id.replace(/<[^>]*>/g,'').trim();}
+  else{var p=PURE[mainDim];if(p)summary=p.oneliner||'';}
+
+  // Card
+  h+='<div class="role-card'+(familyClass?' '+familyClass:'')+'" style="background-image:url('+imgUrl+')">';
+  h+='<div class="card-inner">';
+  h+='<div class="card-image-area">';
+  h+='<div class="card-badge"><span class="card-name">'+charName+'</span><span class="card-sub">'+label+' · '+family+'</span></div>';
+  h+='<div class="card-quote"><span class="qm">"</span>'+quote+'<span class="qm">"</span></div>';
+  h+='</div>';
+  h+='<div class="card-text-area">';
+  h+='<div class="card-summary-bubble">'+summary+'</div>';
+  var scoresHtml='';
+  if(displaySc){
+    var order=['D','I','S','C'];
+    scoresHtml=order.map(function(d){return '<span class="s-item">'+(displaySc[d]||50)+' <span class="s-lbl">'+d+'</span></span>';}).join('');
+  }
+  h+='<div class="card-stats-row">'+scoresHtml+'</div>';
+  h+='<div class="card-footer"><div class="qr-icon"><img src="'+qrUrl+'" alt="QR" crossorigin="anonymous" loading="lazy"></div><span>扫码测测你的专属人格</span></div>';
+  h+='</div></div></div>';
+
+  // Radar + detailed report (same as results page)
+  var mainDim2=key[0]||'D';
+  var bgUrl=FAMILY_IMG[mainDim2]||'';
+  h+='<div class="result-top-box" style="background-image:url('+bgUrl+');background-size:100% auto;background-position:top center;background-repeat:no-repeat;margin-top:16px">';
+  h+='<div class="rt-radar"><canvas id="radar-canvas-personal" width="200" height="240"></canvas></div>';
+  if(combo){
+    h+='<div class="rt-report">'+generateDetailedReport(combo,key,mainDim2)+'</div>';
+  } else {
+    var p2=PURE[mainDim2];
+    if(p2)h+='<div class="rt-report"><div class="dr-intro"><p>'+p2.ua+'</p></div></div>';
+  }
+  h+='</div>';
+
+  // ── Emotional World (DISC-based) ──
+  var discKey2=(userData.disc_type||'').replace('型','');
+  var relStyle2=RELATION_STYLES[discKey2];
+  var hasRel2=combo&&combo.rel;
+  if(relStyle2||hasRel2){
+    h+='<div class="rsc-section"><h4>💕 情感世界</h4>';
+    if(relStyle2){
+      h+='<p style="line-height:1.9;text-align:justify;color:var(--text2)">'+relStyle2+'</p>';
+    }
+    if(hasRel2){
+      h+='<p style="margin-top:8px">'+combo.rel+'</p>';
+    }
+    h+='</div>';
+  }
+
+  // Report sections
+  if(combo){
+    if(combo.pressure)h+='<div class="rsc-section"><h4>🔥 压力状态</h4><p>'+combo.pressure+'</p></div>';
+    if(combo.grow)h+='<div class="rsc-section"><h4>🌱 成长方向</h4><p>'+combo.grow+'</p></div>';
+  }
+
+  // ── Match Recommendations ──
+  var m2=MATCH[key]||null;
+  if(m2){
+    h+='<div class="rsc-section"><h4>💑 适配推荐</h4>';
+    h+='<div class="analysis-match">';
+    h+='<div class="match-item"><div class="match-type">🏆 最适配：'+m2.best+' <span class="m-score">'+m2.score+'分</span></div><div class="match-desc">'+m2.desc+'</div></div>';
+    if(m2.sec)h+='<div class="match-item"><div class="match-type">🥈 次适配：'+m2.sec+' <span class="m-score">'+m2.secScore+'分</span></div><div class="match-desc">'+m2.secDesc+'</div></div>';
+    h+='<div class="match-tip">💡 DISC适配只是参考——真正的感情匹配远比性格标签更丰富，沟通和理解才是关键。</div>';
+    h+='</div></div>';
+  }
+
+  // Match history
+  h+='<div class="rsc-section"><h4>💑 合拍度匹配记录</h4>';
+  h+='<div id="match-list" style="text-align:center;padding:16px;color:var(--text3)">加载中...</div></div>';
+
+  // Share link — at the very bottom
+  h+='<div class="rsc-section"><h4>🔗 邀请好友配对</h4>';
+  h+='<p style="font-size:12px;color:var(--text3);margin-bottom:8px">分享此链接给好友，对方完成测试后自动生成合拍度报告</p>';
+  h+='<div style="display:flex;gap:8px"><input type="text" id="personal-share-url" readonly style="flex:1;padding:8px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:var(--font-body);background:var(--bg2);color:var(--text2);box-sizing:border-box"><button class="btn btn-outline btn-sm" onclick="copyPersonalShare()" style="white-space:nowrap">📋 复制链接</button></div></div>';
+
+  $('personal-content').innerHTML=h;
+  // Draw radar on personal page
+  setTimeout(function(){drawRadarPersonal()},150);
+
+  // Load matches async + populate share URL
+  loadMatches(userData.phone);
+  // Look up share_id for this user, generate one if missing
+  var phoneEnc=encodeURIComponent(userData.phone);
+  fetch(SB_URL+'/rest/v1/unlocks?select=id,share_id&phone=eq.'+phoneEnc+'&limit=1',{
+    headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+  }).then(function(r){return r.json()}).then(function(d){
+    var el=$('personal-share-url');
+    if(d&&d.length>0&&d[0].share_id){
+      var shareUrl=location.origin+location.pathname+'?share='+d[0].share_id;
+      if(el)el.value=shareUrl;
+    }else{
+      // Generate and persist new share_id using record id when available
+      var sid=generateShareId();
+      var recordId=d&&d.length>0?d[0].id:null;
+      var patchUrl=recordId
+        ? SB_URL+'/rest/v1/unlocks?id=eq.'+encodeURIComponent(recordId)
+        : SB_URL+'/rest/v1/unlocks?phone=eq.'+phoneEnc;
+      fetch(patchUrl,{
+        method:'PATCH',headers:sbHeaders(),body:JSON.stringify({share_id:sid})
+      }).then(function(){
+        var shareUrl=location.origin+location.pathname+'?share='+sid;
+        if(el)el.value=shareUrl;
+      }).catch(function(){});
+    }
+  }).catch(function(){});
+}
+
+function copyPersonalShare(){
+  var el=$('personal-share-url');
+  if(!el||!el.value){toast('链接未生成');return}
+  copyToClipboard(getShareMessage(el.value));
+  toast('✅ 链接已复制');
+}
+
+// ══════════════════════════════════════════════════════════════ MATCH DETAIL ══════════════════════════════════════════════════════════════
+function loadMatches(phone){
+  var matchQuery='user_phone=eq.'+encodeURIComponent(phone)+'&order=created_at.desc';
+  fetch(SB_URL+'/rest/v1/matches?select=*&'+matchQuery,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}})
+    .then(function(r){return r.json()})
+    .then(function(matches){
+      var mh='';
+      if(!matches||matches.length===0){
+        mh='<p style="color:var(--text3);padding:16px">暂无匹配记录<br><span style="font-size:12px">分享你的测试链接给朋友，或在上方输入朋友手机号配对</span></p>';
+      } else {
+        matches.forEach(function(m){
+          var scoreEmoji=m.score>=90?'🏆':m.score>=80?'🥈':'🥉';
+          mh+='<div class="match-item" style="text-align:left;cursor:pointer" onclick=\'showMatchDetail('+JSON.stringify(m).replace(/'/g,"&#39;")+')\'><div class="match-type">'+scoreEmoji+' '+m.match_name+' <span class="m-score">'+m.score+'分</span></div><div class="match-desc">对方类型：'+m.match_type+' | '+m.description+'</div><div style="font-size:10px;color:var(--text3)">'+new Date(m.created_at).toLocaleDateString('zh-CN')+' · 点击查看详情 →</div></div>';
+        });
+      }
+      var el=$('match-list');if(el)el.innerHTML=mh;
+    }).catch(function(){var el=$('match-list');if(el)el.innerHTML='<p style="color:var(--text3)">加载失败</p>';});
+}
+
+function showMatchDetail(m){
+  var typeA=m.user_type||'';
+  var typeB=m.match_type||'';
+  var report=generateMatchReport(typeA,typeB,m.match_name||'',m.score||0);
+
+  var h='<h3 style="font-family:var(--font-heading);color:var(--gold);margin-bottom:4px">💑 合拍度详情</h3>';
+  h+='<p style="font-size:13px;color:var(--text2);margin-bottom:16px">'+m.match_name+'（'+typeB+'型）</p>';
+  h+='<div class="hepai-score">'+m.score+'<span> / 100</span></div>';
+  h+='<div class="hepai-tags" style="margin:12px 0">';
+  h+='<span class="hepai-tag">'+typeA+'型 × '+typeB+'型</span>';
+  var dimsA=typeA.split(''),dimsB=typeB.split('');
+  dimsA.forEach(function(d){
+    if(dimsB.indexOf(d)>=0)h+='<span class="hepai-tag" style="background:rgba(30,132,73,.15);color:var(--s)">'+d+'维度共鸣</span>';
+  });
+  h+='</div>';
+  h+='<div class="hepai-desc">'+report+'</div>';
+  h+='<p style="font-size:11px;color:var(--text3);margin-top:12px">📅 匹配时间：'+new Date(m.created_at).toLocaleDateString('zh-CN')+'</p>';
+
+  $('match-detail-content').innerHTML=h;
+  $('modal-match-detail').classList.add('active');
+}
+
+function generateMatchReport(typeA,typeB,nameB,score){
+  var dimsA=typeA.split('');
+  var dimsB=typeB.split('');
+  var both=dimsA.filter(function(d){return dimsB.indexOf(d)>=0});
+  var onlyA=dimsA.filter(function(d){return dimsB.indexOf(d)<0});
+  var onlyB=dimsB.filter(function(d){return dimsA.indexOf(d)<0});
+
+  var dimNames={D:'支配型',I:'影响型',S:'稳健型',C:'谨慎型'};
+  var dimTraits={D:'果断、直接、有领导力',I:'热情、乐观、善社交',S:'温和、耐心、可靠',C:'严谨、精确、逻辑强'};
+  var dimNeed={D:'需要学会倾听和放慢节奏',I:'需要学会聚焦和深度思考',S:'需要学会表达和主动出击',C:'需要学会灵活和拥抱不完美'};
+  var dimGive={D:'带来方向感、决策力和行动力',I:'带来温暖、能量和感染力',S:'带来稳定、耐心和安全感',C:'带来精确、严谨和品质感'};
+
+  var r='';
+
+  // Opening based on score
+  if(score>=90){
+    r+='✨ '+nameB+'是你极其合拍的灵魂搭档。你们的性格特质高度互补，在一起几乎不需要磨合就能找到默契的节奏。';
+  }else if(score>=80){
+    r+='🥈 '+nameB+'是你非常不错的搭档人选。你们的性格大部分契合，虽然有些小差异，但这些差异恰好能让彼此看到不同的世界。';
+  }else if(score>=70){
+    r+='🤝 '+nameB+'和你有着不同的性格底色。你们需要花一些时间去理解彼此的行为模式，但只要愿意沟通，差异会变成互补。';
+  }else{
+    r+='🔍 '+nameB+'的性格与你差异较大，但这并不意味着不适合——差异往往带来新的视角。理解和尊重彼此的不同，关系才能走得更远。';
+  }
+
+  // Shared dimensions
+  if(both.length>0){
+    r+='\n\n你们共同拥有<b>'+both.map(function(d){return dimNames[d]}).join('、')+'</b>的特质，这让你们在'+both.map(function(d){return dimTraits[d]}).join('、')+'等方面有着天然的默契。当遇到需要'+both[0]+'维度能力应对的情况时，你们能迅速达成一致、配合无间。';
+    // Friction map: shared dimensions can also create friction
+    var dimFriction={
+      D:'双方都有主导倾向，可能在决策时产生权力拉锯——谁听谁的，会是你们需要磨合的课题',
+      I:'双方都渴望关注和表达，可能在社交场合争夺话语权——注意给对方留出表达空间',
+      S:'双方都倾向回避冲突，重要问题可能被长期搁置而非解决——学会主动发起"艰难对话"',
+      C:'双方都追求完美和精确，可能因过度分析而拖延行动——适时放下细节、先行动起来'
+    };
+    var frictions=both.map(function(d){return dimFriction[d];}).filter(Boolean);
+    if(frictions.length>0){
+      r+='\n\n⚠️ 不过，相同的性格特质也可能带来摩擦：';
+      frictions.forEach(function(f){r+='\n· '+f;});
+    }
+  }
+
+  // Complementary dimensions
+  if(onlyA.length>0&&onlyB.length>0){
+    r+='\n\n'+nameB+'为你<b>'+onlyB.map(function(d){return dimGive[d]}).join('，')+'</b>，这正是你性格中所需要的。而你的'+onlyA.map(function(d){return dimGive[d]}).join('，')+'，也恰好填补了对方的短板。这种互补让你们在一起时，1+1远大于2。';
+  }else if(onlyA.length===0&&onlyB.length===0){
+    r+='\n\n你们的性格维度几乎完全一致，这会带来极高的默契度——你们看待问题的方式相似，做决定的节奏相近，相处起来非常舒服。唯一的提醒是：太过相似有时会缺少新鲜感的刺激，偶尔尝试对方的"非舒适区"，能让关系更有层次。';
+  }
+
+  // Growth advice
+  if(onlyA.length>0){
+    r+='\n\n对你而言，和'+nameB+'相处时，可以试着欣赏对方的'+onlyB.map(function(d){return dimTraits[d]}).join('、')+'——这些是你的性格中原本不太突出的部分。';
+  }
+  if(onlyB.length>0){
+    r+='\n\n对'+nameB+'而言，TA需要理解你的'+onlyA.map(function(d){return dimTraits[d]}).join('、')+'并非刻意为之，而是你天生的行为模式。当TA适应你的节奏后，你们会更和谐。';
+  }
+
+  r+='\n\n💡 每对性格组合都有独特的相处之道。沟通不是改变对方，而是理解"为什么TA会这样想"。珍惜彼此的不同，这些差异才是关系中最有趣的部分。';
+
+  return r;
+}
+
+// ══════════════════════════════════════════════════════════════ SAVE ══════════════════════════════════════════════════════════════
+function saveResult(){
+  let btn=document.querySelector('.btn-save-rs');if(!btn){toast('页面加载中');return}
+  btn.textContent='生成中...';btn.disabled=true;
+  composeCardToCanvas().then(function(canvas){
+    let url=canvas.toDataURL('image/png');
+    showSaveOverlay(url);
+    btn.textContent='📷 保存结果';btn.disabled=false;
+  }).catch(function(e){
+    console.log('Canvas compose failed:',e);
+    toast('生成失败，请重试');
+    btn.textContent='📷 保存结果';btn.disabled=false;
+  });
+}
+
+function composeCardToCanvas(){
+  return new Promise(function(resolve,reject){
+    var key=resultKey||'D';
+    var S=3;
+    var cardW=320*S;
+    var imgH=Math.round(cardW*4/3);
+
+    // Data
+    var imgUrl=getCharImg(key);
+    var name=CHAR_NAME[key]||'';
+    var family=CHAR_FAMILY[key]||'';
+    var quote=selectedQuote||pickQuote(key);
+    var mainDim=key[0]||'D';
+
+    var summary='';
+    if(combo&&combo.id){summary=combo.id.replace(/<[^>]*>/g,'').trim();}
+    else{var p=PURE[mainDim];if(p)summary=p.oneliner||'';}
+
+    var famNameColor={'破军虎':'#e8a090','焰羽凤':'#e8d090','抱山熊':'#90c0a0','玄机鹰':'#a0b0d0'};
+    var famStatColor={'破军虎':'#e8745a','焰羽凤':'#d4a853','抱山熊':'#5aa078','玄机鹰':'#788cb4'};
+    var famSumColor={'破军虎':'#c8a090','焰羽凤':'#c8b890','抱山熊':'#90b8a0','玄机鹰':'#a0a8c0'};
+    var nameColor=famNameColor[family]||'#e8d090';
+    var statColor=famStatColor[family]||'#d4a853';
+    var sumColor=famSumColor[family]||'#c8b890';
+
+    var qrUrl='https://api.qrserver.com/v1/create-qr-code/?size=300x300&data='+encodeURIComponent(location.origin+location.pathname);
+
+    var loaded=0,total=2;
+    var charImg=new Image();
+    charImg.crossOrigin='anonymous';
+    charImg.src=imgUrl;
+    var qrImg=new Image();
+    qrImg.crossOrigin='anonymous';
+    qrImg.src=qrUrl;
+
+    function tryDraw(){loaded++;if(loaded===total)draw();}
+    charImg.onload=tryDraw;charImg.onerror=tryDraw;
+    qrImg.onload=tryDraw;qrImg.onerror=tryDraw;
+
+    function wrapText(ctx,txt,maxW,fontSize){
+      ctx.font='bold '+fontSize+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      var chars=txt.split('');
+      var lines=[],cur='';
+      for(var i=0;i<chars.length;i++){
+        var test=cur+chars[i];
+        if(ctx.measureText(test).width>maxW&&cur.length>0){lines.push(cur);cur=chars[i];}
+        else{cur=test;}
+      }
+      if(cur)lines.push(cur);
+      return lines;
+    }
+
+    function draw(){
+      // Phase 1: measure layout with temp canvas
+      var tmpCvs=document.createElement('canvas');
+      tmpCvs.width=cardW;tmpCvs.height=100;
+      var tmpCtx=tmpCvs.getContext('2d');
+
+      // Summary bubble params
+      var bubFS=Math.round(11*S);
+      var bubLH=Math.round(bubFS*1.55);
+      var bubP=Math.round(10*S);
+      var maxTW=cardW-Math.round(18*S)-bubP*2;
+      var lines=wrapText(tmpCtx,summary,maxTW,bubFS);
+      var maxLines=5;
+      if(lines.length>maxLines){lines=lines.slice(0,maxLines);lines[maxLines-1]=lines[maxLines-1].replace(/.$/,'')+'\u2026';}
+      var bubH=Math.round(lines.length*bubLH+bubP*1.8);
+
+      // Position: summary bubble starts 24px ABOVE imgH (overlaps image slightly)
+      var bubY=imgH-Math.round(24*S);
+      var statsY=bubY+bubH+Math.round(5*S);
+      var statsYpos=statsY+Math.round(13*S);
+      var qrSize=Math.round(36*S);
+      var qrY=statsYpos+Math.round(6*S);
+      var totalH=qrY+qrSize+Math.round(12*S);
+
+      // Phase 2: create actual canvas
+      var canvas=document.createElement('canvas');
+      canvas.width=cardW;canvas.height=totalH;
+      var ctx=canvas.getContext('2d');
+
+      // 1. Character image - fill width, crop to 3:4
+      if(charImg.naturalWidth>0){
+        var srcRatio=charImg.naturalWidth/charImg.naturalHeight;
+        var drawH=cardW/srcRatio;
+        ctx.drawImage(charImg,0,0,cardW,Math.min(drawH,imgH));
+      }
+
+      // 2. Gradient: start higher (from 35% of imgH) so text can overlap
+      var grad=ctx.createLinearGradient(0,imgH*0.35,0,imgH);
+      grad.addColorStop(0,'rgba(10,10,12,0)');
+      grad.addColorStop(1,'rgba(10,10,12,1)');
+      ctx.fillStyle=grad;
+      ctx.fillRect(0,Math.round(imgH*0.35),cardW,Math.round(imgH*0.65));
+
+      // 3. Text area: solid dark from imgH downward
+      ctx.fillStyle='#0a0a0c';
+      ctx.fillRect(0,imgH,cardW,totalH-imgH);
+
+      // 4. Badge - character name (top-left)
+      ctx.fillStyle=nameColor;
+      ctx.font='bold '+Math.round(22*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      ctx.fillText(name,Math.round(14*S),Math.round(14*S+22*S*0.85));
+      ctx.fillStyle=nameColor;
+      ctx.globalAlpha=0.9;
+      ctx.font=Math.round(10*S)+'px "PingFang SC","Microsoft YaHei",sans-serif';
+      var discType=label||(key+'型');
+      ctx.fillText(discType+' · '+family,Math.round(14*S),Math.round(14*S+22*S+10*S+6));
+      ctx.globalAlpha=1;
+
+      // 5. Golden quote - moved up, overlapping image
+      ctx.fillStyle='#d4a853';
+      ctx.font='bold '+Math.round(15*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText('\u201c'+quote+'\u201d',Math.round(cardW/2),Math.round(imgH-46*S));
+      ctx.textAlign='left';
+
+      // 6. Summary bubble - starts above imgH, overlaps image bottom
+      var bubX=Math.round(9*S);
+      var bubW=cardW-Math.round(18*S);
+      var rr=Math.round(6*S);
+      ctx.fillStyle='rgba(0,0,0,0.55)';
+      ctx.beginPath();
+      ctx.moveTo(bubX+rr,bubY);ctx.lineTo(bubX+bubW-rr,bubY);
+      ctx.arcTo(bubX+bubW,bubY,bubX+bubW,bubY+rr,rr);
+      ctx.lineTo(bubX+bubW,bubY+bubH-rr);
+      ctx.arcTo(bubX+bubW,bubY+bubH,bubX+bubW-rr,bubY+bubH,rr);
+      ctx.lineTo(bubX+rr,bubY+bubH);
+      ctx.arcTo(bubX,bubY+bubH,bubX,bubY+bubH-rr,rr);
+      ctx.lineTo(bubX,bubY+rr);
+      ctx.arcTo(bubX,bubY,bubX+rr,bubY,rr);
+      ctx.closePath();ctx.fill();
+
+      ctx.fillStyle=sumColor;
+      ctx.font=bubFS+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+      for(var i=0;i<lines.length;i++){
+        ctx.fillText(lines[i],bubX+bubP,Math.round(bubY+bubP+bubLH*0.85+i*bubLH));
+      }
+
+      // 7. Stats row — compact, centered, family color
+      var dims=['D','I','S','C'];
+      ctx.font='bold '+Math.round(10*S)+'px "PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+
+      // Measure each stat's width for centering
+      var statItems=[],totalW=0;
+      for(var i=0;i<dims.length;i++){
+        var d=dims[i];
+        var val=(displaySc&&typeof displaySc[d]==='number')?displaySc[d]:50;
+        var txt=val+' '+d;
+        var w=ctx.measureText(txt).width;
+        statItems.push({d:d,val:val,txt:txt,w:w});
+        totalW+=w;
+      }
+      var statsGap=Math.round(12*S);
+      totalW+=statsGap*(dims.length-1);
+      var curX=Math.round((cardW-totalW)/2);
+      for(var i=0;i<statItems.length;i++){
+        var it=statItems[i];
+        // Number — family stat color, full opacity
+        ctx.fillStyle=statColor;
+        ctx.fillText(it.val+'',curX,statsYpos);
+        var numW=ctx.measureText(it.val+'').width;
+        // Letter — SAME family color, lower opacity (matches reference design .s-lbl opacity:.4)
+        ctx.globalAlpha=0.4;
+        ctx.fillStyle=statColor;
+        ctx.fillText(it.d,curX+numW+Math.round(2*S),statsYpos);
+        ctx.globalAlpha=1;
+        curX+=it.w+statsGap;
+      }
+
+      // 8. QR code + footer text — QR left, text right (matches website card)
+      var qrX=Math.round(12*S);
+      if(qrImg.naturalWidth>0){
+        ctx.fillStyle='#fff';ctx.fillRect(qrX,qrY,qrSize,qrSize);
+        ctx.drawImage(qrImg,qrX,qrY,qrSize,qrSize);
+      }
+
+      // Footer text — to the right of QR
+      ctx.fillStyle='rgba(168,160,152,0.45)';
+      ctx.font=Math.round(8*S)+'px "PingFang SC","Microsoft YaHei",sans-serif';
+      ctx.fillText('扫码测测你的专属人格',qrX+qrSize+Math.round(6*S),qrY+Math.round(qrSize/2+2*S));
+
+      // 9. Black-gold border — thin + dark
+      var borderClr='#c9a96e';
+      var bw=Math.round(5*S);
+      var hw=Math.round(bw/2);
+
+      // Outer black frame (dominant dark)
+      ctx.strokeStyle='rgba(0,0,0,.85)';
+      ctx.lineWidth=Math.round(5*S);
+      ctx.strokeRect(Math.round(2.5*S),Math.round(2.5*S),cardW-Math.round(5*S),totalH-Math.round(5*S));
+
+      // Gold line (thin)
+      ctx.strokeStyle='rgba(201,169,110,.6)';
+      ctx.lineWidth=Math.round(2*S);
+      ctx.strokeRect(hw,hw,cardW-bw,totalH-bw);
+
+      // Inner dark hairline
+      var ir=Math.round(8*S);
+      ctx.strokeStyle='rgba(0,0,0,.5)';
+      ctx.lineWidth=Math.round(0.8*S);
+      ctx.strokeRect(ir,ir,cardW-ir*2,totalH-ir*2);
+
+      // Corner dots
+      var csz=Math.round(10*S);
+      var co=Math.round(5*S);
+      var corners=[
+        {x:co+csz/2,y:co+csz/2},
+        {x:cardW-co-csz/2,y:co+csz/2},
+        {x:co+csz/2,y:totalH-co-csz/2},
+        {x:cardW-co-csz/2,y:totalH-co-csz/2}
+      ];
+      corners.forEach(function(c){
+        // Dark diamond
+        ctx.fillStyle='rgba(0,0,0,.8)';
+        ctx.beginPath();
+        ctx.moveTo(c.x,c.y-csz/2);
+        ctx.lineTo(c.x+csz/2,c.y);
+        ctx.lineTo(c.x,c.y+csz/2);
+        ctx.lineTo(c.x-csz/2,c.y);
+        ctx.closePath();ctx.fill();
+        // Gold center dot
+        ctx.fillStyle='#c9a96e';
+        ctx.beginPath();
+        ctx.arc(c.x,c.y,Math.round(csz*0.18),0,Math.PI*2);
+        ctx.fill();
+      });
+
+      resolve(canvas);
+    }
+  });
+}
+
+function showSaveOverlay(url){
+  var overlay=document.createElement('div');
+  overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column';
+  overlay.innerHTML='<img src="'+url+'" style="max-width:90%;max-height:65%;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.5)"><div style="margin-top:16px;display:flex;gap:12px"><button id="dl-btn" style="padding:10px 28px;border:none;border-radius:30px;background:#c9a96e;color:#08080a;font-size:14px;cursor:pointer;font-weight:600">下载图片</button><button onclick="this.parentElement.parentElement.remove()" style="padding:10px 28px;border:1px solid var(--border-gold);border-radius:30px;background:transparent;color:var(--text2);font-size:14px;cursor:pointer">关闭</button></div>';
+  overlay.querySelector('#dl-btn').onclick=function(){
+    var a=document.createElement('a');
+    a.href=url;a.download='我的DISC性格_'+(CHAR_NAME[resultKey]||'')+'.png';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  };
+  overlay.onclick=function(e){if(e.target===overlay)overlay.remove()};
+  document.body.appendChild(overlay);
+}
+
+// ══════════════════════════════════════════════════════════════ INIT ══════════════════════════════════════════════════════════════
+(function(){
+  // ═══════════════ 合拍度 init ═══════════════
+  var _initParams=new URLSearchParams(location.search);
+  var _shareParam=_initParams.get('share');
+  if(_shareParam){
+    window._pendingShareId = _shareParam;
+    // Immediately show banner with generic text (don't wait for fetch)
+    var banner=$('hepai-banner');
+    var nameEl=$('share-from-name');
+    var typeEl=$('share-from-type');
+    if(banner){
+      banner.style.display='block';
+      if(nameEl)nameEl.textContent='有人邀请你做合拍分析';
+      if(typeEl)typeEl.textContent='';
+    }
+    // Async fetch inviter name (8s timeout)
+    var ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+    var timer=setTimeout(function(){if(ctrl)ctrl.abort();},8000);
+    fetch(SB_URL+'/rest/v1/unlocks?share_id=eq.'+encodeURIComponent(_shareParam)+'&select=name,disc_type',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY},
+      signal:ctrl?ctrl.signal:undefined
+    }).then(function(r){return r.json()}).then(function(data){
+      clearTimeout(timer);
+      if(data&&data.length>0){
+        var inviter=data[0];
+        window._shareInviterData = inviter;
+        var inviterName=inviter.name||'好友';
+        if(nameEl)nameEl.textContent=inviterName+' 邀请你做合拍分析';
+        if(typeEl)typeEl.textContent='TA的性格类型：'+(inviter.disc_type||'未知');
+      }
+    }).catch(function(){
+      clearTimeout(timer);
+      // Banner stays with generic text on error/timeout
+    });
+  }
+
+  // Prevent horizontal scroll (WeChat X5 compositor-level overflow)
+  var _lsx=0;
+  window.addEventListener('scroll',function(){
+    if(window.scrollX!==0){
+      window.scrollTo(0,window.scrollY);
+    }
+  },{passive:false});
+  window.addEventListener('touchmove',function(e){
+    if(_lsx===0)_lsx=window.scrollX;
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
